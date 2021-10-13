@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- библиотека для таблиц(сортировка, фильтры) -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+
+    <title>store</title>
+</head>
+<style>
+    table{
+        border:1px solid black;
+        padding:20px;
+    }
+    th,td{
+        border:1px solid black;
+        padding:10px;
+    }
+    form{
+        margin:20px;
+        
+    }
+    input{
+        margin-bottom:10px;
+        margin-left:10px;
+    }
+    label{
+        display: block;
+    }
+    .btn{
+        padding:10px;
+        background-color:green;
+        cursor:pointer;
+        color:white;
+    }
+    form p {
+        font-size:21px;
+        font-weight:bold;
+    }
+    td a{
+        text-decoration:none;
+        color:red;
+        cursor:pointer;
+    }
+    select{
+        padding:5px;
+        margin:10px;
+    }
+    form{
+        border: 1px solid black;
+        width:300px;
+        text-align:center;
+    }
+    .search:hover{
+        color:blue;
+    }
+    
+</style>
+
+
+<body>
+
+    <form method="POST">
+        <p>Добавление нового продукта</p>
+        <label><input type="hidden" name="id" value="{{product.id}}"></label>
+        <label>Название<input type="text" placeholder="Название" name="productName" value="{{product.productName}}"></label>
+        <label>Цена<input type="number" step="0.01" placeholder="Цена" name="price" value="{{product.price}}"></label>
+        <label>Фото<input type="text" placeholder="Фото" name="foto" value="{{product.foto}}"></label>
+        <label>Цвет<input type="text" placeholder="Цвет" name="color" value="{{product.color}}"></label>
+        <label>Вес<input type="number" step="0.01" placeholder="Вес" name="weight" value="{{product.weight}}"></label>
+        <label>Размер<input type="text" placeholder="Размер x" name="size.x" value="{{product.size.x}}">
+        <input type="text" placeholder="Размер y" name="size.y" value="{{product.size.y}}">
+        <input type="text" placeholder="Размер z" name="size.z" value="{{product.size.z}}"></label>
+        <label>Наличие<input type="number" placeholder="Наличие" name="numberOfStock" value="{{product.numberOfStock}}"></label>
+
+        
+
+        <label>Категория
+
+            <select name="id_category">
+               <option></option>
+            </select>
+        </label>
+
+        <label>Производитель
+            <select name="id_manufact">
+                    <option></option>
+            </select>
+        </label>
+
+        <input class="btn" type="submit">
+
+    </form>
+
+    <input type="search" id="filterMin">
+    <input type="search" id="filterMax">
+
+    <table id="product">
+
+        <thead>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Фото</th>
+            <th>Цвет</th>
+            <th>Вес</th>
+            <th>Размер</th>
+            <th>Наличие</th>
+            <th>Категория</th>
+            <th>Производитель</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            {{#each productList}}
+                <tr>
+                    
+                    <td>{{this.productName}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.foto}}</td>
+                    <td>{{this.color}}</td>
+                    <td>{{this.weight}}</td>
+                    <td>{{this.size.x}}*{{this.size.y}}*{{this.size.z}}</td>
+                    <td>{{this.numberOfStock}}</td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="product?id={{this._id}}">edit</a></td>
+                    <td><a href="product/{{this._id}}/delete">delete</a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script src="js/filter.js"></script>
+    <script>
+        $(document).ready( function () {
+        $('#product').DataTable(); 
+        } );
+    </script>
+</body>
+</html>
