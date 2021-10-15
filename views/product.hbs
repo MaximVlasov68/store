@@ -28,6 +28,7 @@
         
     }
     input{
+        
         margin-bottom:10px;
         margin-left:10px;
     }
@@ -55,7 +56,7 @@
     }
     form{
         border: 1px solid black;
-        width:300px;
+        width:350px;
         text-align:center;
     }
     .search:hover{
@@ -84,13 +85,15 @@
 
         <label>Категория
 
-            <select name="id_category">
-               <option></option>
+            <select name="category">
+                {{#each categoryList}}
+               <option value="{{this.id}}">{{this.name}}</option>
+               {{/each}}
             </select>
         </label>
 
         <label>Производитель
-            <select name="id_manufact">
+            <select name="manufact">
                     <option></option>
             </select>
         </label>
@@ -128,7 +131,7 @@
                     <td>{{this.weight}}</td>
                     <td>{{this.size.x}}*{{this.size.y}}*{{this.size.z}}</td>
                     <td>{{this.numberOfStock}}</td>
-                    <td></td>
+                    <td>{{this.category.name}}</td>
                     <td></td>
                     <td><a href="product?id={{this._id}}">edit</a></td>
                     <td><a href="product/{{this._id}}/delete">delete</a></td>

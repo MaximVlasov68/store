@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   findAll() {
-    return this.productModel.find();
+    return this.productModel.find().populate('category');
   }
 
   async findOne(id: string) {

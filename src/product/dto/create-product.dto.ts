@@ -1,3 +1,4 @@
+import { Category } from "src/category/schemas/category.schema";
 import { Size } from "../schemas/size.schema";
 
 export class CreateProductDto {
@@ -15,4 +16,6 @@ export class CreateProductDto {
     size: Size;
 
     numberOfStock: number;
+
+    category: Category;
 }

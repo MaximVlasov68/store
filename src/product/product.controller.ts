@@ -3,10 +3,11 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Response } from 'express';
+import { CategoryService } from 'src/category/category.service';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService) {}
 
   @Post()
   async createOrUpdate(@Res() res: Response, @Body() createOrUpdateProductDto: CreateProductDto & UpdateProductDto) {
@@ -15,6 +16,8 @@ export class ProductController {
     } else {
       await this.productService.create(createOrUpdateProductDto);
     }
+    console.log(createOrUpdateProductDto);
+    
     return res.redirect('/product')
     
   }
@@ -26,19 +29,12 @@ export class ProductController {
     if(id){
       product = await this.productService.findOne(id);
     } 
+      const categoryList = await this.categoryService.findAll();
       const productList = await this.productService.findAll();
-      return {productList, product};
+      return {productList, categoryList, product};
   
   }
-
-  @Get(':id')
-  @Render('product')
-  findOne(@Param('name') name: string) {
-    return this.productService.findOne(name);
-  }
-
   
-
   @Get(':id/delete')
   async remove(@Res() res: Response, @Param('id') id: string) {
     await this.productService.remove(id);
