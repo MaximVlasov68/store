@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,6 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
     <title>store</title>
-
 </head>
 <style>
     table{
@@ -58,31 +58,38 @@
 <body>
 
     <form method="POST">
-        <p>Добавление новой категории</p>
-        <label><input type="hidden"  name="id" value="{{category.id}}"></label>
-        <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
+        <p>Добавление нового производителя</p>
+        <label><input type="hidden"  name="id" value="{{manufacturer.id}}"></label>
+        <label>Название<input type="text" placeholder="Название" name="name" value="{{manufacturer.name}}"></label>
+        <label>Страна<input type="text" placeholder="Страна" name="country" value="{{manufacturer.country}}"></label>
+        <label>Город<input type="text" placeholder="Город" name="city" value="{{manufacturer.city}}"></label>
         <input class="btn" type="submit">
-
     </form>
 
-   
-    <table id="category">
+
+  
+    <table id="manufacturer">
         <thead>
             <th>Название</th>
+            <th>Страна</th>
+            <th>Город</th>
             <th></th>
             <th></th>
         </thead>
-        {{#each categoryList}}
-            <tr>
-                <td>{{this.name}}</td>
-                <td><a href="category?id={{this._id}}">edit</a></td>
-                <td><a href="category/{{this._id}}/delete">delete</a></td>
-            </tr>
-        {{/each}}
+            {{#each manufacturerList}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.city}}</td>
+            <td><a href="manufacturer?id={{this._id}}">edit</a></td>
+            <td><a href="manufacturer/{{this._id}}/delete">delete</a></td>
+            
+        </tr>
+            {{/each}}
     </table>
     <script>
         $(document).ready( function () {
-        $('#category').DataTable(); 
+        $('#manufacturer').DataTable(); 
         } );
     </script>
 </body>

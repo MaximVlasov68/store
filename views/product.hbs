@@ -81,21 +81,27 @@
         <input type="text" placeholder="Размер z" name="size.z" value="{{product.size.z}}"></label>
         <label>Наличие<input type="number" placeholder="Наличие" name="numberOfStock" value="{{product.numberOfStock}}"></label>
 
-        
-
         <label>Категория
 
             <select name="category">
-                {{#each categoryList}}
-               <option value="{{this.id}}">{{this.name}}</option>
+                {{#each categoryList}}                    
+                    <option {{#eq this.id ../product.category.id}}
+                        selected
+                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
                {{/each}}
             </select>
         </label>
 
         <label>Производитель
-            <select name="manufact">
-                    <option></option>
+
+            <select name="manufacturer">
+            {{#each manufacturerList}}                    
+                    <option {{#eq this.id ../product.manufacturer.id}}
+                        selected
+                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
+               {{/each}}
             </select>
+
         </label>
 
         <input class="btn" type="submit">
@@ -132,7 +138,7 @@
                     <td>{{this.size.x}}*{{this.size.y}}*{{this.size.z}}</td>
                     <td>{{this.numberOfStock}}</td>
                     <td>{{this.category.name}}</td>
-                    <td></td>
+                    <td>{{this.manufacturer.name}}</td>
                     <td><a href="product?id={{this._id}}">edit</a></td>
                     <td><a href="product/{{this._id}}/delete">delete</a></td>
                 </tr>

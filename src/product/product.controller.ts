@@ -4,10 +4,11 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Response } from 'express';
 import { CategoryService } from 'src/category/category.service';
+import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService) {}
+  constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService, private readonly manufacturerService: ManufacturerService) {}
 
   @Post()
   async createOrUpdate(@Res() res: Response, @Body() createOrUpdateProductDto: CreateProductDto & UpdateProductDto) {
@@ -30,8 +31,10 @@ export class ProductController {
       product = await this.productService.findOne(id);
     } 
       const categoryList = await this.categoryService.findAll();
+      const manufacturerList = await this.manufacturerService.findAll();
       const productList = await this.productService.findAll();
-      return {productList, categoryList, product};
+      
+      return {productList, categoryList, manufacturerList, product};
   
   }
   

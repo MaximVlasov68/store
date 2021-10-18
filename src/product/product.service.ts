@@ -16,11 +16,11 @@ export class ProductService {
   }
 
   findAll() {
-    return this.productModel.find().populate('category');
+    return this.productModel.find().populate('category').populate('manufacturer');
   }
 
   async findOne(id: string) {
-    return this.productModel.findById(id);
+    return this.productModel.findById(id).populate('category').populate('manufacturer');
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
