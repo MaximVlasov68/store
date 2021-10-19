@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Redirect, Res, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Redirect, Res, Query, UseGuards } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Response } from 'express';
 import { CategoryService } from 'src/category/category.service';
 import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
+import { SessionAuthGuard } from 'src/auth/session-auth.guard';
 
 @Controller('product')
+@UseGuards(SessionAuthGuard)
 export class ProductController {
   constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService, private readonly manufacturerService: ManufacturerService) {}
 
