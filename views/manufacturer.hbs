@@ -58,8 +58,8 @@
 <body>
 
     <form method="POST">
-        <p>Добавление нового производителя</p>
-        <label><input type="hidden"  name="id" value="{{manufacturer.id}}"></label>
+        <p>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</p>
+        {{#if manufacturer}}<input type="hidden" name="id" value="{{manufacturer.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{manufacturer.name}}"></label>
         <label>Страна<input type="text" placeholder="Страна" name="country" value="{{manufacturer.country}}"></label>
         <label>Город<input type="text" placeholder="Город" name="city" value="{{manufacturer.city}}"></label>
@@ -81,8 +81,8 @@
             <td>{{this.name}}</td>
             <td>{{this.country}}</td>
             <td>{{this.city}}</td>
-            <td><a href="manufacturer?id={{this._id}}">edit</a></td>
-            <td><a href="manufacturer/{{this._id}}/delete">delete</a></td>
+            <td><a href="manufacturer?id={{this.id}}">edit</a></td>
+            <td><a href="manufacturer/{{this.id}}/delete">delete</a></td>
             
         </tr>
             {{/each}}

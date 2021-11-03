@@ -58,8 +58,8 @@
 <body>
 
     <form method="POST">
-        <p>Добавление новой категории</p>
-        <label><input type="hidden"  name="id" value="{{category.id}}"></label>
+        <p>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</p>
+        {{#if category}}<input type="hidden" name="id" value="{{category.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
         <input class="btn" type="submit">
 
@@ -75,8 +75,8 @@
         {{#each categoryList}}
             <tr>
                 <td>{{this.name}}</td>
-                <td><a href="category?id={{this._id}}">edit</a></td>
-                <td><a href="category/{{this._id}}/delete">delete</a></td>
+                <td><a href="category?id={{this.id}}">edit</a></td>
+                <td><a href="category/{{this.id}}/delete">delete</a></td>
             </tr>
         {{/each}}
     </table>

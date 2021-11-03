@@ -12,7 +12,7 @@ export class AppController {
     if(req.user){
       req.session.user = req.user;
     }
-    return res.redirect('/product');
+    return res.redirect('/admin');
   }
 
   @Render('loginForm')

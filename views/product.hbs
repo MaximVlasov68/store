@@ -69,16 +69,14 @@
 <body>
 
     <form method="POST">
-        <p>Добавление нового продукта</p>
-        <label><input type="hidden" name="id" value="{{product.id}}"></label>
+        <p>{{#if product}}Редактирование{{else}}Создание{{/if}} продукта</p>
+        {{#if product}}<input type="hidden" name="id" value="{{product.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="productName" value="{{product.productName}}"></label>
         <label>Цена<input type="number" step="0.01" placeholder="Цена" name="price" value="{{product.price}}"></label>
         <label>Фото<input type="text" placeholder="Фото" name="foto" value="{{product.foto}}"></label>
         <label>Цвет<input type="text" placeholder="Цвет" name="color" value="{{product.color}}"></label>
         <label>Вес<input type="number" step="0.01" placeholder="Вес" name="weight" value="{{product.weight}}"></label>
-        <label>Размер<input type="text" placeholder="Размер x" name="size.x" value="{{product.size.x}}">
-        <input type="text" placeholder="Размер y" name="size.y" value="{{product.size.y}}">
-        <input type="text" placeholder="Размер z" name="size.z" value="{{product.size.z}}"></label>
+        <label>Размер<input type="text" placeholder="Размер x" name="size" value="{{product.size}}"></label>
         <label>Наличие<input type="number" placeholder="Наличие" name="numberOfStock" value="{{product.numberOfStock}}"></label>
 
         <label>Категория
@@ -135,12 +133,12 @@
                     <td>{{this.foto}}</td>
                     <td>{{this.color}}</td>
                     <td>{{this.weight}}</td>
-                    <td>{{this.size.x}}*{{this.size.y}}*{{this.size.z}}</td>
+                    <td>{{this.size}}</td>
                     <td>{{this.numberOfStock}}</td>
                     <td>{{this.category.name}}</td>
                     <td>{{this.manufacturer.name}}</td>
-                    <td><a href="product?id={{this._id}}">edit</a></td>
-                    <td><a href="product/{{this._id}}/delete">delete</a></td>
+                    <td><a href="product?id={{this.id}}">edit</a></td>
+                    <td><a href="product/{{this.id}}/delete">delete</a></td>
                 </tr>
             {{/each}}
         </tbody>
