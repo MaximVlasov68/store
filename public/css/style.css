@@ -1,0 +1,39 @@
+table{
+    border:1px solid black;
+    padding:20px;
+}
+th,td{
+    border:1px solid black;
+    padding:10px;
+}
+form{
+    margin:20px;
+    
+}
+input{
+    margin-bottom:10px;
+    margin-left:10px;
+}
+label{
+    display: block;
+}
+.btn{
+    padding:10px;
+    background-color:green;
+    cursor:pointer;
+    color:white;
+}
+form p {
+    font-size:21px;
+    font-weight:bold;
+}
+td a{
+    text-decoration:none;
+    color:red;
+    cursor:pointer;
+}
+form{
+    border: 1px solid black;
+    width:300px;
+    text-align:center;
+}
