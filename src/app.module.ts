@@ -13,6 +13,8 @@ import { User } from './users/entities/user.entity';
 import { RouterModule } from '@nestjs/core';
 import { CategoryModule } from './admin/category/category.module';
 import { ManufacturerModule } from './admin/manufacturer/manufacturer.module';
+import { OrderModule } from './admin/order/order.module';
+import { Order } from './admin/order/entities/order.entity';
 
 @Module({
   imports: [
@@ -23,8 +25,9 @@ import { ManufacturerModule } from './admin/manufacturer/manufacturer.module';
       username: 'postgres',
       password: 'postgres',
       database: 'store',
-      entities: [Product, Category, Manufacturer, User],
+      entities: [Product, Category, Manufacturer, User, Order],
       synchronize: true,
+      logging: 'all'
     }),
     AdminModule,
     ProductModule,
@@ -38,20 +41,25 @@ import { ManufacturerModule } from './admin/manufacturer/manufacturer.module';
         module: AdminModule,
         children: [
           {
-          path: 'product',
-          module: ProductModule,
-        },
+            path: 'product',
+            module: ProductModule,
+          },
           {
-          path: 'category',
-          module: CategoryModule,
-        },
+            path: 'category',
+            module: CategoryModule,
+          },
           {
-          path: 'manufacturer',
-          module: ManufacturerModule,
-        },
-      ]
+            path: 'manufacturer',
+            module: ManufacturerModule,
+          },
+          {
+            path: 'order',
+            module: OrderModule,
+          },
+        ]
       },
     ]),
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

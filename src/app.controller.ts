@@ -17,8 +17,11 @@ export class AppController {
 
   @Render('loginForm')
   @Get('login')
-  async loginForm(@Res() res: Response){
-    
-  }
+  async loginForm(@Res() res: Response){}
+
+  @Render('main')
+  @Get()
+  async main(){}
+
   
 }
