@@ -20,7 +20,7 @@ export class ProductController {
       await this.productService.create(createOrUpdateProductDto);
     }
     
-    return res.redirect('/product')
+    return res.redirect('/admin/product')
     
   }
 
@@ -42,6 +42,6 @@ export class ProductController {
   @Get(':id/delete')
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.productService.remove(id);
-    return res.redirect('/product');
+    return res.redirect('/admin/product');
   }
 }

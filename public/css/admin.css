@@ -1,0 +1,38 @@
+/* для админки */
+.admin-form{
+    max-width:300px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    border: 1px solid black;
+    text-align:center;
+    margin:20px;
+}
+.admin-form input{
+    margin-bottom:10px;
+    margin-left:10px;
+}
+.admin-form label{
+    
+}
+.admin-form .btn{
+    margin: 10px;
+    padding:10px;
+    background-color:green;
+    border-radius: 12px;
+    cursor:pointer;
+    color:white;
+}
+.admin-form p {
+    font-size:21px;
+    font-weight:bold;
+}
+table td{
+    text-align: center;
+}
+td a{
+    text-decoration:none;
+    color:red;
+    cursor:pointer;
+}
+/**/

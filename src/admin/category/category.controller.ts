@@ -16,7 +16,7 @@ export class CategoryController {
     } else {
       await this.categoryService.create(createOrUpdateCategoryDto as CreateCategoryDto);
     }
-    return res.redirect('/category')
+    return res.redirect('/admin/category')
   }
 
   @Get()
@@ -34,6 +34,6 @@ export class CategoryController {
   @Get(':id/delete')
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.categoryService.remove(id);
-    return res.redirect('/category');
+    return res.redirect('/admin/category');
   }
 }

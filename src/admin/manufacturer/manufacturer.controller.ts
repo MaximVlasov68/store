@@ -16,7 +16,7 @@ export class ManufacturerController {
       await this.manufacturerService.create(createOrUpdateManufacturerDto);
     }
     
-    return res.redirect('/manufacturer')
+    return res.redirect('/admin/manufacturer')
     
   }
 
@@ -35,6 +35,6 @@ export class ManufacturerController {
   @Get(':id/delete')
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.manufacturerService.remove(id);
-    return res.redirect('/manufacturer');
+    return res.redirect('/admin/manufacturer');
   }
 }

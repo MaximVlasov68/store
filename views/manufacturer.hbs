@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <form method="POST">
+    <form class="admin-form" method="POST">
         <p>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</p>
         {{#if manufacturer}}<input type="hidden" name="id" value="{{manufacturer.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{manufacturer.name}}"></label>
@@ -38,8 +38,8 @@
             <td>{{this.name}}</td>
             <td>{{this.country}}</td>
             <td>{{this.city}}</td>
-            <td><a href="manufacturer?id={{this.id}}">edit</a></td>
-            <td><a href="manufacturer/{{this.id}}/delete">delete</a></td>
+            <td><a href="/admin/manufacturer?id={{this.id}}">edit</a></td>
+            <td><a href="/admin/manufacturer/{{this.id}}/delete">delete</a></td>
             
         </tr>
             {{/each}}

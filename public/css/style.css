@@ -1,62 +1,32 @@
 body{
-    max-width: 1620px;
-    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding:0;
     font-family: "Montserrat";
     color: #001400;
-    font-size: 18px;
+    font-size: 16px;
 }
 a{
     text-decoration: none;
     color: #001400;
 }
-
-/* для админки */
-.admin-form{
-    border: 1px solid black;
-    width:300px;
-    text-align:center;
-    margin:20px;
-}
-.admin-form input{
-    margin-bottom:10px;
-    margin-left:10px;
-}
-.admin-form label{
-    display: block;
-}
-.admin-form .btn{
-    padding:10px;
-    background-color:green;
-    cursor:pointer;
-    color:white;
-}
-.admin-form p {
-    font-size:21px;
-    font-weight:bold;
-}
-td a{
-    text-decoration:none;
-    color:red;
-    cursor:pointer;
-}
-/**/
-
 header{
+    max-width: 1600px;
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
-    gap: 48px;
+    gap: 2vw;
     /* border:1px solid red; */
 }
 header p{
     display: inline;
 }
 .header-left{
+    
     /* border: 1px solid black; */
 }
 .header-right{
-    width: 85%;
     display: flex;
     flex-direction: column;
     /* border: 1px solid green; */
@@ -70,12 +40,12 @@ header p{
 }
 .form-search{
     position: relative;
-    min-width: 670px;
     padding-right: 22px;
     margin: 0;
 }
 .wrapper-search {
     border-radius: 12px;
+    width: 50%;
 }
 .wrapper-search input {
     width: 100%;
@@ -103,7 +73,7 @@ header p{
 }
 .wrapper-login-shop{
     display: flex;
-    gap: 38px;
+    gap: 1.5vw;
 }
 .wrapper-login-shop .item a{
     display: flex;
@@ -119,7 +89,7 @@ header p{
     font-weight: 600;
 }
 .header-bottom{
-    gap: 20px;
+    gap: 1vw;
 }
 .header-bottom .catalog{
     display: flex;
@@ -139,7 +109,7 @@ header p{
 }
 .header-bottom nav{
     display: flex;
-    gap: 48px;
+    gap: 2vw;
 }
 .header-bottom nav a{
     text-align:center;
