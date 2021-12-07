@@ -1,34 +1,41 @@
 body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 1920px;
     padding:0;
+    margin: auto;
     font-family: "Montserrat";
     color: #001400;
     font-size: 16px;
+    background: #FDFDFD;
 }
 a{
     text-decoration: none;
     color: #001400;
 }
 header{
-    max-width: 1600px;
-    margin-top: 40px;
     display: flex;
+    margin-top: 40px;
     justify-content: space-between;
     gap: 2vw;
+    padding-bottom: 2vw;
+    margin-bottom: 2vw;
+    border-bottom: 2px solid #EEEEEE;
     /* border:1px solid red; */
 }
 header p{
     display: inline;
 }
 .header-left{
-    
-    /* border: 1px solid black; */
+    display: flex;
+    padding-left: 1vw;
+}
+.logo{
+    width: 100%;
 }
 .header-right{
+    width: 80%;
     display: flex;
     flex-direction: column;
+    padding-right: 1vw;
     /* border: 1px solid green; */
 }
 .header-top, .header-bottom{
@@ -80,7 +87,7 @@ header p{
     align-items: center;
     justify-content: center;
 }
-.item img{
+.item .icon{
     width: 24px;
     height: 24px;
 }
@@ -114,4 +121,94 @@ header p{
 .header-bottom nav a{
     text-align:center;
     font-weight: 500;
+}
+main{
+    border: 1px solid red;
+}
+article{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    border: 1px solid green;
+}
+section{
+    border: 2px solid yellow;
+}
+.wrapperSlider{    /* ! временно ! */
+    display: flex;
+    height: 400px;
+    border: 2px solid #A3A3A3;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
+.content-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.content-box .item{
+    margin-top: 2vw;
+}
+.item .picture{
+    width: 375px;
+    height: 300px;
+}
+.item .name{
+    font-weight: 600;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    line-height: 22px;
+    margin-top: 24px;
+    margin-bottom: 2px;
+}
+.item .category{
+    font-weight: normal;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+    line-height: 22px;
+    margin-top: 2px;
+    margin-bottom: 16px;
+}
+.item .price{
+    letter-spacing: 0.015em;
+    font-weight: 600;
+    font-size: 2em;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+.item .addBusket{
+    width: 165px;
+    height: 54px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #5C5C5C;
+    color: #F9F9F9;
+    border-radius: 8px;
+    font-size: 1.125em;
+    font-weight: 500;
+    margin-top: 8px;
+    border: none;
+    cursor: pointer;
+}
+.more{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #001400;
+    font-size: 1.125em;
+    background: none;
+    letter-spacing: 0.015em;
+    border: 2px solid #001400;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px 32px;
+    margin: 3vw auto;
+    cursor: pointer;
 }
