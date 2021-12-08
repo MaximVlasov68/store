@@ -12,10 +12,12 @@ a{
     color: #001400;
 }
 header{
+    max-width: 1620px;
     display: flex;
-    margin-top: 40px;
+    padding-top: 1.5vw;
     justify-content: space-between;
     gap: 2vw;
+    margin: auto;
     padding-bottom: 2vw;
     margin-bottom: 2vw;
     border-bottom: 2px solid #EEEEEE;
@@ -123,6 +125,8 @@ header p{
     font-weight: 500;
 }
 main{
+    margin: auto;
+    /* max-width: 1620px; */
     border: 1px solid red;
 }
 article{
@@ -132,14 +136,17 @@ article{
     border: 1px solid green;
 }
 section{
+    
     border: 2px solid yellow;
 }
 .wrapperSlider{    /* ! временно ! */
+    padding: 0 calc(50% - 810px);
     display: flex;
     height: 400px;
     border: 2px solid #A3A3A3;
 }
 .content{
+    padding: 0 calc(50% - 810px);
     display: flex;
     flex-direction: column;
 }
@@ -211,4 +218,9 @@ section{
     padding: 16px 32px;
     margin: 3vw auto;
     cursor: pointer;
+}
+
+.map h2{
+    padding: 0 calc(50% - 810px);
+    margin-bottom: 3vw;
 }
