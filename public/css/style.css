@@ -120,13 +120,15 @@ header p{
     display: flex;
     gap: 2vw;
 }
-.header-bottom nav a{
+.header-bottom .navigation a{
     text-align:center;
     font-weight: 500;
 }
+.navigation a:hover{
+    padding-bottom: 0.5vw;
+    border-bottom: 2px solid #6FB740;
+}
 main{
-    margin: auto;
-    /* max-width: 1620px; */
     border: 1px solid red;
 }
 article{
@@ -139,7 +141,7 @@ section{
     
     border: 2px solid yellow;
 }
-.wrapperSlider{    /* ! временно ! */
+.wrapperSlider{    
     padding: 0 calc(50% - 810px);
     display: flex;
     height: 400px;
