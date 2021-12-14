@@ -11,6 +11,13 @@ a{
     text-decoration: none;
     color: #001400;
 }
+ul{
+    padding: 0px;
+    margin: 0px;
+}
+li{
+    list-style-type: none;
+}
 header{
     max-width: 1620px;
     display: flex;
@@ -129,23 +136,23 @@ header p{
     border-bottom: 2px solid #6FB740;
 }
 main{
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 article{
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 section{
     
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
 }
 .wrapperSlider{    
     padding: 0 calc(50% - 810px);
     display: flex;
     height: 400px;
-    border: 2px solid #A3A3A3;
+    /* border: 2px solid #A3A3A3; */
 }
 .content{
     padding: 0 calc(50% - 810px);
@@ -226,3 +233,80 @@ section{
     padding: 0 calc(50% - 810px);
     margin-bottom: 3vw;
 }
+
+footer{
+    padding: 0 calc(50% - 810px);
+    display: flex;
+    flex-direction: column;
+    background: #F9F9F9;
+}
+.footer-head{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4vw;
+    padding-bottom: 3vw;
+    border-bottom: 2px solid #9A9A9A;;
+}
+.footer-left{
+    /* border: 2px solid red; */
+    display: flex;
+    gap: 8vw;
+}
+.link-list a{
+    padding-right:1.5vw;
+    vertical-align: middle;
+}
+.link-list{
+    margin-bottom: 1.5vw;
+}
+.under-logo{
+    width: 80px;
+    height: 80px;
+    /* border: 1px solid black; */
+}
+.wrapper-massegers{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* border: 1px solid green; */
+}
+.wrapper-massegers .headText, .wrapper-massegers .phone, .footer-center .headText, .footer-right .headText{
+    font-weight: 600;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+    line-height: 22px;
+}
+.wrapper-massegers .phone, .wrapper-massegers .politics{
+    display: block;
+    text-decoration: underline;
+}
+.phone{
+    margin-bottom: 6.5vw;
+}
+.wrapper-massegers .politics{
+    line-height: 20px;
+    font-weight: 300;
+    letter-spacing: 0.015em;
+    
+}
+.container{
+    display: flex;
+    gap: 6vw;
+}
+
+.hots-links li{
+    padding-bottom: 16px;
+    line-height: 20px;
+    letter-spacing: 0.015em;
+}
+.footer-bottom{
+    margin-top: 24px;
+    text-align: center;
+}
+.footer-bottom p{
+    font-weight: 300;
+    letter-spacing: 0.015em;
+    line-height: 20px;
+    color: #001400;
+}
+
