@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <!-- библиотека для таблиц(сортировка, фильтры) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+
+    <title>store</title>
+</head>
+
+<body>
+
+    <form class="admin-form" method="POST">
+        <p>{{#if order}}Редактирование{{else}}Создание{{/if}} заказа</p>
+        {{#if order}}<input type="hidden" name="id" value="{{order.id}}">{{/if}}
+
+        <label>Категория
+
+            <select name="category">
+                {{#each categoryList}}                    
+                    <option {{#eq this.id ../product.category.id}}
+                        selected
+                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
+               {{/each}}
+            </select>
+        </label>
+
+        <label>Производитель
+
+            <select name="manufacturer">
+            {{#each manufacturerList}}                    
+                    <option {{#eq this.id ../product.manufacturer.id}}
+                        selected
+                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
+               {{/each}}
+            </select>
+
+        </label>
+
+        <input class="btn" type="submit">
+
+    </form>
+
+    <table id="product">
+
+        <thead>
+            <th>Номер заказа</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            {{#each orderList}}
+                <tr>
+                    
+                    <td>{{this.id}}</td>
+                    <td><a href="/admin/product?id={{this.id}}">edit</a></td>
+                    <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script src="/js/filter.js"></script>
+    <script>
+        $(document).ready( function () {
+        $('#order').DataTable(); 
+        } );
+    </script>
+</body>
+</html>

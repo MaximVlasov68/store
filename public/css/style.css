@@ -96,6 +96,9 @@ header p{
     align-items: center;
     justify-content: center;
 }
+.wrapper-login-shop .item a:hover{
+    font-size: 1.0125em;
+}
 .item .icon{
     width: 24px;
     height: 24px;
@@ -238,14 +241,18 @@ section{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: #5C5C5C;
+    background: #599233;
+    border: 2px solid #599233;
     color: #F9F9F9;
     border-radius: 8px;
     font-size: 1.125em;
     font-weight: 500;
     margin-top: 8px;
-    border: none;
     cursor: pointer;
+}
+.item .addBusket:hover{
+    background: none;
+    color: #599233;
 }
 .more{
     display: flex;
@@ -264,7 +271,10 @@ section{
     margin: 3vw auto;
     cursor: pointer;
 }
-
+.more:hover{
+    background-color:#001400;
+    color: white;
+}
 .map h2{
     padding: 0 calc(50% - 810px);
     margin-bottom: 3vw;
@@ -330,10 +340,14 @@ footer{
     gap: 6vw;
 }
 
-.hots-links li{
+.hots-links a li{
+    display: block;
     padding-bottom: 16px;
     line-height: 20px;
     letter-spacing: 0.015em;
+}
+.hots-links li:hover{
+    font-weight: 401;
 }
 .footer-bottom{
     margin-top: 24px;
