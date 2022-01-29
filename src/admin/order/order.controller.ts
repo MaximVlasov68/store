@@ -1,22 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Query } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { ProductService } from "../product/product.service";
 
 @Controller()
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService, private readonly productService: ProductService) { }
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
+  async create(@Body() createOrderDto: CreateOrderDto) {
     console.log(createOrderDto);
+    const order = await this.orderService.create(createOrderDto);
+    console.log(order);
     
-    return this.orderService.create(createOrderDto);
+    return order;
   }
 
   @Get()
-  findAll() {
-    return this.orderService.findAll();
+  @Render('order')
+  async findAll(@Query('id') id?: number) {
+    let order;
+    if (id) {
+      order = await this.orderService.findOne(id)
+    }
+    const orderList = await this.orderService.findAll();
+    console.log(orderList);
+    
+    return {
+      order, orderList
+    }
   }
 
   @Get(':id')

@@ -47,18 +47,19 @@
 
     </form>
 
-    <table id="product">
+    <table id="order">
 
         <thead>
             <th>Номер заказа</th>
+            <th>Состав заказа</th>
             <th></th>
             <th></th>
         </thead>
         <tbody>
             {{#each orderList}}
                 <tr>
-                    
                     <td>{{this.id}}</td>
+                    <td>{{this.items}}</td>
                     <td><a href="/admin/product?id={{this.id}}">edit</a></td>
                     <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
                 </tr>
