@@ -18,20 +18,33 @@
         <p>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</p>
         {{#if category}}<input type="hidden" name="id" value="{{category.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
-        <input class="btn" type="submit">
 
+         <label>Родительская категория
+            <select name="parent">
+                <option value="0">-</option>
+                {{#each parentCategoryList}}                    
+                    <option {{#eq this.id ../category.parent.id}}
+                        selected
+                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
+               {{/each}}
+            </select>
+        </label>
+
+        <input class="btn" type="submit">
     </form>
 
    
     <table id="category">
         <thead>
             <th>Название</th>
+            <th>Родительская категория</th>
             <th></th>
             <th></th>
         </thead>
         {{#each categoryList}}
             <tr>
                 <td>{{this.name}}</td>
+                <td>{{#if this.parent.name}}{{this.parent.name}}{{else}} - {{/if}}</td>
                 <td><a href="/admin/category?id={{this.id}}">edit</a></td>
                 <td><a href="/admin/category/{{this.id}}/delete">delete</a></td>
             </tr>

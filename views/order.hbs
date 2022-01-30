@@ -16,42 +16,14 @@
 
 <body>
 
-    <form class="admin-form" method="POST">
-        <p>{{#if order}}Редактирование{{else}}Создание{{/if}} заказа</p>
-        {{#if order}}<input type="hidden" name="id" value="{{order.id}}">{{/if}}
-
-        <label>Категория
-
-            <select name="category">
-                {{#each categoryList}}                    
-                    <option {{#eq this.id ../product.category.id}}
-                        selected
-                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
-               {{/each}}
-            </select>
-        </label>
-
-        <label>Производитель
-
-            <select name="manufacturer">
-            {{#each manufacturerList}}                    
-                    <option {{#eq this.id ../product.manufacturer.id}}
-                        selected
-                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
-               {{/each}}
-            </select>
-
-        </label>
-
-        <input class="btn" type="submit">
-
-    </form>
 
     <table id="order">
 
         <thead>
             <th>Номер заказа</th>
             <th>Состав заказа</th>
+            <th>Статус</th>
+            <th>Цена</th>
             <th></th>
             <th></th>
         </thead>
@@ -60,6 +32,8 @@
                 <tr>
                     <td>{{this.id}}</td>
                     <td>{{this.items}}</td>
+                    <td></td>
+                    <td></td>
                     <td><a href="/admin/product?id={{this.id}}">edit</a></td>
                     <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
                 </tr>

@@ -93,37 +93,15 @@
 
                 <h2>Рекомендации для вас</h2>
                 <div class="content-box">
+                    {{#each recommendedProducts}}
                     <div class="item">
-                        <img class="picture" src="/img/tovar.png" alt="товар1">
-                        <p class="name">Диван комфорт+</p>
-                        <p class="category">Кровати и диваны</p>
-                        <p class="price">16 999 ₽</p>
+                        <img class="picture" src="/img/{{this.foto}}" alt="{{this.foto}}">
+                        <p class="name">{{this.productName}}</p>
+                        <p class="category">{{this.category.name}}</p>
+                        <p class="price">{{this.price}} ₽</p>
                         <a href="#" class="addBusket">В корзину</a>
                     </div>
-                
-                    <div class="item">
-                        <img class="picture" src="/img/tovar2.png" alt="товар2">
-                        <p class="name">Диван комфорт+</p>
-                        <p class="category">Кровати и диваны</p>
-                        <p class="price">16 999 ₽</p>
-                        <a href="#" class="addBusket">В корзину</a>
-                    </div>
-
-                    <div class="item">
-                        <img class="picture" src="/img/tovar3.png" alt="товар3">
-                        <p class="name">Диван комфорт+</p>
-                        <p class="category">Кровати и диваны</p>
-                        <p class="price">16 999 ₽</p>
-                        <a href="#" class="addBusket">В корзину</a>
-                    </div>
-
-                    <div class="item">
-                        <img class="picture" src="/img/tovar4.png" alt="товар4">
-                        <p class="name">Диван комфорт+</p>
-                        <p class="category">Кровати и диваны</p>
-                        <p class="price">16 999 ₽</p>
-                        <a href="#" class="addBusket">В корзину</a>
-                    </div>
+                    {{/each}}
                 </div>
                 <a href="#" class="more">Показать ещё</a>
             </section>

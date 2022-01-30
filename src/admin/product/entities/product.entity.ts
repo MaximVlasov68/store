@@ -21,7 +21,7 @@ export class Product {
     @Column()
     color: string;
 
-    @Column()
+    @Column({type: 'decimal' })
     weight: number;
 
     @Column()
