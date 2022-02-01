@@ -28,7 +28,6 @@ header{
     padding-bottom: 2vw;
     margin-bottom: 2vw;
     border-bottom: 2px solid #EEEEEE;
-    /* border:1px solid red; */
 }
 header p{
     display: inline;
@@ -45,14 +44,12 @@ header p{
     display: flex;
     flex-direction: column;
     padding-right: 1vw;
-    /* border: 1px solid green; */
 }
 .header-top, .header-bottom{
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 50%;
-    /* border: 1px solid orange; */
 }
 .form-search{
     position: relative;
@@ -197,6 +194,9 @@ section{
     padding: 0 calc(50% - 810px);
     display: flex;
     flex-direction: column;
+}
+.content h2{
+    margin-top: 70px;
 }
 .content-box{
     display: flex;
@@ -360,3 +360,108 @@ footer{
     color: #001400;
 }
 
+/*Модалка для входа и регистрации*/
+
+/* класс для body при открытой модалке*/
+.shadow{
+    filter: blur(16px);
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:2;
+}
+
+.modal{
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 3; /* Сидеть на вершине */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 460px; /* Полная ширина */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background: #F9F9F9; 
+    border-radius: 8px;
+}
+.close{
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 3rem;
+}
+.close:hover,
+.close:focus {
+  color: rgb(168, 19, 19);
+  cursor: pointer;
+}
+.modal-content-login, .modal-content-register{ /* класс для другой формы*/
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 80px 80px 80px;
+}
+.login-btn, .reg-btn{
+    border: 0;
+    background-color: none;
+    text-transform: uppercase;
+    color: #001400;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    font-size: 1.125rem;
+}
+.login-btn{
+    margin-right: 32px;
+}
+.active{
+    padding-bottom: 0.5vw;
+    border-bottom: 2px solid #6FB740;
+}
+.modal-data{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.name[type=text], .password[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 1em;
+    display: inline-block;
+    border: 2px solid #9A9A9A;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+.singIn{
+    background: #6FB740;
+    border: none;
+    border-radius: 8px;
+    width: 301px;
+    height: 56px;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 22px;
+    letter-spacing: 0.07em;
+    color: #FFFFFF;
+}
+.singIn:hover{
+    background: none;
+    color: #599233;
+    border: 2px solid #599233;
+}
+
+/* Добавить анимацию масштабирования */
+.animate {
+    -webkit-animation: animatezoom 0.7s;
+    animation: animatezoom 0.7s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }

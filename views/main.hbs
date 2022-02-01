@@ -12,58 +12,89 @@
     <title>Главная</title>
 </head>
 <body>
+    <div class="modal">
+        <form class="modal-content-login animate" action="" method="post">
+            <div>
+                <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
+            </div>
+            <div class="head-modal">
+                <a href="#" class="login-btn active" onclick="select()">вход</a>
+                <a href="#" class="reg-btn" onclick="select()">регистрация</a>
+            </div>
+            <div class="modal-data">
+                <div>
+                    <label for="uname">Логин</label>
+                    <input class="name" type="text" placeholder="Введите имя пользователя" name="uname" required>
+                </div>
+                
+                <div>
+                     <label for="psw">Пароль</label>
+                    <input class="password" type="password" placeholder=" Ведите пароль" name="psw" required>
+                </div>
+               
+                <div>
+                    <label for="save">
+                    <input type="checkbox" name="remember" id="save"> Запомнить меня
+                    </label>
+                </div>
+                
+            </div>
+            <div class="button-modal">
+                <button type="submit" class="singIn">Войти в аккаунт</button>
+            </div>
+        </form>
+    </div>
+
     <header>
-            <div class="header-left">
-                <a href="#" class="headLink"><img class="logo" src="/img/logo.png"></a>
+        <div class="header-left">
+            <a href="#" class="headLink"><img class="logo" src="/img/logo.png"></a>
+        </div>
+            
+        <div class="header-right">
+            
+            <div class="header-top">
+                <div class="wrapper-search">
+                    <form class="form-search" action="">
+                        <input type="text" placeholder="Поиск по сайту">
+                        <button type="submit"></button>
+                    </form>
+                </div>
+                
+                <div class="wrapper-login-shop">
+
+                    <div class="item">
+                        <a class="login" href="#" onclick="openModal()">
+                            <img class="icon" src="/img/Login.svg" alt="">
+                            <p>Профиль</p>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img class="icon" src="/img/Shop.svg" alt="">
+                            <p>Корзина</p>
+                        </a>
+                    </div>
+
+                </div>
             </div>
             
-            <div class="header-right">
+            <div class="header-bottom">
+
+                <a class="catalog" href="">
+                    <img src="/img/Burger.svg" alt="">
+                    <p>Каталог</p>
+                </a>
                 
-                <div class="header-top">
-                    <div class="wrapper-search">
-                        <form class="form-search" action="">
-                            <input type="text" placeholder="Поиск по сайту">
-                            <button type="submit"></button>
-                        </form>
-                    </div>
-                    
-
-                    <div class="wrapper-login-shop">
-                        <div class="item">
-                            <a href="">
-                                <img class="icon" src="/img/Login.svg" alt="">
-                                <p>Профиль</p>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <img class="icon" src="/img/Shop.svg" alt="">
-                                <p>Корзина</p>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <div class="header-bottom">
-
-                    <a class="catalog" href="">
-                        <img src="/img/Burger.svg" alt="">
-                        <p>Каталог</p>
-                    </a>
-                    
-                    <nav class="navigation">
-                        <div><a href="#">Кровати и диваны</a></div>
-                        <div><a href="#">Товары для дома</a></div>
-                        <div><a href="#">Кухни</a></div>
-                        <div><a href="#">Потолки</a></div>
-                        <div><a href="#">Строительные смеси</a></div>
-                        <div><a href="#">Кресла качалки</a></div>
-                    </nav>
-                </div>
-
-
+                <nav class="navigation">
+                    <div><a href="#">Кровати и диваны</a></div>
+                    <div><a href="#">Товары для дома</a></div>
+                    <div><a href="#">Кухни</a></div>
+                    <div><a href="#">Потолки</a></div>
+                    <div><a href="#">Строительные смеси</a></div>
+                    <div><a href="#">Кресла качалки</a></div>
+                </nav>
             </div>
+        </div>
     </header>
 
     
@@ -108,7 +139,7 @@
 
             <section class="map">
                 <h2>Мы на картах</h2>
-                <div class="map-box">
+                <div class="map-box"> 
                      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;width=100%25&amp;height=700&amp;lang=ru_RU&amp;scroll=true"></script>
                 </div>
                
@@ -174,5 +205,6 @@
     </footer>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/js/slider.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
