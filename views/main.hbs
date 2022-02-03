@@ -12,6 +12,7 @@
     <title>Главная</title>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="modal">
         <form class="modal-content-login animate" action="" method="post">
             <div>
@@ -26,12 +27,22 @@
                     <label for="uname">Логин</label>
                     <input class="name" type="text" placeholder="Введите имя пользователя" name="uname" required>
                 </div>
+
+                <div class="reg">
+                    <label for="tel">Телефон</label>
+                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel" required>
+                </div>
                 
                 <div>
-                     <label for="psw">Пароль</label>
+                    <label for="psw">Пароль</label>
                     <input class="password" type="password" placeholder=" Ведите пароль" name="psw" required>
                 </div>
-               
+
+                <div class="reg">
+                    <label for="psw">Пароль</label>
+                    <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
+                </div>
+            
                 <div>
                     <label for="save">
                     <input type="checkbox" name="remember" id="save"> Запомнить меня
@@ -43,7 +54,9 @@
                 <button type="submit" class="singIn">Войти в аккаунт</button>
             </div>
         </form>
+
     </div>
+
 
     <header>
         <div class="header-left">
