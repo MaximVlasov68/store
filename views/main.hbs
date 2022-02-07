@@ -30,7 +30,7 @@
 
                 <div class="reg">
                     <label for="tel">Телефон</label>
-                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel" required>
+                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
                 </div>
                 
                 <div>
@@ -43,9 +43,9 @@
                     <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
                 </div>
             
-                <div>
-                    <label for="save">
-                    <input type="checkbox" name="remember" id="save"> Запомнить меня
+                <div class="saveMe">
+                    <label class="save" for="save">
+                        <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
                     </label>
                 </div>
                 
@@ -113,7 +113,6 @@
     
     <main>
         <article>
-
             <section class="wrapperSlider">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
@@ -139,11 +138,13 @@
                 <div class="content-box">
                     {{#each recommendedProducts}}
                     <div class="item">
+                        <a href="товар">
                         <img class="picture" src="/img/{{this.foto}}" alt="{{this.foto}}">
                         <p class="name">{{this.productName}}</p>
                         <p class="category">{{this.category.name}}</p>
                         <p class="price">{{this.price}} ₽</p>
                         <a href="#" class="addBusket">В корзину</a>
+                        </a>
                     </div>
                     {{/each}}
                 </div>
@@ -153,7 +154,7 @@
             <section class="map">
                 <h2>Мы на картах</h2>
                 <div class="map-box"> 
-                     <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;width=100%25&amp;height=700&amp;lang=ru_RU&amp;scroll=true"></script>
+                     <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;width=100%25&amp;height=700&amp;lang=ru_RU&amp;scroll=fasle"></script>
                 </div>
                
             </section>
@@ -182,29 +183,29 @@
                 <p class="headText">Товары</p>
                 <div class="container">
                     <ul class="hots-links">
-                        <a href=""><li>Спальни и кровати</li></a>
-                        <a href=""><li>Спальни</li></a>
-                        <a href=""><li>Диваны</li></a>
-                        <a href=""><li>Креслы-качалки</li></a>
-                        <a href=""><li>Строительные смеси</li></a>
-                        <a href=""><li>Товары для дома</li></a>
-                        <a href=""><li>Кухни</li></a>
+                        <a href="#"><li>Спальни и кровати</li></a>
+                        <a href="#"><li>Спальни</li></a>
+                        <a href="#"><li>Диваны</li></a>
+                        <a href="#"><li>Креслы-качалки</li></a>
+                        <a href="#"><li>Строительные смеси</li></a>
+                        <a href="#"><li>Товары для дома</li></a>
+                        <a href="#"><li>Кухни</li></a>
                     </ul>
                     <ul class="hots-links">
-                        <a href=""><li>Украшения для дома</li></a>
-                        <a href=""><li>Мелочи для ремонта</li></a>
-                        <a href=""><li>Натяжные потолки</li></a>
-                        <a href=""><li>Тканевые диваны</li></a>
+                        <a href="#"><li>Украшения для дома</li></a>
+                        <a href="#"><li>Мелочи для ремонта</li></a>
+                        <a href="#"><li>Натяжные потолки</li></a>
+                        <a href="#"><li>Тканевые диваны</li></a>
                     </ul>
                 </div>
             </div>
             <div class="footer-right">
                  <p class="headText">Услуги</p>
                 <ul class="hots-links">
-                    <a href=""><li>Украшения для дома</li></a>
-                    <a href=""><li>Мелочи для ремонта</li></a>
-                    <a href=""><li>Натяжные потолки</li></a>
-                    <a href=""><li>Тканевые диваны</li></a>
+                    <a href="#"><li>Украшения для дома</li></a>
+                    <a href="#"><li>Мелочи для ремонта</li></a>
+                    <a href="#"><li>Натяжные потолки</li></a>
+                    <a href="#"><li>Тканевые диваны</li></a>
                 </ul>
             </div>
         </div>

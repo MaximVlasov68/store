@@ -1,8 +1,149 @@
-{{#with product}}
-    ID: {{this.id}}
-    Название: {{this.productName}}
-    Цена: {{this.price}}
-    Цвет: {{this.color}}
-    В наличии: {{this.numberOfStock}}<br>
-    <img src="/img/{{this.foto}}">
-{{/with}}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Главная</title>
+</head>
+<body>
+    <header>
+    <div class="header-left">
+        <a href="#" class="headLink"><img class="logo" src="/img/logo.png"></a>
+    </div>
+        
+    <div class="header-right">
+        
+        <div class="header-top">
+            <div class="wrapper-search">
+                <form class="form-search" action="">
+                    <input type="text" placeholder="Поиск по сайту">
+                    <button type="submit"></button>
+                </form>
+            </div>
+            
+            <div class="wrapper-login-shop">
+
+                <div class="item">
+                    <a class="login" href="#" onclick="openModal()">
+                        <img class="icon" src="/img/Login.svg" alt="">
+                        <p>Профиль</p>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="">
+                        <img class="icon" src="/img/Shop.svg" alt="">
+                        <p>Корзина</p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="header-bottom">
+
+            <a class="catalog" href="">
+                <img src="/img/Burger.svg" alt="">
+                <p>Каталог</p>
+            </a>
+            
+            <nav class="navigation">
+                <div><a href="#">Кровати и диваны</a></div>
+                <div><a href="#">Товары для дома</a></div>
+                <div><a href="#">Кухни</a></div>
+                <div><a href="#">Потолки</a></div>
+                <div><a href="#">Строительные смеси</a></div>
+                <div><a href="#">Кресла качалки</a></div>
+            </nav>
+        </div>
+    </div>
+    </header>
+
+    <main>
+        Каталог > Раздел > Подраздел > Товар
+        <article>
+            <section class="">
+                слайдер
+                и инфа о товаре
+                {{#with product}}
+                    ID: {{this.id}}
+                    Название: {{this.productName}}
+                    Цена: {{this.price}}
+                    Цвет: {{this.color}}
+                    В наличии: {{this.numberOfStock}}<br>
+                    <img src="/img/{{this.foto}}">
+                {{/with}}
+            </section>
+            <section>
+                Описание
+            </section>
+            <section>
+                Характеристики
+            </section>
+        </article>
+    </main>
+
+ <footer>
+        <div class="footer-head">
+            <div class="footer-left">
+                <a href="#"><img class="under-logo" src="/img/logo.png" alt="Логотип "РИО" "></a>
+                <div class="wrapper-massegers">
+                    <p class="headText">Социальные сети и мессенджеры</p>
+                    <div class="link-list">
+                        <a href=""><img src="/img/whats.svg" alt=""></a>
+                        <a href=""><img src="/img/inst.svg" alt=""></a>
+                        <a href=""><img src="/img/vk.svg" alt=""></a>
+                        <a href=""><img src="/img/twit.svg" alt=""></a>
+                    </div>
+                    <a href="#phone" class="phone">+7 (989) 322 22 22</a>
+                    <a class="politics" href="">Политика конфиденциальности</a>
+                </div>
+            </div>
+            <div class="footer-center">
+                <p class="headText">Товары</p>
+                <div class="container">
+                    <ul class="hots-links">
+                        <a href="#"><li>Спальни и кровати</li></a>
+                        <a href="#"><li>Спальни</li></a>
+                        <a href="#"><li>Диваны</li></a>
+                        <a href="#"><li>Креслы-качалки</li></a>
+                        <a href="#"><li>Строительные смеси</li></a>
+                        <a href="#"><li>Товары для дома</li></a>
+                        <a href="#"><li>Кухни</li></a>
+                    </ul>
+                    <ul class="hots-links">
+                        <a href="#"><li>Украшения для дома</li></a>
+                        <a href="#"><li>Мелочи для ремонта</li></a>
+                        <a href="#"><li>Натяжные потолки</li></a>
+                        <a href="#"><li>Тканевые диваны</li></a>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-right">
+                 <p class="headText">Услуги</p>
+                <ul class="hots-links">
+                    <a href="#"><li>Украшения для дома</li></a>
+                    <a href="#"><li>Мелочи для ремонта</li></a>
+                    <a href="#"><li>Натяжные потолки</li></a>
+                    <a href="#"><li>Тканевые диваны</li></a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Цены в местах выдачи товаров могут отличаться от цен, указанных на сайте. Внешний вид товаров и упаковки может отличаться от изображенных на Сайте</p>
+            
+            <p>Обращаем ваше внимание, что данный интернет-сайт и материалы, размещенные на нем, носят исключительно информационный характер и ни при каких условиях не являются публичной офертой, определяемой положениями статьи 437 Гражданского кодекса РФ</p>
+        </div>
+        
+    </footer>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/js/slider.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
