@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Главная</title>
+    <link rel="stylesheet" type="text/css" href="/css/productDetail.css">
+    <title>Продукт</title>
 </head>
 <body>
     <header>
@@ -64,26 +65,131 @@
     </div>
     </header>
 
+    <div class="line">
+        <hr>
+    </div>
+
     <main>
-        Каталог > Раздел > Подраздел > Товар
         <article>
-            <section class="">
-                слайдер
-                и инфа о товаре
-                {{#with product}}
-                    ID: {{this.id}}
-                    Название: {{this.productName}}
-                    Цена: {{this.price}}
-                    Цвет: {{this.color}}
-                    В наличии: {{this.numberOfStock}}<br>
-                    <img src="/img/{{this.foto}}">
-                {{/with}}
+            <div class="navigation-link"> 
+                <a href="#">Каталог</a> > 
+                <a href="#">Раздел</a> > 
+                <a href="#">Подраздел</a> > 
+                <a href="#">Товар</a>
+            </div>
+            <section class="productDetail-wrapper">
+
+                <div class="swiper mySwiperDetail">
+                    <div class="swiper-wrapper">
+                        {{#with product}}
+                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                        {{/with}}
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+                
+                <div class="product-information">
+                    {{#with product}}
+
+                        <div class="name-box">
+                            <span class="articul">#{{this.id}}</span>
+                            <h2>{{this.productName}}</h2>
+                        </div>
+
+                        <div class="price-box">
+                            <p class="price">{{this.price}} ₽</p>
+                        </div>
+
+                        <div class="btn-box">
+                            <a href="#" class="addBusket">В корзину</a> {{!-- как на главной --}}
+                            <div id="counter">
+                                <a href="#" id="buttonCountMinus"><img src="/img/minus.svg"></a>
+                                    <div id="buttonCountNumber">1</div>
+                                <a href="#" id="buttonCountPlus"><img src="/img/plus.svg"></a>
+                            </div>
+                        </div>
+
+                        <div class="stock-box">
+                            <img src="/img/dot.svg" alt="icon">
+                            <p class="text">В наличии {{this.numberOfStock}} штук</p>
+                        </div>
+                        
+                        <div class="delivery-box">
+                            <div class="group">
+                                <img src="/img/delivery.svg" alt="icon">
+                                <p>Доставим</p>
+                            </div>
+                            <p class="text">от 2000 ₽</p>
+                        </div>
+
+                        <div class="pickup-box">
+                            <div class="group">
+                                <img src="/img/pickup.svg" alt="icon">
+                                <p>Самовывоз</p>
+                            </div>
+                            <p class="text">бесплатно</p>
+                        </div>
+
+                        <a href="#specification" class="flag">Характеристики</a>
+                    {{/with}}
+                </div>  
             </section>
-            <section>
-                Описание
+
+            <section class="description-wrapper">
+                <h2>Описание</h2>
+                <p class="description">Текст-рыба на русском языке. Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.
+                    Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле. В отличии от lorem ipsum,
+                    текст рыба на русском языке наполнит любой макет непонятным<span id="dots">...</span><span id="more">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
+                    auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis.
+                    Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
+                <a onclick="moreDescription()" id="myBtn">Подробнее ∨</a>
             </section>
-            <section>
-                Характеристики
+
+            <section class="specification-wrapper" id="specification">
+                <h2>Характеристики</h2>
+                <div class="specification">
+                    {{#with product}}
+                        <dl>
+                            <dt>Размер</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.size}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Вес</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.weight}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Цвет</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.color}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Категория</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.category.name}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Производитель</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.manufacturer.name}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Страна</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.manufacturer.country}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>Город</dt>
+                            <span class="dots"></span>
+                            <dd>{{this.manufacturer.city}}</dd>
+                        </dl> 
+                    {{/with}}
+                    <a id="myBtn">Скрыть ∧</a>
+                </div>
             </section>
         </article>
     </main>
