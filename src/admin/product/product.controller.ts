@@ -34,7 +34,6 @@ export class ProductController {
       const categoryList = await this.categoryService.findAll();
       const manufacturerList = await this.manufacturerService.findAll();
       const productList = await this.productService.findAll();
-      console.log(productList);
       return {productList, categoryList, manufacturerList, product};
   
   }

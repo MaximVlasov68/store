@@ -10,10 +10,7 @@ export class OrderController {
 
   @Post()
   async create(@Body() createOrderDto: CreateOrderDto) {
-    console.log(createOrderDto);
     const order = await this.orderService.create(createOrderDto);
-    console.log(order);
-    
     return order;
   }
 
@@ -25,8 +22,6 @@ export class OrderController {
       order = await this.orderService.findOne(id)
     }
     const orderList = await this.orderService.findAll();
-    console.log(orderList);
-    
     return {
       order, orderList
     }

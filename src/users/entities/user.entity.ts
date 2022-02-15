@@ -15,5 +15,4 @@ export class User {
 
     @Column()
     role: Roles;
-
 }

@@ -12,6 +12,8 @@ export class AppController {
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
   async login(@Request() req, @Res() res: Response) {
+    console.log(req);
+    
     if (req.user) {
       req.session.user = req.user;
     }

@@ -1,5 +1,5 @@
 
-export const enum Roles{
+export const enum Roles {
     admin = 'admin',
-    user='user'
+    user = 'user'
 }

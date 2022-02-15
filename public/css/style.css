@@ -98,6 +98,7 @@ header p{
 }
 .wrapper-login-shop .item a:hover{
     /* font-size: 1.0125em;  */ 
+    cursor: pointer;
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;     
 }
 .item .icon{
@@ -162,9 +163,6 @@ article{
 }
 .wrapperSlider{    
     padding: 0 calc(50% - 810px);
-}
-.mySwiperHome{
-    /* border: 1px solid green; */
 }
 .swiper {
     width: 100%;
@@ -384,6 +382,8 @@ footer{
 .modal{
     display: none; /* Скрыто по умолчанию */
     position: fixed; /* Оставаться на месте */
+    flex-direction: column;
+    align-items: center;
     z-index: 4; /* Сидеть на вершине */
     top: 50%;
     left: 50%;
@@ -391,8 +391,10 @@ footer{
     max-width: 460px; /* Полная ширина */
     background-color: rgba(0,0,0,0.4); /*Черный с непрозрачностью */
     background: #F9F9F9;
-    overflow: auto; 
     border-radius: 8px;
+}
+.head-modal{
+    margin-top: 60px;
 }
 .overlay{
     display: none;
@@ -415,13 +417,13 @@ footer{
   color: rgb(168, 19, 19);
   cursor: pointer;
 }
-.modal-content-login{ 
+.modal-content-login, .modal-content-register{ 
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     padding: 40px 80px 80px 80px;
 }
-.reg{
+.modal-content-register{
     display: none;
 }
 .login-btn, .reg-btn{
@@ -439,11 +441,6 @@ footer{
 .active{
     padding-bottom: 0.5vw;
     border-bottom: 2px solid #6FB740;
-}
-.modal-data{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 .name[type=text], .password[type=password], .telPhone[type=tel] {
     width: 100%;
@@ -466,7 +463,6 @@ footer{
     height: 19px;
     margin-right: 8px;   
 }
-
 .singIn{
     background: #6FB740;
     border: none;
@@ -482,12 +478,29 @@ footer{
 .singIn:hover{
     cursor: pointer;
     box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.5);
-    /* background: none;
-    color: #599233;
-    border: 2px solid #599233; */
 }
 
-/* Добавить анимацию масштабирования */
+/*каталог*/
+.wrapperCatalog{
+    max-width: 1622px;
+    position: absolute;
+    left: calc(50% - 811px);
+    right: calc(50% - 811px);
+    top: 200px;
+    display: flex;
+    background: #EEEEEE;
+    border-radius: 4px;
+    z-index: 5;
+    height: 638px;
+   
+}
+.category-box{
+    display: flex;
+    flex-direction: column;
+    gap: 20vw;
+}
+
+/* Добавить анимацию масштабирования для формы в модалке */
 .animate {
     -webkit-animation: animatezoom 0.7s;
     animation: animatezoom 0.7s
