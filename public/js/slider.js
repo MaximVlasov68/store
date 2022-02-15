@@ -11,7 +11,7 @@ var swiperHome = new Swiper(".mySwiperHome", {
       clickable: true,
     },
     loop: true,
-    mousewheel: true,  /* колёсико мыши */
+    /* mousewheel: true, */  /* колёсико мыши */
     keyboard: true,     /* клавиатура */
     allowTouchMove: true, /* перетягивание мышью */
     autoHeight: true /* обновление высоты под картинку */

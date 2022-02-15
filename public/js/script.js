@@ -10,16 +10,17 @@ let singIn = document.querySelector('.singIn');
 
 console.log(inputReg);
 
+/* функции открывающие модалку профиля */
 function openModal(){
     modal.style.display = "block";
     overlay.style.display = "block";
-    
 }
 function closeModal(){
     modal.style.display = "none";
     overlay.style.display = "none";
-    
 }
+
+/* функция выбора действий в модальном окне регистрация/авторизация на главной странице */
 function select(){
     if(loginBtn.classList.contains('active')){
         /* console.log("регистрация"); */
@@ -42,10 +43,10 @@ function select(){
           })
        /*  console.log("авторизация");
         loginBtn.classList.add('active') */
-        
     }
 }
 
+/* функция скрытия и раскрытия описания на странице productDetail */
 function moreDescription() {
     let dots = document.getElementById("dots");
     let moreText = document.getElementById("more");
@@ -60,5 +61,24 @@ function moreDescription() {
       btnText.innerHTML = "Короче ∧"; 
       moreText.style.display = "inline";
     }
+}
+
+ /* Счётчик товаров на странице productDetails */
+let count = document.getElementById("buttonCountNumber");
+
+function plus() {
+  let countPlus = count.innerHTML;
+  if(+countPlus <= 19){
+    count.innerHTML++;
+    let countPlus = count.innerHTML;
+  }
+}
+
+function minus() {
+  let countMinus = count.innerHTML;
+  if(+countMinus >= 2){
+    count.innerHTML--;
+    let countMinus = count.innerHTML;
+  }
 }
 

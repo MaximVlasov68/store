@@ -1,38 +1,84 @@
 /* для админки */
+body{
+    font-family: "Montserrat";
+    font-size: 16px;
+    max-width: 1920px;
+    padding:0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+
+header{
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #EEEEEE;
+    padding: 0 50px;
+}
+.logo img{
+    width: 150px;
+    height: 150px;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    gap: 2vw;  
+}
+
+.navigation  a{
+    padding: 13px 50px;
+    background: #DCDCDC;
+    border-radius: 4px;
+    margin: 0 20px;
+    font-weight: 500;
+    font-size: 1.125em;
+    line-height: 22px;
+    letter-spacing: 0.015em;
+    color: #262626;
+    text-align: center;
+    cursor: pointer;
+}
+.navigation a:hover, .navigation a:active{
+    background: #6FB740;
+    color: white;
+}
+
+
 .admin-form{
-    max-width:300px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
     align-items:center;
     border: 1px solid black;
-    text-align:center;
     margin:20px;
 }
-.admin-form input{
-    margin-bottom:10px;
-    margin-left:10px;
+.admin-form input, .admin-form select{
+    text-align: justify;
+    margin-left: 20px;
 }
 .admin-form label{
+    display: flex;
     
 }
 .admin-form .btn{
     margin: 10px;
-    padding:10px;
+    padding: 10px;
     background-color:green;
     border-radius: 12px;
-    cursor:pointer;
+    cursor: pointer;
     color:white;
-}
-.admin-form p {
-    font-size:21px;
-    font-weight:bold;
 }
 table td{
     text-align: center;
 }
 td a{
-    text-decoration:none;
+    text-decoration: none;
     color:red;
-    cursor:pointer;
+    cursor: pointer;
 }
-/**/
+/* admin-list*/
+

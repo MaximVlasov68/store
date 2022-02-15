@@ -4,7 +4,8 @@ html{
 body{
     max-width: 1920px;
     padding:0;
-    margin: auto;
+    margin: 0;
+    /* margin: auto; */
     font-family: "Montserrat";
     color: #001400;
     font-size: 16px;
@@ -216,6 +217,7 @@ article{
 }
 .content-box .item{
     margin-top: 2vw;
+    margin-bottom: 2vw;
 }
 .item .picture{
     width: 375px;
@@ -406,7 +408,7 @@ footer{
     right: 25px;
     top: 0;
     color: #000;
-    font-size: 3rem;
+    font-size: 3em;
 }
 .close:hover,
 .close:focus{

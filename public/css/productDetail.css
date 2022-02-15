@@ -13,19 +13,25 @@
 .productDetail-wrapper{
     display: flex;
     justify-content: space-between;
-    gap: 5vw;
+    gap: 3vw;
 }
 .swiper-slide img{
-    max-width: 550px;
+    max-width: 700px;
 }
 .mySwiperDetail, .description{
     max-width: 60%;
     /* border: 1px solid black; */
 }
+.mySwiperDetail{
+    margin: 0;
+    border: 2px solid #EEEEEE;;
+    border-radius: 8px;
+}
 .product-information{
-    max-width: 40%;
+    max-width: 50%;
     display: flex;
     flex-direction: column;
+    margin-right: 30px;
     /* border: 1px solid green; */
 }
 .btn-box{
@@ -42,6 +48,9 @@
 }
 #counter img{
     padding: 5px;
+}
+#counter a{
+    cursor: pointer;
 }
 #buttonCountNumber{
     display: flex;

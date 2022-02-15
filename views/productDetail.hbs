@@ -13,9 +13,54 @@
     <title>Продукт</title>
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="modal">
+        <form class="modal-content-login animate" action="" method="post">
+            <div>
+                <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
+            </div>
+            <div class="head-modal">
+                <a href="#" class="login-btn active" onclick="select()">вход</a>
+                <a href="#" class="reg-btn" onclick="select()">регистрация</a>
+            </div>
+            <div class="modal-data">
+                <div>
+                    <label for="uname">Логин</label>
+                    <input class="name" type="text" placeholder="Введите имя пользователя" name="uname" required>
+                </div>
+
+                <div class="reg">
+                    <label for="tel">Телефон</label>
+                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
+                </div>
+                
+                <div>
+                    <label for="psw">Пароль</label>
+                    <input class="password" type="password" placeholder=" Ведите пароль" name="psw" required>
+                </div>
+
+                <div class="reg">
+                    <label for="psw">Пароль</label>
+                    <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
+                </div>
+            
+                <div class="saveMe">
+                    <label class="save" for="save">
+                        <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
+                    </label>
+                </div>
+                
+            </div>
+            <div class="button-modal">
+                <button type="submit" class="singIn">Войти в аккаунт</button>
+            </div>
+        </form>
+
+    </div>
+
     <header>
     <div class="header-left">
-        <a href="#" class="headLink"><img class="logo" src="/img/logo.png"></a>
+        <a href="/" class="headLink"><img class="logo" src="/img/logo.png"></a>
     </div>
         
     <div class="header-right">
@@ -71,12 +116,14 @@
 
     <main>
         <article>
+            {{#with product }}
             <div class="navigation-link"> 
-                <a href="#">Каталог</a> > 
+                <a href="/">Каталог</a> > 
                 <a href="#">Раздел</a> > 
-                <a href="#">Подраздел</a> > 
-                <a href="#">Товар</a>
+                <a href="#">{{this.category.name}}</a> > 
+                <a href="#">{{this.productName}}</a>
             </div>
+            {{/with}}
             <section class="productDetail-wrapper">
 
                 <div class="swiper mySwiperDetail">
@@ -106,9 +153,9 @@
                         <div class="btn-box">
                             <a href="#" class="addBusket">В корзину</a> {{!-- как на главной --}}
                             <div id="counter">
-                                <a href="#" id="buttonCountMinus"><img src="/img/minus.svg"></a>
+                                <a id="buttonCountMinus" onclick="minus()"><img src="/img/minus.svg"></a>
                                     <div id="buttonCountNumber">1</div>
-                                <a href="#" id="buttonCountPlus"><img src="/img/plus.svg"></a>
+                                <a id="buttonCountPlus" onclick="plus()"><img src="/img/plus.svg"></a>
                             </div>
                         </div>
 
