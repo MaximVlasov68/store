@@ -46,14 +46,17 @@ function moreDescription() {
   let dots = document.getElementById("dots");
   let moreText = document.getElementById("more");
   let btnText = document.getElementById("myBtn");
+  let arrow = document.querySelector(".arrow");
 
   if (dots.style.display === "none") {
     dots.style.display = "inline";
-    btnText.innerHTML = "Подробнее ∨";
+    btnText.innerHTML = "Подробнее";
+    arrow.style.transform = "rotate(360deg)";
     moreText.style.display = "none";
   } else {
     dots.style.display = "none";
-    btnText.innerHTML = "Короче ∧";
+    btnText.innerHTML = "Короче";
+    arrow.style.transform = "rotate(180deg)";
     moreText.style.display = "inline";
   }
 }

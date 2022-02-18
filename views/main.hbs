@@ -17,9 +17,7 @@
 <body>
     <div class="overlay"></div>
     <div class="modal">
-        <div>
             <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
-        </div>
         <div class="head-modal">
             <a class="login-btn active" onclick="select(event)">вход</a>
             <a class="reg-btn" onclick="select(event)">регистрация</a>
@@ -112,7 +110,7 @@
                         <img src="/img/Burger.svg" alt="">
                         <p>Каталог</p>
                     </a>
-                    <section class="wrapperCatalog">
+                    {{!-- <section class="wrapperCatalog">
                         <div class="category-box">
                             
                             <ul><p class="headText">Категории</p>
@@ -131,7 +129,7 @@
                                 <li>Отделка</li>
                             </ul>
                         </div>
-                    </section>
+                    </section> --}}
                 </div>
                 
 
@@ -199,6 +197,10 @@
                     <script type="text/javascript" charset="utf-8" async
                         src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;width=100%25&amp;height=700&amp;lang=ru_RU&amp;scroll=fasle"></script>
                 </div>
+               {{!--  <div class="map-box">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;source=constructor" width="100%" height="700" frameborder="0" scroll="fasle" style="pointer: none;"></iframe>
+                </div> --}}
+                
             </section>
 
         </article>

@@ -4,7 +4,7 @@ html{
 body{
     max-width: 1920px;
     padding:0;
-    margin: 0;
+    margin: auto;
     /* margin: auto; */
     font-family: "Montserrat";
     color: #001400;
@@ -380,11 +380,10 @@ footer{
 }
 
 .modal{
-    display: none; /* Скрыто по умолчанию */
-    position: fixed; /* Оставаться на месте */
+    display: none;
+    position: fixed; 
     flex-direction: column;
-    align-items: center;
-    z-index: 4; /* Сидеть на вершине */
+    z-index: 6; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -394,7 +393,8 @@ footer{
     border-radius: 8px;
 }
 .head-modal{
-    margin-top: 60px;
+    padding-top: 60px;
+    padding-left: 80px;
 }
 .overlay{
     display: none;

@@ -15,47 +15,59 @@
 <body>
     <div class="overlay"></div>
     <div class="modal">
-        <form class="modal-content-login animate" action="" method="post">
+
+        <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
+        <div class="head-modal">
+            <a class="login-btn active" onclick="select(event)">вход</a>
+            <a class="reg-btn" onclick="select(event)">регистрация</a>
+        </div>
+        
+        <form class="modal-content-login animate" action="/auth/login" method="post">
             <div>
-                <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
+                <label for="username">Логин</label>
+                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
             </div>
-            <div class="head-modal">
-                <a href="#" class="login-btn active" onclick="select()">вход</a>
-                <a href="#" class="reg-btn" onclick="select()">регистрация</a>
-            </div>
-            <div class="modal-data">
-                <div>
-                    <label for="uname">Логин</label>
-                    <input class="name" type="text" placeholder="Введите имя пользователя" name="uname" required>
-                </div>
-
-                <div class="reg">
-                    <label for="tel">Телефон</label>
-                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
-                </div>
-                
-                <div>
-                    <label for="psw">Пароль</label>
-                    <input class="password" type="password" placeholder=" Ведите пароль" name="psw" required>
-                </div>
-
-                <div class="reg">
-                    <label for="psw">Пароль</label>
-                    <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
-                </div>
-            
-                <div class="saveMe">
-                    <label class="save" for="save">
-                        <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
-                    </label>
-                </div>
-                
+            <div>
+                <label for="password">Пароль</label>
+                <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
             </div>
             <div class="button-modal">
                 <button type="submit" class="singIn">Войти в аккаунт</button>
             </div>
         </form>
 
+        <form class="modal-content-register animate" action="" method="post">
+                <div>
+                    <label for="username">Логин</label>
+                    <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
+                </div>
+
+                <div class="reg">
+                    <label for="tel">Телефон</label>
+                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel"
+                        pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
+                </div>
+
+                <div>
+                    <label for="password">Пароль</label>
+                    <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
+                </div>
+
+                <div class="reg">
+                    <label for="psw">Повторите пароль</label>
+                    <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
+                </div>
+
+                <div class="saveMe">
+                    <label class="save" for="save">
+                        <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
+                    </label>
+                </div>
+
+                <div class="button-modal">
+                    <button type="submit" class="singIn">Зарегистрироваться</button>
+                </div>
+        </form>
     </div>
 
     <header>
@@ -192,7 +204,12 @@
                     текст рыба на русском языке наполнит любой макет непонятным<span id="dots">...</span><span id="more">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
                     auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis.
                     Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
-                <a onclick="moreDescription()" id="myBtn">Подробнее ∨</a>
+                
+                <div>
+                    <a onclick="moreDescription()" id="myBtn">Подробнее</a>
+                    <img src="/img/down.svg" alt="стрелка вниз" class="arrow">
+                </div>
+                
             </section>
 
             <section class="specification-wrapper" id="specification">
@@ -235,7 +252,11 @@
                             <dd>{{this.manufacturer.city}}</dd>
                         </dl> 
                     {{/with}}
-                    <a id="myBtn">Скрыть ∧</a>
+                    <div>
+                        <a id="myBtn">Скрыть</a>
+                        <img src="/img/down.svg" alt="стрелка вниз" class="arrow">
+                    </div>
+                    
                 </div>
             </section>
         </article>

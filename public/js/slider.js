@@ -24,7 +24,7 @@ var swiperDetail = new Swiper(".mySwiperDetail", {
     scrollbar: {
       el: ".swiper-scrollbar",
       draggable: true,
-      hide: true   /* спрятать ползунок */
+      /* hide: true */   /* спрятать ползунок */
     },
     /* loop: true, */
     allowTouchMove: true, 

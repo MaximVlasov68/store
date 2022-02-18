@@ -102,7 +102,7 @@
     transition: text-shadow .3s;
 }
 .flag:hover{
-    text-shadow: 0 0 .60px rgb(12, 16, 231), 0 0 .60px rgb(12, 16, 231);
+    text-decoration: underline;
 }
 .description{
     font-size: 1.125em;
