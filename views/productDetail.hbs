@@ -104,22 +104,48 @@
         </div>
         
         <div class="header-bottom">
+                <div class="catalogDropdown">
+                    <div class="catalogButton" onclick="catalogDisplay()">
+                        <img src="/img/Burger.svg" alt="">
+                        <p>Каталог</p>
+                    </div>
+                    <div class="catalogContent">
+                        <span class="closeCatalog" onclick="catalogDisplay()" title="Закрыть каталог">&times;</span>
+                        <div class="category-box">
 
-            <a class="catalog" href="">
-                <img src="/img/Burger.svg" alt="">
-                <p>Каталог</p>
-            </a>
-            
-            <nav class="navigation">
-                <div><a href="#">Кровати и диваны</a></div>
-                <div><a href="#">Товары для дома</a></div>
-                <div><a href="#">Кухни</a></div>
-                <div><a href="#">Потолки</a></div>
-                <div><a href="#">Строительные смеси</a></div>
-                <div><a href="#">Кресла качалки</a></div>
-            </nav>
+                            <ul>
+                                <p class="headText">Категории</p>
+                                <li>Краски</li>
+                                <li>Спальни</li>
+                                <li>Диваны</li>
+                                <li>Кресла-качалки</li>
+                                <li>Строительные смеси</li>
+                                <li>Товары для дома</li>
+                                <li>Кухни</li>
+                            </ul>
+
+                            <ul>
+                                <p class="headText">Услуги</p>
+                                <li>Ремонт под ключ</li>
+                                <li>Калировка</li>
+                                <li>Отделка</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <nav class="navigation">
+                    <div><a href="#">Кровати и диваны</a></div>
+                    <div><a href="#">Товары для дома</a></div>
+                    <div><a href="#">Кухни</a></div>
+                    <div><a href="#">Потолки</a></div>
+                    <div><a href="#">Строительные смеси</a></div>
+                    <div><a href="#">Кресла качалки</a></div>
+                </nav>
+            </div>
         </div>
-    </div>
+
     </header>
 
     <div class="line">
@@ -193,18 +219,13 @@
                         </div>
 
                         <a href="#specification" class="flag">Характеристики</a>
-                    {{/with}}
                 </div>  
             </section>
 
             <section class="description-wrapper">
                 <h2>Описание</h2>
-                <p class="description">Текст-рыба на русском языке. Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.
-                    Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле. В отличии от lorem ipsum,
-                    текст рыба на русском языке наполнит любой макет непонятным<span id="dots">...</span><span id="more">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
-                    auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis.
-                    Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
-                
+                    <p class="description">{{this.description}}</p>
+                {{/with}}
                 <div>
                     <a onclick="moreDescription()" id="myBtn">Подробнее</a>
                     <img src="/img/down.svg" alt="стрелка вниз" class="arrow">

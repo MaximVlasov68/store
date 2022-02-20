@@ -4,8 +4,7 @@ html{
 body{
     max-width: 1920px;
     padding:0;
-    margin: auto;
-    /* margin: auto; */
+    margin: 0 auto;
     font-family: "Montserrat";
     color: #001400;
     font-size: 16px;
@@ -34,6 +33,15 @@ header{
 header p{
     display: inline;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block !important;
+}
+
 .header-left{
     display: flex;
     /* margin-left: 1vw;    прилипает на ноуте*/
@@ -113,20 +121,12 @@ header p{
 .header-bottom{
     gap: 1vw;
 }
-.header-bottom .catalog{
-    display: flex;
-    align-items: center;
-    background-color:#EEEEEE;
-    border-radius: 4px;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-.header-bottom .catalog img{
+.header-bottom .catalogButton img{
     width: 24px;
     height: 24px;
     margin-right:16px;
 }
-.header-bottom .catalog p{
+.header-bottom .catalogButton p{
     font-weight: 600;
 }
 .header-bottom nav{
@@ -290,7 +290,6 @@ article{
     padding: 0 calc(50% - 810px);
     margin-bottom: 3vw;
 }
-
 footer{
     padding: 0 calc(50% - 810px);
     display: flex;
@@ -405,15 +404,14 @@ footer{
     background: #000;
     opacity: 0.5;
 }
-.close{
+.close, .closeCatalog{
     position: absolute;
     right: 25px;
     top: 0;
     color: #000;
     font-size: 3em;
 }
-.close:hover,
-.close:focus{
+.close:hover, .close:focus, .closeCatalog:hover, .closeCatalog:focus{
   color: rgb(168, 19, 19);
   cursor: pointer;
 }
@@ -481,26 +479,42 @@ footer{
 }
 
 /*каталог*/
-.wrapperCatalog{
-    max-width: 1622px;
-    position: absolute;
-    left: calc(50% - 811px);
-    right: calc(50% - 811px);
-    top: 200px;
-    display: flex;
-    background: #EEEEEE;
-    border-radius: 4px;
-    z-index: 5;
-    height: 638px;
-   
-}
-.category-box{
-    display: flex;
-    flex-direction: column;
-    gap: 20vw;
+
+.catalogDropdown {
+    float: left;
+    overflow: hidden;
 }
 
-/* Добавить анимацию масштабирования для формы в модалке */
+.header-bottom .catalogButton{
+    display: flex;
+    align-items: center;
+    background-color:#EEEEEE;
+    border-radius: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    cursor: pointer;
+}
+.catalogContent {
+    display: none;
+    position: absolute;
+    background-color: #EEEEEE;
+    width: 84vw;
+    margin-top: 45px;
+    left: 8vw;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 6;
+}
+
+.description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+/* !!!! Добавить анимацию масштабирования для формы в модалке */
 .animate {
     -webkit-animation: animatezoom 0.7s;
     animation: animatezoom 0.7s

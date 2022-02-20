@@ -21,7 +21,7 @@ export class Product {
     @Column()
     color: string;
 
-    @Column({type: 'decimal' })
+    @Column({ type: 'decimal' })
     weight: number;
 
     @Column()
@@ -29,6 +29,9 @@ export class Product {
 
     @Column()
     numberOfStock: number;
+
+    @Column({ type: 'text', default: '' })
+    description: string;
 
     @ManyToOne(() => Category, category => category.products)
     category: Category;

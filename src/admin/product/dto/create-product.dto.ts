@@ -17,6 +17,8 @@ export class CreateProductDto {
 
     numberOfStock: number;
 
+    description: string;
+
     category: Category;
 
     manufacturer: Manufacturer

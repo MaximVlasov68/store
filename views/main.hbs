@@ -17,7 +17,7 @@
 <body>
     <div class="overlay"></div>
     <div class="modal">
-            <span onclick="closeModal()" class="close" title="Закрыть Modal">&times;</span>
+        <span class="close" onclick="closeModal()" title="Закрыть Modal">&times;</span>
         <div class="head-modal">
             <a class="login-btn active" onclick="select(event)">вход</a>
             <a class="reg-btn" onclick="select(event)">регистрация</a>
@@ -37,36 +37,36 @@
         </form>
 
         <form class="modal-content-register animate" action="" method="post">
-                <div>
-                    <label for="username">Логин</label>
-                    <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
-                </div>
+            <div>
+                <label for="username">Логин</label>
+                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
+            </div>
 
-                <div class="reg">
-                    <label for="tel">Телефон</label>
-                    <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel"
-                        pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
-                </div>
+            <div class="reg">
+                <label for="tel">Телефон</label>
+                <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel"
+                    pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
+            </div>
 
-                <div>
-                    <label for="password">Пароль</label>
-                    <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
-                </div>
+            <div>
+                <label for="password">Пароль</label>
+                <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
+            </div>
 
-                <div class="reg">
-                    <label for="psw">Повторите пароль</label>
-                    <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
-                </div>
+            <div class="reg">
+                <label for="psw">Повторите пароль</label>
+                <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
+            </div>
 
-                <div class="saveMe">
-                    <label class="save" for="save">
-                        <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
-                    </label>
-                </div>
+            <div class="saveMe">
+                <label class="save" for="save">
+                    <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
+                </label>
+            </div>
 
-                <div class="button-modal">
-                    <button type="submit" class="singIn">Зарегистрироваться</button>
-                </div>
+            <div class="button-modal">
+                <button type="submit" class="singIn">Зарегистрироваться</button>
+            </div>
         </form>
     </div>
 
@@ -105,15 +105,17 @@
             </div>
 
             <div class="header-bottom">
-                <div>
-                    <a class="catalog" href="">
+                <div class="catalogDropdown">
+                    <div class="catalogButton" onclick="catalogDisplay()">
                         <img src="/img/Burger.svg" alt="">
                         <p>Каталог</p>
-                    </a>
-                    {{!-- <section class="wrapperCatalog">
+                    </div>
+                    <div class="catalogContent">
+                        <span class="closeCatalog" onclick="catalogDisplay()" title="Закрыть каталог">&times;</span>
                         <div class="category-box">
-                            
-                            <ul><p class="headText">Категории</p>
+
+                            <ul>
+                                <p class="headText">Категории</p>
                                 <li>Краски</li>
                                 <li>Спальни</li>
                                 <li>Диваны</li>
@@ -122,16 +124,17 @@
                                 <li>Товары для дома</li>
                                 <li>Кухни</li>
                             </ul>
-                            
-                            <ul><p class="headText">Услуги</p>
+
+                            <ul>
+                                <p class="headText">Услуги</p>
                                 <li>Ремонт под ключ</li>
                                 <li>Калировка</li>
                                 <li>Отделка</li>
                             </ul>
                         </div>
-                    </section> --}}
+                    </div>
                 </div>
-                
+
 
                 <nav class="navigation">
                     <div><a href="#">Кровати и диваны</a></div>
@@ -143,7 +146,7 @@
                 </nav>
             </div>
         </div>
-        
+
     </header>
 
     <div class="line">
@@ -197,10 +200,11 @@
                     <script type="text/javascript" charset="utf-8" async
                         src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;width=100%25&amp;height=700&amp;lang=ru_RU&amp;scroll=fasle"></script>
                 </div>
-               {{!--  <div class="map-box">
-                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;source=constructor" width="100%" height="700" frameborder="0" scroll="fasle" style="pointer: none;"></iframe>
-                </div> --}}
-                
+                {{!-- <div class="map-box">
+                    <iframe
+                        src="https://yandex.ru/map-widget/v1/?um=constructor%3A613e31463ca9038288f4922b16d7b6856a358b0ef474d7ebe22febb0b9af8169&amp;source=constructor&scroll=false"
+                        width="100%" height="700" frameborder="0" style="pointer: none;"></iframe>
+                </div>--}}
             </section>
 
         </article>

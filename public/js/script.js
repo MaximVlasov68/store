@@ -11,8 +11,14 @@ let singIn = document.querySelector('.singIn');
 let action = document.querySelector('#action');
 const loginForm = document.querySelector('.modal-content-login');
 const registerForm = document.querySelector('.modal-content-register');
+const catalogButton = document.querySelector('.catalogButton');
+const catalogContent = document.querySelector('.catalogContent');
 
 console.log(inputReg);
+
+function catalogDisplay()  {
+  catalogContent.classList.toggle('show');
+}
 
 /* функции открывающие модалку профиля */
 function openModal() {
@@ -43,21 +49,18 @@ function select(event) {
 
 /* функция скрытия и раскрытия описания на странице productDetail */
 function moreDescription() {
-  let dots = document.getElementById("dots");
-  let moreText = document.getElementById("more");
+  let text = document.querySelector('.description');
   let btnText = document.getElementById("myBtn");
   let arrow = document.querySelector(".arrow");
 
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
+  text.classList.toggle('show');
+  const style = getComputedStyle(text);
+  if (style.display === "-webkit-box") {
     btnText.innerHTML = "Подробнее";
     arrow.style.transform = "rotate(360deg)";
-    moreText.style.display = "none";
   } else {
-    dots.style.display = "none";
     btnText.innerHTML = "Короче";
     arrow.style.transform = "rotate(180deg)";
-    moreText.style.display = "inline";
   }
 }
 
