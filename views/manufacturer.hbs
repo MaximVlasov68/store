@@ -15,7 +15,7 @@
 <body>
 
     <form class="admin-form" method="POST">
-        <p>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</p>
+        <h2>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</h2>
         {{#if manufacturer}}<input type="hidden" name="id" value="{{manufacturer.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{manufacturer.name}}"></label>
         <label>Страна<input type="text" placeholder="Страна" name="country" value="{{manufacturer.country}}"></label>

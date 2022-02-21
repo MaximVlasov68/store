@@ -15,7 +15,7 @@
 <body>
 
     <form class="admin-form" method="POST">
-        <p>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</p>
+        <h2>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</h2>
         {{#if category}}<input type="hidden" name="id" value="{{category.id}}">{{/if}}
         <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
 
