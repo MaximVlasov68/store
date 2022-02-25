@@ -189,14 +189,15 @@ article{
     height: 100%;
     object-fit: cover;
 }
-.swiper-button-prev, .swiper-button-next{
-    color: #837b7b73;
+.swiper-pagination-bullet{
+    width: 9px;
+    height: 9px;
 }
-.swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 2em;
-}
+
 .swiper-pagination-bullet-active{
     background-color: #6FB740;
+    width: 11px;
+    height: 11px;
 }
 .content{
     /* margin-left: 1vw;    прилипает на ноуте
@@ -500,19 +501,14 @@ footer{
     background-color: #EEEEEE;
     width: 84vw;
     margin-top: 45px;
-    left: 8vw;
+    left: 7.4vw;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 5px;
     padding: 10px;
     z-index: 6;
 }
 
-.description {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-}
+
 
 /* !!!! Добавить анимацию масштабирования для формы в модалке */
 .animate {

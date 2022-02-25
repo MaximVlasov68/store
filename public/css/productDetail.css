@@ -110,6 +110,10 @@
     letter-spacing: 0.015em;
     text-align: justify;
     padding-top: 20px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 #myBtn{
     font-weight: 600;
