@@ -26,8 +26,8 @@ export class CategoryController {
     if (id) {
       category = await this.categoryService.findOne(id);
     }
-    const categoryList = await this.categoryService.findAll();
-    const parentCategoryList = await this.categoryService.findAll(true);
+    const categoryList = await this.categoryService.getAll();
+    const parentCategoryList = await this.categoryService.getRoots();
     return { categoryList, parentCategoryList, category };
 
   }

@@ -12,7 +12,10 @@ export class Category {
 
     @OneToMany(() => Product, product => product.category)
     products: Product[]
+    
+    @ManyToOne(() => Category, child => child.childCategories)
+    parentCategory: Category;
 
-    @ManyToOne(() => Category, child => child.id)
-    parent: Category;
+    @OneToMany(() => Category, category => category.parentCategory)
+    childCategories: Category[]
 }

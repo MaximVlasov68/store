@@ -8,39 +8,48 @@ import { Category } from './entities/category.entity';
 @Injectable()
 
 export class CategoryService {
-  constructor(@InjectRepository(Category) private categoryRepository: Repository<Category>){}
+  constructor(@InjectRepository(Category) private categoryRepository: Repository<Category>) { }
 
   async create(createCategoryDto: CreateCategoryDto) {
-    console.log(createCategoryDto);
-    
     const parent = await this.categoryRepository.findOne(createCategoryDto.parent);
-    console.log(parent);
-    
     const category = await this.categoryRepository.create({
       ...createCategoryDto,
-      parent,
+      parentCategory: parent,
     })
     return this.categoryRepository.save(category);
   }
 
-  async findAll(onlyParent: boolean = false): Promise<Category[]> {
-    if (onlyParent) {
-      return this.categoryRepository.find({relations: ['parent'], where: {
-        parent: IsNull()
-      }});
-    }
-    return this.categoryRepository.find({relations: ['parent']});
+  async getAll(): Promise<Category[]> {
+    return this.categoryRepository.find({ relations: ['parent'] });
+  }
+  
+  async getRoots(): Promise<Category[]> {
+      return this.categoryRepository.find({
+        where: {
+          parentCategory: IsNull()
+        },
+        relations: ['parentCategory'], 
+      });
+  }
+  
+  async getTree(): Promise<Category[]> {
+    return this.categoryRepository.find({
+      where: {
+        parentCategory: IsNull()
+      },
+      relations: ['childCategories']
+    });
   }
 
   async findOne(id: number): Promise<Category> {
-    return this.categoryRepository.findOne(id, {relations: ['parent']});
+    return this.categoryRepository.findOne(id, { relations: ['parentCategory'] });
   }
 
   async update(updateCategoryDto: UpdateCategoryDto): Promise<any> {
     const parent = await this.categoryRepository.findOne(updateCategoryDto.parent);
     return this.categoryRepository.update(updateCategoryDto.id, {
       ...updateCategoryDto,
-      parent,
+      parentCategory: parent,
     });
   }
 

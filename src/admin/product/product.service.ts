@@ -15,12 +15,22 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  async findAll(options: { take?: number } = {}) {
+  async findAll(options: { take?: number } = {}): Promise<Product[]> {
     const { take = 10 } = options;
     return this.productRepository.find({ relations: ['category', 'manufacturer'], take })
   }
+ 
+  async findByCategory(categoryId: number): Promise<Product[]> {
+    return this.productRepository.find({ 
+      where: {
+        category: {
+          id: categoryId,
+        }
+      },
+      relations: ['category', 'manufacturer'] })
+  }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Product> {
     return this.productRepository.findOne(id, { relations: ['category', 'manufacturer'] })
   }
 

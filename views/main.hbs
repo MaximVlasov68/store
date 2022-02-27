@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="h8ttps://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Главная</title>
@@ -114,22 +113,26 @@
                         <span class="closeCatalog" onclick="catalogDisplay()" title="Закрыть каталог">&times;</span>
                         <div class="category-box">
 
-                            <div class="left-box">
-                                <p class="headText">Категории</p>
-                                <nav class="category-list">
-                                    <a class="item">Краски</a>
-                                    <a class="item">Спальни</a>
-                                    <a class="item">Диваны</a>
-                                    <a class="item">Кресла-качалки</a>
-                                    <a class="item">Строительные смеси</a>
-                                    <a class="item">Товары для дома</a>
-                                    <a class="item">Кухни</a>
-                                    <a class="item">Кухни</a>
-                                    <a class="item">Кухни</a>
-                                    <a class="item">Кухни</a>
-                                    <a class="item">Кухни</a>
-                                </nav>
 
+                            <div class="categories-box">
+                                <p class="headText">Товары</p>
+                                <div class="product-list">
+                                    {{#each categoriesTree}}
+                                    <div class="product-item">
+                                        <p class="childText">{{this.name}}</p>
+                                        <nav class="child-list">
+                                            {{#each this.childCategories}}
+                                            <a href="/productList?categoryId={{this.id}}" class="item">{{this.name}}</a>
+                                            {{/each}}
+                                        </nav>
+                                    </div>
+                                    {{/each}}
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="sirvices-box">
                             
                                 <p class="headText">Услуги</p>
                                 <nav class="services-list">
@@ -137,92 +140,6 @@
                                     <a class="item">Калировка</a>
                                     <a class="item">Отделка</a>
                                 </nav>
-                            </div>
-
-                            <div class="right-box">
-                                <p class="headText">Категория</p>
-                                <div class="product-list">
-
-                                    <div class="product-item">
-                                        <p class="childText">Краски для наружных работ</p>
-                                        <nav class="child-list">
-                                            <a class="item">Фасадные краски</a>
-                                            <a class="item">Фасадные штукатурки</a>
-                                            <a class="item">Лаки и пропитки</a>
-                                            <a class="item">Краски для крыш</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-
-                                    <div class="product-item">
-                                        <p class="childText">Эмали</p>
-                                        <nav class="child-list">
-                                            <a class="item">Эмали для наружных</a>
-                                            <a class="item">Эмали по ржавчине</a>
-                                            <a class="item">Аэрозольные эмали</a>
-                                            <a class="item">Прочие эмали</a>
-                                        </nav>
-                                    </div>
-                                </div>
                             </div>
                                 
                     

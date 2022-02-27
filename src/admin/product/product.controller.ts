@@ -31,7 +31,7 @@ export class ProductController {
     if(id){
       product = await this.productService.findOne(id);
     } 
-      const categoryList = await this.categoryService.findAll();
+      const categoryList = await this.categoryService.getAll();
       const manufacturerList = await this.manufacturerService.findAll();
       const productList = await this.productService.findAll();
       return {productList, categoryList, manufacturerList, product};
