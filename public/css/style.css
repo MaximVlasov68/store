@@ -511,12 +511,12 @@ footer{
     display: flex;
 }
 .sirvices-box{
-    min-width: 250px;
     display: flex;
     flex-direction: column;
     margin: 12px 10px 28px 28px;
     border-left: 2px solid #9A9A9A;
     padding-left: 15px;
+    white-space: nowrap;
 }
 .headText{
     font-weight: 500;
@@ -531,12 +531,15 @@ footer{
     gap: 12px;
 }
 .child-list .item, .services-list .item{
-    font-size: 1.125em;
+    font-size: 1.025em;
     line-height: 22px;
     letter-spacing: 0.015em;
 }
 .services-list .item{
     padding: 8px 16px;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+    
 }
 .services-list .item:hover{
     background: #FFFFFF;
@@ -544,7 +547,7 @@ footer{
     cursor: pointer;
 }
 .child-list .item:hover{
-    font-weight: 500;
+    text-shadow: 0 0 .65px #333, 0 0 .65px #333;
 }
 .categories-box{
     display: flex;
