@@ -1,0 +1,90 @@
+ <header>
+        <div class="header-left">
+            <a href="/" class="headLink"><img class="logo" src="/img/logo.png"></a>
+        </div>
+
+        <div class="header-right">
+
+            <div class="header-top">
+                <div class="wrapper-search">
+                    <form class="form-search" action="">
+                        <input type="text" placeholder="Поиск по сайту">
+                        <button type="submit"></button>
+                    </form>
+                </div>
+
+                <div class="wrapper-login-shop">
+
+                    <div class="item">
+                        <a class="login" onclick="openModal()">
+                            <img class="icon" src="/img/Login.svg" alt="">
+                            <p>Профиль</p>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a>
+                            <img class="icon" src="/img/Shop.svg" alt="">
+                            <p>Корзина</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="header-bottom">
+                <div class="catalogDropdown">
+                    <div class="catalogButton" onclick="catalogDisplay()">
+                        <img src="/img/Burger.svg" alt="">
+                        <p>Каталог</p>
+                    </div>
+                    <div class="catalogContent">
+                        <span class="closeCatalog" onclick="catalogDisplay()" title="Закрыть каталог">&times;</span>
+                        <div class="category-box">
+
+
+                            <div class="categories-box">
+                                <p class="headText">Товары</p>
+                                <div class="product-list">
+                                    {{#each categoriesTree}}
+                                    <div class="product-item">
+                                        <p class="childText">{{this.name}}</p>
+                                        <nav class="child-list">
+                                            {{#each this.childCategories}}
+                                            <a href="/category/{{this.id}}" class="item">{{this.name}}</a>
+                                            {{/each}}
+                                        </nav>
+                                    </div>
+                                    {{/each}}
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="sirvices-box">
+                            
+                                <p class="headText">Услуги</p>
+                                <nav class="services-list">
+                                    <a class="item">Ремонт под ключ</a>
+                                    <a class="item">Калировка</a>
+                                    <a class="item">Отделка</a>
+                                </nav>
+                            </div>
+                                
+                    
+                        </div>
+                    </div>
+                </div>
+
+
+                <nav class="navigation">
+                    <div><a href="#">Кровати и диваны</a></div>
+                    <div><a href="#">Товары для дома</a></div>
+                    <div><a href="#">Кухни</a></div>
+                    <div><a href="#">Потолки</a></div>
+                    <div><a href="#">Строительные смеси</a></div>
+                    <div><a href="#">Кресла качалки</a></div>
+                </nav>
+            </div>
+        </div>
+
+    </header>

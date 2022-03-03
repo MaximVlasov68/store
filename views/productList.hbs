@@ -122,7 +122,7 @@
                                         <p class="childText">{{this.name}}</p>
                                         <nav class="child-list">
                                             {{#each this.childCategories}}
-                                            <a href="/productList?categoryId={{this.id}}" class="item">{{this.name}}</a>
+                                            <a href="/category/{{this.id}}" class="item">{{this.name}}</a>
                                             {{/each}}
                                         </nav>
                                     </div>
@@ -169,7 +169,7 @@
     <article>
         <section class="content">
                 
-                <h2>Название подкатегории</h2>   {{!-- доделать --}}
+                <h2>{{category.name}}</h2>   {{!-- доделать --}}
                 <div class="content-box">
                     {{#each productList}}
                     <div class="item">

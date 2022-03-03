@@ -1,0 +1,54 @@
+<div class="overlay"></div>
+    <div class="modal">
+        <span class="close" onclick="closeModal()" title="Закрыть Modal">&times;</span>
+        <div class="head-modal">
+            <a class="login-btn active" onclick="select(event)">вход</a>
+            <a class="reg-btn" onclick="select(event)">регистрация</a>
+        </div>
+        <form class="modal-content-login animate" action="/auth/login" method="post">
+            <div>
+                <label for="username">Логин</label>
+                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
+            </div>
+            <div>
+                <label for="password">Пароль</label>
+                <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
+            </div>
+            <div class="button-modal">
+                <button type="submit" class="singIn">Войти в аккаунт</button>
+            </div>
+        </form>
+
+        <form class="modal-content-register animate" action="" method="post">
+            <div>
+                <label for="username">Логин</label>
+                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
+            </div>
+
+            <div class="reg">
+                <label for="tel">Телефон</label>
+                <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="tel"
+                    pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
+            </div>
+
+            <div>
+                <label for="password">Пароль</label>
+                <input class="password" type="password" placeholder=" Ведите пароль" name="password" required>
+            </div>
+
+            <div class="reg">
+                <label for="psw">Повторите пароль</label>
+                <input class="password" type="password" placeholder=" Повторите пароль" name="psw" required>
+            </div>
+
+            <div class="saveMe">
+                <label class="save" for="save">
+                    <input class="checkbox" type="checkbox" name="remember" id="save"> Запомнить меня
+                </label>
+            </div>
+
+            <div class="button-modal">
+                <button type="submit" class="singIn">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>

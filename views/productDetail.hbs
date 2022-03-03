@@ -157,8 +157,8 @@
             {{#with product }}
             <div class="navigation-link"> 
                 <a href="/">Каталог</a> > 
-                <a href="#">{{this.category.name}}</a> > 
-                <a href="#">{{this.productName}}</a>
+                <a href="/category/{{this.category.id}}">{{this.category.name}}</a> > 
+                <span>{{this.productName}}</span>
             </div>
             {{/with}}
             <section class="productDetail-wrapper">

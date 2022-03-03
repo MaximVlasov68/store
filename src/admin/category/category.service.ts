@@ -20,7 +20,7 @@ export class CategoryService {
   }
 
   async getAll(): Promise<Category[]> {
-    return this.categoryRepository.find({ relations: ['parent'] });
+    return this.categoryRepository.find({ relations: ['parentCategory'] });
   }
   
   async getRoots(): Promise<Category[]> {

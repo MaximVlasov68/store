@@ -31,11 +31,10 @@ export class AppController {
   async main() {
     const recommendedProducts = await this.productService.findAll();
 
-    const categories = await this.categoryService.getRoots(); /* родительская категория */
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     console.log(categoriesTree);
     
-    return { recommendedProducts, categories, categoriesTree }
+    return { recommendedProducts, categoriesTree }
   }
 
   @Render('productDetail')
@@ -43,13 +42,18 @@ export class AppController {
 
   async getProduct(@Param('id') id: number) {
     const product = await this.productService.findOne(id);
-    return { product }
+    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+
+    return { product, categoriesTree }
   }
   
   @Render('productList')
-  @Get('productList')
-  async getProductList(@Query('categoryId') categoryId?: number) {
-    const productList = await this.productService.findByCategory(categoryId);
-    return { productList }
+  @Get('category/:id')
+  async getProductList(@Param('id') id?: number) {
+    const productList = await this.productService.findByCategory(id);
+    const category = await this.categoryService.findOne(id);
+    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+
+    return { productList, category, categoriesTree }
   }
 }

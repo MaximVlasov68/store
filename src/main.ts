@@ -28,6 +28,7 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   
   hbs.handlebars.registerHelper({...handlebarsHelpers()})
+  hbs.registerPartials(join(__dirname, '..', 'views/partials'))
 
   await app.listen(3000);
 }
