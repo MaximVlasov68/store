@@ -16,7 +16,7 @@ const catalogContent = document.querySelector('.catalogContent');
 
 console.log(inputReg);
 
-function catalogDisplay()  {
+function catalogDisplay() {
   catalogContent.classList.toggle('show');
 }
 
@@ -80,6 +80,34 @@ function minus() {
   if (+countMinus >= 2) {
     count.innerHTML--;
     let countMinus = count.innerHTML;
+  }
+}
+
+registerForm.onsubmit = async (event) => {
+  event.preventDefault();
+  const { username, password, telephoneNumber } = registerForm.elements
+  const data = {
+    username: username.value,
+    password: password.value,
+    telephoneNumber: telephoneNumber.value,
+  }
+  try {
+    const result = await fetch('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    if (result.ok) {
+      const data = await result.json()
+      console.log(data);
+    } else {
+      const error = await result.json()
+      alert(`Registration error: ${JSON.stringify(error)}`)
+    }
+  } catch (e) {
+    console.error(`Fetch error: ${e}`);
   }
 }
 

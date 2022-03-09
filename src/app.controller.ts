@@ -1,14 +1,18 @@
-import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { ProductService } from './admin/product/product.service';
 import { CategoryService } from './admin/category/category.service';
+import { RegisterUserDto } from "./users/dto/register-user-dto";
+import { UsersService } from './users/users.service';
 
 @Controller()
 export class AppController {
 
   constructor(
-    private readonly productService: ProductService, private readonly categoryService: CategoryService
+    private readonly productService: ProductService, 
+    private readonly categoryService: CategoryService, 
+    private readonly usersService: UsersService 
   ) { }
 
   @UseGuards(AuthGuard('local'))
@@ -20,6 +24,11 @@ export class AppController {
       req.session.user = req.user;
     }
     return res.redirect('/admin');
+  }
+
+  @Post('auth/register')
+  async register(@Body() registerUserDto: RegisterUserDto) {
+    return this.usersService.registerUser(registerUserDto);
   }
 
   @Render('loginForm')

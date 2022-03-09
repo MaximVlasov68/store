@@ -13,6 +13,8 @@ async function bootstrap() {
   );
 
   app.useGlobalPipes(new ValidationPipe({
+    forbidNonWhitelisted: true,
+    enableDebugMessages: true,
   }));
 
   app.use(

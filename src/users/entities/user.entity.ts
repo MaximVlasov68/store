@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
+import { Column, PrimaryGeneratedColumn, Entity, Unique } from "typeorm";
 import { Roles } from "../enums/roles";
 
 @Entity()
@@ -13,6 +13,13 @@ export class User {
     @Column()
     password: string;
 
-    @Column()
+    @Column({
+        unique: true
+    })
+    telephoneNumber: string;
+
+    @Column({
+        default: 'user'
+    })
     role: Roles;
 }
