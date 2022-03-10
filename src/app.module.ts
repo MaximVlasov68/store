@@ -15,6 +15,8 @@ import { CategoryModule } from './admin/category/category.module';
 import { ManufacturerModule } from './admin/manufacturer/manufacturer.module';
 import { OrderModule } from './admin/order/order.module';
 import { Order } from './admin/order/entities/order.entity';
+import { OrderProductsModule } from './admin/orderProducts/orderProducts.module';
+import { OrderProducts } from './admin/orderProducts/entities/orderProducts.entity';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { Order } from './admin/order/entities/order.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'store',
-      entities: [Product, Category, Manufacturer, User, Order],
+      entities: [Product, Category, Manufacturer, User, Order, OrderProducts],
       synchronize: true,
       logging: 'all'
     }),
@@ -33,6 +35,8 @@ import { Order } from './admin/order/entities/order.entity';
     ProductModule,
     CategoryModule,
     ManufacturerModule,
+    OrderModule,
+    OrderProductsModule,
     AuthModule,
     UsersModule,
     RouterModule.register([
@@ -59,7 +63,6 @@ import { Order } from './admin/order/entities/order.entity';
         ]
       },
     ]),
-    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

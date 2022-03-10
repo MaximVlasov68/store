@@ -102,6 +102,7 @@ registerForm.onsubmit = async (event) => {
     if (result.ok) {
       const data = await result.json()
       console.log(data);
+      alert("Успешная регистрация");
     } else {
       const error = await result.json()
       alert(`Registration error: ${JSON.stringify(error)}`)

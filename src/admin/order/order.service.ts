@@ -5,35 +5,31 @@ import { Product } from '../product/entities/product.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
+import { OrderProductsService } from '../orderProducts/orderProducts.service';
 
 @Injectable()
 export class OrderService {
-  constructor(@InjectRepository(Order) private orderRepository: Repository<Order>, @InjectRepository(Product) private productRepository: Repository<Product>) { }
+  constructor(
+    @InjectRepository(Order) private orderRepository: Repository<Order>,
+    @InjectRepository(Product) private productRepository: Repository<Product>,
+    private orderProductsService: OrderProductsService,
+  ) { }
 
   async create(createOrderDto: CreateOrderDto) {
-    console.log(createOrderDto);
-    const order = await this.orderRepository.create({
-      ...createOrderDto,
-      items: JSON.stringify(createOrderDto.items),
-    });
+    const order = await this.orderRepository.create();
+    const orderId = order.id;
+    const items = createOrderDto.items;
+    const orderProducts = await this.orderProductsService.add({ orderId, items })
     return this.orderRepository.save(order);
   }
 
   async findAll() {
-    const orders = await this.orderRepository.find();
+    const orders = await this.orderRepository.find({ relations: ['products'] });
     return orders
   }
 
   async findOne(id: number) {
     return this.orderRepository.findOne(id);
-  }
-
-  async update(id: number, updateOrderDto: UpdateOrderDto) {
-    return this.orderRepository.update(id, {
-      ...updateOrderDto,
-      items: JSON.stringify(updateOrderDto.items),
-    }
-    );
   }
 
   async remove(id: number) {

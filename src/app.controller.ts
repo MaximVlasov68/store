@@ -10,9 +10,9 @@ import { UsersService } from './users/users.service';
 export class AppController {
 
   constructor(
-    private readonly productService: ProductService, 
-    private readonly categoryService: CategoryService, 
-    private readonly usersService: UsersService 
+    private readonly productService: ProductService,
+    private readonly categoryService: CategoryService,
+    private readonly usersService: UsersService
   ) { }
 
   @UseGuards(AuthGuard('local'))
@@ -33,7 +33,7 @@ export class AppController {
 
   @Render('loginForm')
   @Get('login')
-  async loginForm(@Res() res: Response) { }
+  async loginForm() { }
 
   @Render('main')
   @Get()
@@ -42,7 +42,7 @@ export class AppController {
 
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     console.log(categoriesTree);
-    
+
     return { recommendedProducts, categoriesTree }
   }
 
@@ -55,7 +55,7 @@ export class AppController {
 
     return { product, categoriesTree }
   }
-  
+
   @Render('productList')
   @Get('category/:id')
   async getProductList(@Param('id') id?: number) {
@@ -64,5 +64,12 @@ export class AppController {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
 
     return { productList, category, categoriesTree }
+  }
+
+  @Render('cart')
+  @Get('cart')
+  async cart() {
+    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    return { categoriesTree }
   }
 }

@@ -6,7 +6,7 @@ export class CreateOrderDto {
     @IsArray()
     @ValidateNested({ each: true })
     items: {
-        product: number,
+        productId: number,
         quantity: number;
     }[]
 }

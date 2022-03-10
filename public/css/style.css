@@ -207,7 +207,7 @@ article{
     flex-direction: column;
 }
 .content h2{
-    margin-top: 70px;
+    /* margin-top: 70px; */
 }
 .content-box{
     display: flex;
