@@ -5,7 +5,6 @@ let loginBtn = document.querySelector('.login-btn');
 let registerBtn = document.querySelector('.reg-btn');
 let regBtn = document.querySelector('.reg-btn');
 let overlay = document.querySelector('.overlay');
-let inputReg = document.querySelectorAll('.reg');
 let saveMe = document.querySelector('.saveMe');
 let singIn = document.querySelector('.singIn');
 let action = document.querySelector('#action');
@@ -14,7 +13,6 @@ const registerForm = document.querySelector('.modal-content-register');
 const catalogButton = document.querySelector('.catalogButton');
 const catalogContent = document.querySelector('.catalogContent');
 
-console.log(inputReg);
 
 function catalogDisplay() {
   catalogContent.classList.toggle('show');
@@ -65,21 +63,20 @@ function moreDescription() {
 }
 
 /* Счётчик товаров на странице productDetails */
-let count = document.getElementById("buttonCountNumber");
 
-function plus() {
+function plus(target) {
+  let count = target.parentElement.querySelector(".buttonCountNumber");
   let countPlus = count.innerHTML;
   if (+countPlus <= 19) {
     count.innerHTML++;
-    let countPlus = count.innerHTML;
   }
 }
 
-function minus() {
+function minus(target) {
+  let count = target.parentElement.querySelector(".buttonCountNumber");
   let countMinus = count.innerHTML;
   if (+countMinus >= 2) {
     count.innerHTML--;
-    let countMinus = count.innerHTML;
   }
 }
 
@@ -111,4 +108,5 @@ registerForm.onsubmit = async (event) => {
     console.error(`Fetch error: ${e}`);
   }
 }
+
 

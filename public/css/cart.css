@@ -3,10 +3,12 @@
 }
 .box-cart{
     margin-top: 4vh;
+    padding: 1vw;
 }
 .head-box{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2.5vh;
 }
 .move-box{
     display: flex;
@@ -22,4 +24,99 @@
     color: #9A9A9A;
     letter-spacing: 0.015em;
     font-weight: 400;
+}
+.product-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3.5vh 0;
+}
+.left-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productImg{
+    max-width: 150px;
+    max-height: 150px;
+}
+.productName{
+   font-size: 1.125em;
+   letter-spacing: 0.015em;
+}
+.info-product{
+    width: 380px;  /*Придумать более адаптианое решение*/
+}
+.productPrice{
+    font-weight: 600;
+    font-size: 1.25em;
+    letter-spacing: 0.015em;
+}
+.counter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 110px;
+    gap: 6px;
+}
+.minus, .plus{
+    height: 24px;
+    font-size: 2em;
+}
+.counter a{
+    cursor: pointer;
+}
+.buttonCountNumber{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttonCountNumber{
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+}
+.count-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1vw;
+    margin-bottom: 8vh;
+}
+.weightText, .sumText{
+    font-weight: 600;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+}
+.deliveryText, .productWeight{
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.015em;
+    color: #9A9A9A;
+}
+.right-count{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.forming{
+    width: 200px;
+    height: 50px;
+    border: 0;
+    background: #10AD44;
+    border: 2px solid #10AD44;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 1.125em;
+    letter-spacing: 0.015em;
+    color: #FFFFFF;
+}
+.forming:hover{
+    color: #10AD44;
+    background: none;
+}
+.sum{
+    margin-left: 30px;
+    font-size: 32px;
+    line-height: 39px;
 }

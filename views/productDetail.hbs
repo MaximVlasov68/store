@@ -39,19 +39,19 @@
 
                         <div class="name-box">
                             <span class="articul">#{{this.id}}</span>
-                            <h2>{{this.productName}}</h2>
+                            <h2 id="name">{{this.productName}}</h2>
                         </div>
 
                         <div class="price-box">
-                            <p class="price">{{this.price}} ₽</p>
+                            <p class="price"><span id="priceNumber">{{this.price}}</span>₽</p>
                         </div>
 
                         <div class="btn-box">
                             <a href="#" class="addBusket">В корзину</a> {{!-- как на главной --}}
-                            <div id="counter">
-                                <a id="buttonCountMinus" onclick="minus()"><img src="/img/minus.svg"></a>
-                                    <div id="buttonCountNumber">1</div>
-                                <a id="buttonCountPlus" onclick="plus()"><img src="/img/plus.svg"></a>
+                            <div class="counter">
+                                <a class="buttonCountMinus" onclick="minus(this)"><img src="/img/minus.svg"></a>
+                                    <div class="buttonCountNumber" id="quantity">1</div>
+                                <a class="buttonCountPlus" onclick="plus(this)"><img src="/img/plus.svg"></a>
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
                         <dl>
                             <dt>Вес</dt>
                             <span class="dots"></span>
-                            <dd>{{this.weight}}</dd>
+                            <dd id="weight">{{this.weight}}</dd>
                         </dl>
                         <dl>
                             <dt>Цвет</dt>
@@ -141,7 +141,9 @@
         </article>
     </main>
 
- {{#>footer}}{{/footer}}
+ {{#>footer}}
+    <script src="/js/cart.js"></script>
+ {{/footer}}
  
 </body>
 </html>

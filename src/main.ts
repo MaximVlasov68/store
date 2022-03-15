@@ -6,6 +6,7 @@ import * as handlebarsHelpers from 'handlebars-helpers';
 import * as hbs from 'hbs';
 import * as session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
+import IMask from 'imask';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(

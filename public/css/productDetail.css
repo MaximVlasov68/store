@@ -39,20 +39,20 @@
     justify-content: flex-start;
     gap: 40px;
 }
-#counter {
+.counter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 130px;
     gap: 6px;
 }
-#counter img{
+.counter img{
     padding: 5px;
 }
-#counter a{
+.counter a{
     cursor: pointer;
 }
-#buttonCountNumber{
+.buttonCountNumber{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,7 @@
     background: #EEEEEE;
     border-radius: 8px;
 }
-#buttonCountNumber{
+.buttonCountNumber{
     font-size: 1.5em;
 }
 .delivery-box, .pickup-box{

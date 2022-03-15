@@ -11,7 +11,6 @@ import { OrderProductsService } from '../orderProducts/orderProducts.service';
 export class OrderService {
   constructor(
     @InjectRepository(Order) private orderRepository: Repository<Order>,
-    @InjectRepository(Product) private productRepository: Repository<Product>,
     private orderProductsService: OrderProductsService,
   ) { }
 

@@ -5,6 +5,8 @@ import { ProductService } from './admin/product/product.service';
 import { CategoryService } from './admin/category/category.service';
 import { RegisterUserDto } from "./users/dto/register-user-dto";
 import { UsersService } from './users/users.service';
+import { OrderService } from './admin/order/order.service';
+import { CreateOrderDto } from './admin/order/dto/create-order.dto';
 
 @Controller()
 export class AppController {
@@ -12,7 +14,8 @@ export class AppController {
   constructor(
     private readonly productService: ProductService,
     private readonly categoryService: CategoryService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly orderService: OrderService,
   ) { }
 
   @UseGuards(AuthGuard('local'))
@@ -71,5 +74,10 @@ export class AppController {
   async cart() {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     return { categoriesTree }
+  }
+
+  @Post('createOrder')
+  async createOrder(createOrderDto: CreateOrderDto) {
+    return this.orderService.create(createOrderDto)
   }
 }
