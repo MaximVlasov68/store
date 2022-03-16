@@ -1,5 +1,5 @@
 {{#>head}}
-    <link rel="stylesheet" type="text/css" href="/css/productDetail.css">
+<link rel="stylesheet" type="text/css" href="/css/productDetail.css">
 {{/head}}
 
 <body>
@@ -14,136 +14,137 @@
     <main>
         <article>
             {{#with product }}
-            <div class="navigation-link"> 
-                <a href="/">Каталог</a> > 
-                <a href="/category/{{this.category.id}}">{{this.category.name}}</a> > 
+            <div class="navigation-link">
+                <a href="/">Каталог</a> >
+                <a href="/category/{{this.category.id}}">{{this.category.name}}</a> >
                 <span>{{this.productName}}</span>
             </div>
             {{/with}}
             <section class="productDetail-wrapper">
 
                 <div class="swiper mySwiperDetail">
-                    <div class="swiper-wrapper">
-                        {{#with product}}
-                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                            <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                        {{/with}}
+                    {{#with product}}
+                    <div class="swiper-wrapper" id="image" data-src="/img/{{this.foto}}">
+                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
                     </div>
+                    {{/with}}
                     <div class="swiper-scrollbar"></div>
                 </div>
-                
+
                 <div class="product-information">
                     {{#with product}}
 
-                        <div class="name-box">
-                            <span class="articul">#{{this.id}}</span>
-                            <h2 id="name">{{this.productName}}</h2>
-                        </div>
+                    <div class="name-box">
+                        <span class="articul">#{{this.id}}</span>
+                        <h2 id="name">{{this.productName}}</h2>
+                    </div>
 
-                        <div class="price-box">
-                            <p class="price"><span id="priceNumber">{{this.price}}</span>₽</p>
-                        </div>
+                    <div class="price-box">
+                        <p class="price"><span id="priceNumber">{{this.price}}</span>₽</p>
+                    </div>
 
-                        <div class="btn-box">
-                            <a href="#" class="addBusket">В корзину</a> {{!-- как на главной --}}
-                            <div class="counter">
-                                <a class="buttonCountMinus" onclick="minus(this)"><img src="/img/minus.svg"></a>
-                                    <div class="buttonCountNumber" id="quantity">1</div>
-                                <a class="buttonCountPlus" onclick="plus(this)"><img src="/img/plus.svg"></a>
-                            </div>
+                    <div class="btn-box">
+                        <a href="#" class="addBusket">В корзину</a> {{!-- как на главной --}}
+                        <div class="counter">
+                            <a class="buttonCountMinus" onclick="minus(this)"><img src="/img/minus.svg"></a>
+                            <div class="buttonCountNumber" id="quantity">1</div>
+                            <a class="buttonCountPlus" onclick="plus(this)"><img src="/img/plus.svg"></a>
                         </div>
+                    </div>
 
-                        <div class="stock-box">
-                            <img src="/img/dot.svg" alt="icon">
-                            <p class="text">В наличии {{this.numberOfStock}} штук</p>
-                        </div>
-                        
-                        <div class="delivery-box">
-                            <div class="group">
-                                <img src="/img/delivery.svg" alt="icon">
-                                <p>Доставим</p>
-                            </div>
-                            <p class="text">от 2000 ₽</p>
-                        </div>
+                    <div class="stock-box">
+                        <img src="/img/dot.svg" alt="icon">
+                        <p class="text">В наличии {{this.numberOfStock}} штук</p>
+                    </div>
 
-                        <div class="pickup-box">
-                            <div class="group">
-                                <img src="/img/pickup.svg" alt="icon">
-                                <p>Самовывоз</p>
-                            </div>
-                            <p class="text">бесплатно</p>
+                    <div class="delivery-box">
+                        <div class="group">
+                            <img src="/img/delivery.svg" alt="icon">
+                            <p>Доставим</p>
                         </div>
+                        <p class="text">от 2000 ₽</p>
+                    </div>
 
-                        <a href="#specification" class="flag">Характеристики</a>
-                </div>  
+                    <div class="pickup-box">
+                        <div class="group">
+                            <img src="/img/pickup.svg" alt="icon">
+                            <p>Самовывоз</p>
+                        </div>
+                        <p class="text">бесплатно</p>
+                    </div>
+
+                    <a href="#specification" class="flag">Характеристики</a>
+                </div>
             </section>
 
             <section class="description-wrapper">
                 <h2>Описание</h2>
-                    <p class="description">{{this.description}}</p>
+                <p class="description">{{this.description}}</p>
                 {{/with}}
                 <div>
                     <a onclick="moreDescription()" id="myBtn">Подробнее</a>
                     <img src="/img/down.svg" alt="стрелка вниз" class="arrow">
                 </div>
-                
+
             </section>
 
             <section class="specification-wrapper" id="specification">
                 <h2>Характеристики</h2>
                 <div class="specification">
                     {{#with product}}
-                        <dl>
-                            <dt>Размер</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.size}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Вес</dt>
-                            <span class="dots"></span>
-                            <dd id="weight">{{this.weight}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Цвет</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.color}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Категория</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.category.name}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Производитель</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.manufacturer.name}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Страна</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.manufacturer.country}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Город</dt>
-                            <span class="dots"></span>
-                            <dd>{{this.manufacturer.city}}</dd>
-                        </dl> 
+                    <dl>
+                        <dt>Размер</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.size}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Вес</dt>
+                        <span class="dots"></span>
+                        <dd id="weight">{{this.weight}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Цвет</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.color}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Категория</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.category.name}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Производитель</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.manufacturer.name}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Страна</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.manufacturer.country}}</dd>
+                    </dl>
+                    <dl>
+                        <dt>Город</dt>
+                        <span class="dots"></span>
+                        <dd>{{this.manufacturer.city}}</dd>
+                    </dl>
                     {{/with}}
                     <div>
                         <a id="myBtn">Скрыть</a>
                         <img src="/img/down.svg" alt="стрелка вниз" class="arrow">
                     </div>
-                    
+
                 </div>
             </section>
         </article>
     </main>
 
- {{#>footer}}
+    {{#>footer}}
     <script src="/js/cart.js"></script>
- {{/footer}}
- 
+    {{/footer}}
+
 </body>
+
 </html>

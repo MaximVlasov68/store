@@ -3,12 +3,14 @@ class Product {
     price;
     quantity;
     weight;
+    image;
 
-    constructor(name, price, quantity, weight) {
+    constructor(name, price, quantity, weight, image) {
         this.name = name;
         this.price = parseInt(price);
         this.quantity = parseFloat(quantity);
         this.weight = parseFloat(weight);
+        this.image = image;
     }
 
     get cost() {
@@ -27,17 +29,19 @@ class Product {
             weight: this.weight,
             cost: this.cost,
             totalWeight: this.totalWeight,
+            image: this.image,
         })
     }
 
-    static from(obj) {
-        return new Cart(obj.name, obj.price, obj.quantity, obj.weight)
+    static from(str) {
+        const { name, price, quantity, weight, image } = JSON.parse(str);
+        return new Product(name, price, quantity, weight, image)
     }
 }
 
 class Cart {
 
-    static LOCAL_STORAGE_KEY = 'cart';
+    static STORAGE_KEY = 'cart';
 
     products = [];
 
@@ -52,7 +56,7 @@ class Cart {
     }
 
     static load() {
-        const data = localStorage.getItem(Cart.LOCAL_STORAGE_KEY);
+        const data = localStorage.getItem(Cart.STORAGE_KEY);
         return Cart.from(data);
     }
 
@@ -63,7 +67,7 @@ class Cart {
     }
 
     save() {
-        localStorage.setItem(Cart.LOCAL_STORAGE_KEY, this.toJSON())
+        localStorage.setItem(Cart.STORAGE_KEY, this.toJSON())
         console.log(`Saved ${this.toJSON()}`);
     }
 
@@ -96,7 +100,18 @@ if (addProductButton) {
         const price = document.querySelector('#priceNumber').innerHTML;
         const quantity = document.querySelector('#quantity').innerHTML;
         const weight = document.querySelector('#weight').innerHTML;
-        const product = new Product(name, price, quantity, weight);
+        const image = document.querySelector('#image').dataset.src;
+        const product = new Product(name, price, quantity, weight, image);
         cart.add(product);
     }
+}
+
+const cartItemView = document.querySelector('script#cart-item');
+if (cartItemView) {
+    const template = Handlebars.compile(cartItemView.innerHTML);
+    const data = {
+        products: cart.products
+    };
+    const html = template(data);
+    document.querySelector('.box-cart').insertAdjacentHTML('beforeend', html);
 }

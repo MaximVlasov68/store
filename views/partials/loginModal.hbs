@@ -1,10 +1,13 @@
 <div class="overlay"></div>
+
     <div class="modal">
+
         <span class="close" onclick="closeModal()" title="Закрыть Modal">&times;</span>
         <div class="head-modal">
             <a class="login-btn active" onclick="select(event)">вход</a>
             <a class="reg-btn" onclick="select(event)">регистрация</a>
         </div>
+
         <form class="modal-content-login animate" action="/auth/login" method="post">
             <div>
                 <label for="username">Логин</label>
