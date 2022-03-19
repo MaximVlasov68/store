@@ -45,7 +45,7 @@
    letter-spacing: 0.015em;
 }
 .info-product{
-    width: 380px;  /*Придумать более адаптианое решение*/
+    min-width: 380px;  /*Придумать более адаптианое решение*/
 }
 .productPrice{
     font-weight: 600;
@@ -129,6 +129,12 @@
     font-weight: 600;
     margin: 0 0 20px 30px;
     align-self: center;
+}
+.priceOne{
+	font-weight: 400;
+	text-align: right;
+	letter-spacing: 0.015em;
+	color: #9A9A9A;
 }
 .input-box{
     display: flex;
@@ -289,3 +295,36 @@
 .b-contain:first-child .b-input::before {
 	visibility: hidden;
 }
+
+.check, #select{
+	transform:scale(1.2); /*Equal to scaleX(1.2) scaleY(1.2) */
+	opacity:0.9;
+	cursor:pointer;
+}
+.adress-box{
+	display: none;
+}
+.inputAdress{
+	height: 40px;
+	font-size: 1.025em;
+	padding-left: 15px;
+	border: 1.5px solid #A9A9A9;
+	border-radius: 8px;
+	font-weight: 500;
+	letter-spacing: 0.015em;
+
+	display: inline-flex;
+	flex-wrap: nowrap;
+	box-sizing: border-box;
+	/* min-width: 340px; */
+	max-width: 500px;
+	transition: width 1s ease;
+}
+.inputAdress:focus {
+	width: 200px;
+	min-width: 200px;
+	transition: all 1s ease;
+}  
+.inputAdress:not(:focus){
+	width: 340px;
+  }

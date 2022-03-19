@@ -115,3 +115,46 @@ if (cartItemView) {
     const html = template(data);
     document.querySelector('.box-cart').insertAdjacentHTML('beforeend', html);
 }
+
+/* selext checkbox */
+const checkbox = document.querySelector('#select');
+const allCheckbox = document.querySelectorAll('.check');
+/* console.log(allCheckbox); */
+checkbox.onclick = function(){
+    if (checkbox.checked) {
+        allCheckbox.forEach(el => el.checked = true);
+        console.log('add');
+    } 
+    else {
+        allCheckbox.forEach(el => el.checked = false);
+        console.log('delete');
+    }
+}
+
+/* увеличение поля ввода */
+const inputAdress = document.querySelector('.inputAdress');  /* нужно доработать */
+
+inputAdress.oninput = function(){
+  let size = inputAdress.scrollWidth;
+  inputAdress.style.width = size + 'px';
+  inputAdress.style.transition = "none";
+}
+
+/* выпадение уточнения адреса */
+const selectDelivery = document.querySelector('#delivery');
+const selectPickup = document.querySelector('#pickup');
+const deliveryBox = document.querySelector('.adress-box');
+
+selectDelivery.onclick = function(){
+    if(selectDelivery.checked = true){
+        deliveryBox.style.display = "block";
+        console.log('look block');
+    } 
+}  
+selectPickup.onclick = function(){
+    if(selectPickup.checked = true) {
+        deliveryBox.style.display = "none";
+        console.log('block none');
+    }
+}
+
