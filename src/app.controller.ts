@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body } from '@nestjs/common';
+import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body, BadRequestException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { ProductService } from './admin/product/product.service';
@@ -7,6 +7,7 @@ import { RegisterUserDto } from "./users/dto/register-user-dto";
 import { UsersService } from './users/users.service';
 import { OrderService } from './admin/order/order.service';
 import { CreateOrderDto } from './admin/order/dto/create-order.dto';
+import { KeyNotUniqueException } from './common/exceptions';
 
 @Controller()
 export class AppController {
@@ -31,7 +32,17 @@ export class AppController {
 
   @Post('auth/register')
   async register(@Body() registerUserDto: RegisterUserDto) {
-    return this.usersService.registerUser(registerUserDto);
+    try {
+      const user = await this.usersService.registerUser(registerUserDto);
+      return user;
+    } catch (e) {
+      if (e.code = '23505') {
+        const keyName = e.detail.match('".*"');
+        throw new KeyNotUniqueException('user', keyName)
+      }
+      console.error('Registration error' + e);
+      throw new BadRequestException();
+    }
   }
 
   @Render('loginForm')

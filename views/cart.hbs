@@ -31,7 +31,7 @@
                     <div class="line">
                         <hr>
                     </div>
-                    <script id="cart-item" type="text/x-handlebars-template">
+                    <script id="cart" type="text/x-handlebars-template">
                         \{{#each products}}
                         <div class="cart-item">
                             <div class="product-box">
@@ -43,7 +43,7 @@
                                                 <p class="productWeight">\{{this.weight}} кг</p>
                                             </div>
                                         </div>
-                                        <p class="productPrice">\{{this.price}} ₽</p>
+                                        <p class="productPrice">\{{this.cost}} ₽</p>
                                         <div class="counter-box">
                                             <div class="counter">
                                                 <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
@@ -59,12 +59,13 @@
                             </div>
                         </div>
                         \{{/each}}
-                    </script>
                 </div>
 
                 <div class="count-box">
+
+                    \{{#with cart}}
                     <div class="left-count">
-                        <p class="weightText">Общий вес заказа 30.7 кг</p>
+                        <p class="weightText">Общий вес заказа \{{this.totalWeight}} кг</p>
                         <p class="deliveryText">Минимальный заказ 2 000 ₽ для доставки</p>
                         <div class="input-box">
                             <label class="b-contain">
@@ -89,14 +90,13 @@
                     </div>
 
                     <div class="right-count">
-                        <p class="sumText">Итого: <span class="sum">31 000 ₽</span> </p>
-                        <p class="discountText">35 000 ₽</p>
+                        <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span> </p>
+                        <p class="discountText">\{{this.totalCost}} ₽</p>
                         <button class="forming">Оформить заказ</button>
                     </div>
+                    \{{/with}}
                 </div>
-
-                
-
+            </script>
             </section>
         </article>
     </main>

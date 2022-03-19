@@ -45,7 +45,7 @@
    letter-spacing: 0.015em;
 }
 .info-product{
-    min-width: 380px;  /*Придумать более адаптианое решение*/
+    min-width: 380px;
 }
 .productPrice{
     font-weight: 600;
@@ -141,23 +141,23 @@
     gap: 2vw;
     margin-top: 6vh;
 }
-.b-contain *, .b-contain *::before, .b-contain *::after {
+.b-contain *, .b-contain *::before, .b-contain *::after{
 	box-sizing: content-box;
 }
 
-.b-contain input {
+.b-contain input{
 	position: absolute;
 	z-index: -1;
 	opacity: 0;
 }
 
-.b-contain span {
+.b-contain span{
 	line-height: 1.54;
 	font-size: 1em;
 	font-family: inherit;
 }
 
-.b-contain {
+.b-contain{
 	display: table;
 	position: relative;
 	padding-left: 1.8rem;
@@ -165,7 +165,7 @@
 	margin-bottom: .5rem;
 }
 
-.b-contain input[type="radio"] ~ .b-input {
+.b-contain input[type="radio"] ~ .b-input{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -177,7 +177,7 @@
 	border-radius: 0.724rem;
 }
 
-.b-contain input[type="radio"] ~ .b-input::after {
+.b-contain input[type="radio"] ~ .b-input::after{
 	content: '';
 	position: absolute;
 	display: none;
@@ -191,41 +191,41 @@
 	transform: rotate(45deg);
 }
 
-.b-contain input:disabled ~ .b-input::after {
+.b-contain input:disabled ~ .b-input::after{
 	border-color: rgba(135, 149, 161, 1);
 }
 
-.b-contain input:checked ~ .b-input::after {
+.b-contain input:checked ~ .b-input::after{
 	display: block;
 }
 
 .b-contain:hover input ~ .b-input,
-.b-contain input:focus ~ .b-input {
+.b-contain input:focus ~ .b-input{
 	background: rgb(231, 238, 243);
 }
 
-.b-contain input:focus ~ .b-input {
+.b-contain input:focus ~ .b-input{
 	box-shadow: 0 0 0 2px rgba(52,144,220,0.5);
 }
 
-.b-contain input:checked ~ .b-input {
+.b-contain input:checked ~ .b-input{
 	background: #10AD44;;
 	border-color: #10AD44;;
 }
 
-.b-contain input[type="radio"]:disabled ~ .b-input {
+.b-contain input[type="radio"]:disabled ~ .b-input{
 	background: rgba(241, 245, 248, 1);
 	border-color: rgba(184, 194, 204, 1);
 	opacity: 0.6;
 	cursor: not-allowed;
 }
 
-.b-contain input:checked:focus ~ .b-input, .b-contain:hover input:not([disabled]):checked ~ .b-input {
+.b-contain input:checked:focus ~ .b-input, .b-contain:hover input:not([disabled]):checked ~ .b-input{
 	background: #10AD44;;
 	border-color: #10AD44;;
 }
 
-.b-contain .b-input::before {
+.b-contain .b-input::before{
 	content: '';
 	display: block;
 	position: absolute;
@@ -242,57 +242,54 @@
 	transform: scale(0);
 }
 
-@keyframes b-ripple {
-	0% {
+@keyframes b-ripple{
+	0%{
 		transform: scale(0);
 	}
 
-	20% {
+	20%{
 		transform: scale(1);
 	}
 
-	100% {
+	100%{
 		opacity: 0;
 		transform: scale(1);
   	}
 }
 
-@keyframes b-ripple-duplicate {
-	0% {
+@keyframes b-ripple-duplicate{
+	0%{
 		transform: scale(0);
 	}
-
 	30% {
 		transform: scale(1);
 	}
-
 	60% {
 		transform: scale(1);
 	}
-
 	100% {
 		opacity: 0;
 		transform: scale(1);
   	}
 }
 
-.b-contain input + .b-input::before {
+.b-contain input + .b-input::before{
 	animation: b-ripple 250ms ease-out;
 }
 
-.b-contain input:checked + .b-input::before {
+.b-contain input:checked + .b-input::before{
 	animation-name: b-ripple-duplicate;
 }
 
-.b-contain .b-input::before {
+.b-contain .b-input::before{
 	visibility: hidden;
 }
 
-.b-contain input:focus + .b-input::before {
+.b-contain input:focus + .b-input::before{
 	visibility: visible;
 }
 
-.b-contain:first-child .b-input::before {
+.b-contain:first-child .b-input::before{
 	visibility: hidden;
 }
 
@@ -303,6 +300,23 @@
 }
 .adress-box{
 	display: none;
+	/* transform: translateY(-50%); */
+  	/* animation: upToDown 1s forwards; */
+}
+@keyframes upToDown{
+	0%{
+		transform: translateY(-50%);
+	}
+	100%{
+		transform: translateY(0);}
+}
+@keyframes downToUp{
+	0%{
+		transform: translateY(0);
+	}
+	100%{
+		transform: translateY(-100%);
+	}
 }
 .inputAdress{
 	height: 40px;
@@ -312,19 +326,13 @@
 	border-radius: 8px;
 	font-weight: 500;
 	letter-spacing: 0.015em;
-
 	display: inline-flex;
 	flex-wrap: nowrap;
 	box-sizing: border-box;
-	/* min-width: 340px; */
+	min-width: 340px;
 	max-width: 500px;
 	transition: width 1s ease;
 }
 .inputAdress:focus {
-	width: 200px;
-	min-width: 200px;
 	transition: all 1s ease;
 }  
-.inputAdress:not(:focus){
-	width: 340px;
-  }

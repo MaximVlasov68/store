@@ -1,4 +1,4 @@
-// Get the modal
+
 let modal = document.querySelector('.modal');
 let login = document.querySelector('.login');
 let loginBtn = document.querySelector('.login-btn');
@@ -102,7 +102,11 @@ registerForm.onsubmit = async (event) => {
       alert("Успешная регистрация");
     } else {
       const error = await result.json()
-      alert(`Registration error: ${JSON.stringify(error)}`)
+      if (error.name === 'KeyNotUniqueException') {
+        alert(error.detail)
+      } else {
+        alert(`Registration error: ${JSON.stringify(error)}`)
+      }
     }
   } catch (e) {
     console.error(`Fetch error: ${e}`);
