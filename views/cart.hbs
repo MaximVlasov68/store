@@ -17,7 +17,8 @@
             <section class="wrapperCart">
                 <h2> Корзина </h2>
 
-                <div class="box-cart">
+                <div class="box-cart"></div>
+                <script id="cart" type="text/x-handlebars-template">
                     <div class="head-box">
                         <div class="move-box">
                             <label>
@@ -31,37 +32,39 @@
                     <div class="line">
                         <hr>
                     </div>
-                    <script id="cart" type="text/x-handlebars-template">
-                        \{{#each products}}
-                        <div class="cart-item">
-                            <div class="product-box">
-                                <div class="left-item">
-                                    <input type="checkbox" class="check">
-                                        <a href="#ссылка_на_товар"><img class="productImg" src="\{{this.image}}" alt="фото продукта"></a>
-                                            <div class="info-product">
-                                                <a href="#ссылка_на_товар"><p class="productName">\{{this.name}}</p></a>
-                                                <p class="productWeight">\{{this.weight}} кг</p>
-                                            </div>
-                                        </div>
-                                        <p class="productPrice">\{{this.cost}} ₽</p>
-                                        <div class="counter-box">
-                                            <div class="counter">
-                                                <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
-                                                <div class="buttonCountNumber">\{{this.quantity}}</div>
-                                                <a class="buttonCountPlus" onclick="plus(this)"><span class="plus">+</span></a>
-                                            </div>
-                                            <p class="priceOne">\{{this.price}} ₽/шт</p>
-                                        </div>
-                                </div>
-                                <div class="line">
-                                    <hr>
+
+                    \{{#each products}}
+                    <div class="cart-item" data-id="\{{this.id}}">
+                        <div class="product-box">
+                            <div class="left-item">
+                                <input type="checkbox" class="check">
+                                <a href="#ссылка_на_товар"><img class="productImg" src="\{{this.image}}"
+                                        alt="фото продукта"></a>
+                                <div class="info-product">
+                                    <a href="#ссылка_на_товар">
+                                        <p class="productName">\{{this.name}}</p>
+                                    </a>
+                                    <p class="productWeight">\{{this.weight}} кг</p>
                                 </div>
                             </div>
+                            <p class="productPrice">\{{this.cost}} ₽</p>
+                            <div class="counter-box">
+                                <div class="counter">
+                                    <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
+                                    <div class="buttonCountNumber">\{{this.quantity}}</div>
+                                    <a class="buttonCountPlus" onclick="plus(this)"><span class="plus">+</span></a>
+                                </div>
+                                <p class="priceOne">\{{this.price}} ₽/шт</p>
+                            </div>
                         </div>
-                        \{{/each}}
-                </div>
+                        <div class="line">
+                            <hr>
+                        </div>
+                    </div>
+                    \{{/each}}
 
-                <div class="count-box">
+
+                    <div class="count-box">
 
                     \{{#with cart}}
                     <div class="left-count">
@@ -75,7 +78,7 @@
                             </label>
                             <label class="b-contain">
                                 <span>Доставка курьером</span>
-                                <input name="delivery" type="radio"  id="delivery">
+                                <input name="delivery" type="radio" id="delivery">
                                 <div class="b-input"></div>
                             </label>
                         </div>
@@ -83,7 +86,7 @@
                             <h3>Адрес доставки</h3>
                             <form class="adress" action="">
                                 <label for="">
-                                    <input type="text" class="inputAdress" placeholder="Укажите адрес"> 
+                                    <input type="text" class="inputAdress" placeholder="Укажите адрес">
                                 </label>
                             </form>
                         </div>
@@ -95,8 +98,8 @@
                         <button class="forming">Оформить заказ</button>
                     </div>
                     \{{/with}}
-                </div>
-            </script>
+                    </div>
+                </script>
             </section>
         </article>
     </main>

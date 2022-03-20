@@ -114,6 +114,10 @@ class Cart {
         } else throw new TypeError('Argument is not of Product class')
     }
 
+    delete(productId) {
+        this.products = this.products.filter(product => product.id !== productId);
+    }
+
     render() {
         const cartView = document.querySelector('script#cart');
         if (cartView) {
@@ -126,8 +130,33 @@ class Cart {
                     totalWeight: this.totalWeight,
                 }
             };
-            const html = template(data, { allowProtoPropertiesByDefault: true });
-            document.querySelector('.box-cart').insertAdjacentHTML('beforeend', html);
+            const html = template(data, { allowProtoPropertiesByDefault: true }); /* пазрешить использовать геттеры */
+            const root = document.querySelector('.box-cart');
+            root.innerHTML = html;
+        }
+
+        /* select checkbox */
+        const checkbox = document.querySelector('#select');
+        const allCheckbox = document.querySelectorAll('.check');
+        /* console.log(allCheckbox); */
+        if (checkbox && allCheckbox) {
+            checkbox.onclick = function () {
+                if (checkbox.checked) {
+                    allCheckbox.forEach(el => el.checked = true);
+                    console.log('add');
+                }
+                else {
+                    allCheckbox.forEach(el => el.checked = false);
+                    console.log('delete');
+                }
+            }
+        }
+
+        const deleteItemsButton = document.querySelector('.deleteItem').onclick = () => {
+            const itemsForDelete = Array.from(document.querySelectorAll('.cart-item')).filter(el => el.querySelector('.check').checked === true)
+            itemsForDelete.forEach(item => cart.delete(item.dataset.id))
+            cart.save()
+            cart.render()
         }
     }
 
@@ -165,27 +194,10 @@ if (addProductButton) {
 
 cart.render();
 
-/* select checkbox */
-const checkbox = document.querySelector('#select');
-const allCheckbox = document.querySelectorAll('.check');
-/* console.log(allCheckbox); */
-if (checkbox && allCheckbox) {
-    checkbox.onclick = function () {
-        if (checkbox.checked) {
-            allCheckbox.forEach(el => el.checked = true);
-            console.log('add');
-        }
-        else {
-            allCheckbox.forEach(el => el.checked = false);
-            console.log('delete');
-        }
-    }
-}
-
 /* увеличение поля ввода */
 const inputAdress = document.querySelector('.inputAdress');  /* нужно доработать */
 
-if(inputAdress){
+if (inputAdress) {
     inputAdress.oninput = function () {
         let contentLength = inputAdress.value.length;
         let size = contentLength > 0 ? contentLength + 5 + "ch" : "";
@@ -198,7 +210,7 @@ const selectDelivery = document.querySelector('#delivery');
 const selectPickup = document.querySelector('#pickup');
 const deliveryBox = document.querySelector('.adress-box');
 
-if(selectDelivery && selectPickup){
+if (selectDelivery && selectPickup) {
     selectDelivery.onclick = function () {
         if (selectDelivery.checked = true) {
             deliveryBox.style.display = "block";
