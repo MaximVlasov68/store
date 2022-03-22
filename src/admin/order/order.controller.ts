@@ -21,7 +21,7 @@ export class OrderController {
     if (id) {
       order = await this.orderService.findOne(id)
     }
-    const orderList = await this.orderService.findAll();
+    const orderList = await this.orderService.findAll(1);
     return {
       order, orderList
     }

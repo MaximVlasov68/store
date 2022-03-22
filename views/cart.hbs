@@ -14,92 +14,11 @@
 
     <main>
         <article>
-            <section class="wrapperCart">
+            <section class="wrapper-cart">
                 <h2> Корзина </h2>
 
-                <div class="box-cart"></div>
-                <script id="cart" type="text/x-handlebars-template">
-                    <div class="head-box">
-                        <div class="move-box">
-                            <label>
-                                <input type="checkbox" id="select"> Выбрать все
-                            </label>
-                            <a href="#" class="deleteItem">Удалить выбранные</a>
-                        </div>
-                        <p class="text">Скидка при покупке от 5 000 – 5%, 10 000 - 10%</p>
-                    </div>
-
-                    <div class="line">
-                        <hr>
-                    </div>
-
-                    \{{#each products}}
-                    <div class="cart-item" data-id="\{{this.id}}">
-                        <div class="product-box">
-                            <div class="left-item">
-                                <input type="checkbox" class="check">
-                                <a href="#ссылка_на_товар"><img class="productImg" src="\{{this.image}}"
-                                        alt="фото продукта"></a>
-                                <div class="info-product">
-                                    <a href="#ссылка_на_товар">
-                                        <p class="productName">\{{this.name}}</p>
-                                    </a>
-                                    <p class="productWeight">\{{this.weight}} кг</p>
-                                </div>
-                            </div>
-                            <p class="productPrice">\{{this.cost}} ₽</p>
-                            <div class="counter-box">
-                                <div class="counter">
-                                    <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
-                                    <div class="buttonCountNumber">\{{this.quantity}}</div>
-                                    <a class="buttonCountPlus" onclick="plus(this)"><span class="plus">+</span></a>
-                                </div>
-                                <p class="priceOne">\{{this.price}} ₽/шт</p>
-                            </div>
-                        </div>
-                        <div class="line">
-                            <hr>
-                        </div>
-                    </div>
-                    \{{/each}}
-
-
-                    <div class="count-box">
-
-                    \{{#with cart}}
-                    <div class="left-count">
-                        <p class="weightText">Общий вес заказа \{{this.totalWeight}} кг</p>
-                        <p class="deliveryText">Минимальный заказ 2 000 ₽ для доставки</p>
-                        <div class="input-box">
-                            <label class="b-contain">
-                                <span>Самовывоз</span>
-                                <input name="delivery" type="radio" id="pickup" checked>
-                                <div class="b-input"></div>
-                            </label>
-                            <label class="b-contain">
-                                <span>Доставка курьером</span>
-                                <input name="delivery" type="radio" id="delivery">
-                                <div class="b-input"></div>
-                            </label>
-                        </div>
-                        <div class="adress-box">
-                            <h3>Адрес доставки</h3>
-                            <form class="adress" action="">
-                                <label for="">
-                                    <input type="text" class="inputAdress" placeholder="Укажите адрес">
-                                </label>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="right-count">
-                        <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span> </p>
-                        <p class="discountText">\{{this.totalCost}} ₽</p>
-                        <button class="forming">Оформить заказ</button>
-                    </div>
-                    \{{/with}}
-                    </div>
-                </script>
+                {{#>cartView}}{{/cartView}}
+            
             </section>
         </article>
     </main>

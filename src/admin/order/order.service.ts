@@ -22,8 +22,12 @@ export class OrderService {
     return this.orderRepository.save(order);
   }
 
-  async findAll() {
-    const orders = await this.orderRepository.find({ relations: ['products'] });
+  async findAll(userId?: number) {
+    const orders = await this.orderRepository
+      .createQueryBuilder("order")
+      .leftJoinAndSelect("order.orderProducts", "orderProducts")
+      .leftJoinAndSelect("orderProducts.product", "product")
+      .getMany()
     return orders
   }
 

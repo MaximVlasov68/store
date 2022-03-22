@@ -91,4 +91,12 @@ export class AppController {
   async createOrder(createOrderDto: CreateOrderDto) {
     return this.orderService.create(createOrderDto)
   }
+
+  @Render('account')
+  @Get('account')
+  async account() {
+    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const orders = await this.orderService.findAll(1)
+    return { categoriesTree, orders }
+  }
 }

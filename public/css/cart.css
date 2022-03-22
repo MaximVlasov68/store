@@ -1,4 +1,4 @@
-.wrapperCart{
+.wrapper-cart{
     padding: 0 calc(50% - 810px);
 }
 .box-cart{
@@ -305,10 +305,13 @@
 }
 @keyframes upToDown{
 	0%{
-		transform: translateY(-50%);
+		transform: translateY(-100%);
+		opacity: 0;
 	}
 	100%{
-		transform: translateY(0);}
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 @keyframes downToUp{
 	0%{
@@ -316,6 +319,8 @@
 	}
 	100%{
 		transform: translateY(-100%);
+		visibility: hidden;
+		opacity: 0;
 	}
 }
 .inputAdress{
@@ -336,3 +341,26 @@
 .inputAdress:focus {
 	transition: all 1s ease;
 }  
+/*modal*/
+.overlay{
+    display: none;
+    position: fixed;
+    z-index: 7;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+}
+.cartModal{
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    z-index: 8; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 460px; /* Полная ширина */
+    background-color: rgba(0,0,0,0.4); /*Черный с непрозрачностью */
+    background: #F9F9F9;
+    border-radius: 8px;
+}

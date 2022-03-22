@@ -1,0 +1,6 @@
+.wrapper-account{
+    padding: 0 calc(50% - 810px);
+}
+.wrapper-account h2{
+    margin: 4vh 0;
+}

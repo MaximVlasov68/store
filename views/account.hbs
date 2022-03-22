@@ -1,0 +1,63 @@
+{{#>head}}
+<link rel="stylesheet" type="text/css" href="/css/cart.css">
+<link rel="stylesheet" type="text/css" href="/css/account.css">
+{{/head}}
+
+<body>
+
+    {{#>cartModal}}{{/cartModal}}
+    {{#>loginModal}}{{/loginModal}}
+    {{#>header}}{{/header}}
+
+    <div class="line">
+        <hr>
+    </div>
+
+    <main>
+        <article>
+            <section class="wrapper-account">
+                <h2>Мои заказы</h2>
+
+                <div class="line">
+                    <hr>
+                </div>
+
+                {{#each orders}}
+                    {{#each this.orderProducts}}
+                    <div class="cart-item" data-id="{{this.product.id}}">
+                        <div class="product-box">
+                            <div class="left-item">
+                                <a href="#ссылка_на_товар"><img class="productImg" src="/img/{{this.product.foto}}"
+                                        alt="фото продукта"></a>
+                                <div class="info-product">
+                                    <a href="#ссылка_на_товар">
+                                        <p class="productName">{{this.product.productName}}</p>
+                                    </a>
+                                    <p class="productWeight">{{this.product.weight}} кг</p>
+                                </div>
+                            </div>
+                            <p class="productPrice">{{this.cost}} ₽</p>
+                            <div class="counter-box">
+                                <div class="counter">
+                                    <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
+                                    <div class="buttonCountNumber">{{this.quantity}}</div>
+                                    <a class="buttonCountPlus" onclick="plus(this)"><span class="plus">+</span></a>
+                                </div>
+                                <p class="priceOne">{{this.product.price}} ₽/шт</p>
+                            </div>
+                        </div>
+                        <div class="line">
+                            <hr>
+                        </div>
+
+                    </div>
+                    {{/each}}
+                <hr>
+                {{/each}}
+            </section>
+        </article>
+    </main>
+
+    {{#>footer}}{{/footer}}
+
+</body>
