@@ -1,11 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Render, Query } from '@nestjs/common';
 import { Response } from 'express';
+import { AdminRequired } from '../admin.decorator';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
 @Controller()
+@AdminRequired()
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) { }
 

@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Query } from
 import { OrderProductsService } from './orderProducts.service';
 import { AddOrderItemsDto } from './dto/add-order-item.dto';
 import { ProductService } from "../product/product.service";
+import { AdminRequired } from '../admin.decorator';
 
 @Controller()
+@AdminRequired()
 export class OrderProductController {
   constructor(private readonly orderProductService: OrderProductsService, private readonly productService: ProductService) { }
 

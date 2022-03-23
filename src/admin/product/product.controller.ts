@@ -6,8 +6,10 @@ import { Response } from 'express';
 import { CategoryService } from '../category/category.service';
 import { ManufacturerService } from '../manufacturer/manufacturer.service';
 import { SessionAuthGuard } from 'src/auth/session-auth.guard';
+import { AdminRequired } from '../admin.decorator';
 
 @Controller()
+@AdminRequired()
 @UseGuards(SessionAuthGuard)
 export class ProductController {
   constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService, private readonly manufacturerService: ManufacturerService) {}

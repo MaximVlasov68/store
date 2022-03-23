@@ -4,3 +4,43 @@
 .wrapper-account h2{
     margin: 4vh 0;
 }
+.cart-item{
+    margin: 5vh 0;
+}
+.accountLine{
+    background-color:  #9A9A9A; 
+    color:  #9A9A9A; 
+}
+.current-box{
+    margin: 5vh 0;
+}
+.filter-box{
+    display: flex;
+    align-items: baseline;
+    gap: 2vw;
+}
+.filterText{
+    font-size: .875em;
+    font-weight: 500;
+    color: #9A9A9A;
+    letter-spacing: 0.015em;
+}
+.counter-box{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 2vh;
+}
+.buttonCountNumber{
+    padding: 0;
+}
+.priceOne{
+    margin: 0;
+}
+.buttonCountNumber {
+    font-size: 1.125em;
+    font-weight: 600;
+}
+.quantityText{
+    margin-left: 5px;
+}

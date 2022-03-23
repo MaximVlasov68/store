@@ -41,8 +41,9 @@
     max-height: 150px;
 }
 .productName{
-   font-size: 1.125em;
-   letter-spacing: 0.015em;
+	width: 380px;
+	font-size: 1.125em;
+	letter-spacing: 0.015em;
 }
 .info-product{
     min-width: 380px;
@@ -305,7 +306,7 @@
 }
 @keyframes upToDown{
 	0%{
-		transform: translateY(-100%);
+		transform: translateY(-50%);
 		opacity: 0;
 	}
 	100%{
@@ -318,7 +319,7 @@
 		transform: translateY(0);
 	}
 	100%{
-		transform: translateY(-100%);
+		transform: translateY(-50%);
 		visibility: hidden;
 		opacity: 0;
 	}

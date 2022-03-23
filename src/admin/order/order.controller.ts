@@ -3,8 +3,10 @@ import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ProductService } from "../product/product.service";
+import { AdminRequired } from '../admin.decorator';
 
 @Controller()
+@AdminRequired()
 export class OrderController {
   constructor(private readonly orderService: OrderService, private readonly productService: ProductService) { }
 

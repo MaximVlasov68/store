@@ -3,8 +3,10 @@ import { ManufacturerService } from './manufacturer.service';
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 import { UpdateManufacturerDto } from './dto/update-manufacturer.dto';
 import { Response } from 'express';
+import { AdminRequired } from '../admin.decorator';
 
 @Controller()
+@AdminRequired()
 export class ManufacturerController {
   constructor(private readonly manufacturerService: ManufacturerService) {}
 

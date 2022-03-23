@@ -238,14 +238,14 @@ class Cart {
             selectDelivery.onclick = function () {
                 if (selectDelivery.checked = true) {
                     deliveryBox.style.display = "block";
-                    deliveryBox.style.animation = "upToDown 1s forwards";
+                    deliveryBox.style.animation = "upToDown .8s forwards";
                     console.log('look block');
                 }
             }
 
             selectPickup.onclick = function () {
                 if (selectPickup.checked = true) {
-                    deliveryBox.style.animation = "downToUp 1s forwards";
+                    deliveryBox.style.animation = "downToUp .8s forwards";
                     console.log('block none');
                 }
                 /* deliveryBox.style.display = "none"; */

@@ -18,13 +18,33 @@
             <section class="wrapper-account">
                 <h2>Мои заказы</h2>
 
-                <div class="line">
-                    <hr>
+                <div class="current-box">
+                    <div class="line">
+                        <hr class="accountLine">
+                    </div>
+                
+                    <div class="filter-box">
+                        <h3>Текущие</h3>
+                        <p class="filterText">Скрыть всё</p>
+                    </div>
+                    
+                    <div class="line">
+                        <hr class="accountLine">
+                    </div>
                 </div>
-
+               
+                
+                
                 {{#each orders}}
+                    <h3>Заказ № 1</h3>
+                                                            {{!-- добавить общую стоимость --}}
+                    <div class="line">
+                        <hr>
+                    </div>
+
                     {{#each this.orderProducts}}
                     <div class="cart-item" data-id="{{this.product.id}}">
+                        
                         <div class="product-box">
                             <div class="left-item">
                                 <a href="#ссылка_на_товар"><img class="productImg" src="/img/{{this.product.foto}}"
@@ -39,21 +59,36 @@
                             <p class="productPrice">{{this.cost}} ₽</p>
                             <div class="counter-box">
                                 <div class="counter">
-                                    <a class="buttonCountMinus" onclick="minus(this)"><span class="minus">–</span></a>
-                                    <div class="buttonCountNumber">{{this.quantity}}</div>
-                                    <a class="buttonCountPlus" onclick="plus(this)"><span class="plus">+</span></a>
+                                    <div class="buttonCountNumber">{{this.quantity}} <span class="quantityText"> шт.</span></div>
                                 </div>
                                 <p class="priceOne">{{this.product.price}} ₽/шт</p>
                             </div>
                         </div>
-                        <div class="line">
+                        {{!-- <div class="line">
                             <hr>
-                        </div>
+                        </div> --}}
 
                     </div>
                     {{/each}}
                 <hr>
                 {{/each}}
+
+
+                <div class="current-box">
+                    <div class="line">
+                        <hr class="accountLine">
+                    </div>
+                
+                    <div class="filter-box">
+                        <h3>Завершенные</h3>
+                        <p class="filterText">Скрыть всё</p>
+                    </div>
+                    
+                    <div class="line">
+                        <hr class="accountLine">
+                    </div>
+                </div>
+
             </section>
         </article>
     </main>

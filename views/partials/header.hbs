@@ -16,9 +16,15 @@
                 <div class="wrapper-login-shop">
 
                     <div class="item">
-                        <a class="login" onclick="openModal()">
+                        <a class="login" {{#if user}} href="/account" {{else}} onclick="openModal()" {{/if}}>
                             <img class="icon" src="/img/Login.svg" alt="">
-                            <p>Профиль</p>
+                            <p>
+                                {{#if user}}
+                                {{user.username}}
+                                {{else}}
+                                Войти
+                                {{/if}}
+                                </p>
                         </a>
                     </div>
                     <div class="item">

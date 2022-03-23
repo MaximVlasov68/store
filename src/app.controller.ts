@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body, BadRequestException, Session } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { ProductService } from './admin/product/product.service';
@@ -8,6 +8,7 @@ import { UsersService } from './users/users.service';
 import { OrderService } from './admin/order/order.service';
 import { CreateOrderDto } from './admin/order/dto/create-order.dto';
 import { KeyNotUniqueException } from './common/exceptions';
+import { UserRoles } from './users/enums/roles';
 
 @Controller()
 export class AppController {
@@ -22,12 +23,14 @@ export class AppController {
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
   async login(@Request() req, @Res() res: Response) {
-    console.log(req);
-
     if (req.user) {
       req.session.user = req.user;
     }
-    return res.redirect('/admin');
+    if (req.user.role === UserRoles.admin) {   
+      return res.redirect('/admin');
+    } else {
+      return res.redirect('/account');
+    }
   }
 
   @Post('auth/register')
@@ -51,40 +54,42 @@ export class AppController {
 
   @Render('main')
   @Get()
-  async main() {
+  async main(@Session() session) {
     const recommendedProducts = await this.productService.findAll();
-
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    console.log(categoriesTree);
+    const user = session.user;
 
-    return { recommendedProducts, categoriesTree }
+    return { recommendedProducts, categoriesTree, user }
   }
 
   @Render('productDetail')
   @Get('product/:id')
 
-  async getProduct(@Param('id') id: number) {
+  async getProduct(@Session() session, @Param('id') id: number) {
     const product = await this.productService.findOne(id);
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const user = session.user;
 
-    return { product, categoriesTree }
+    return { product, categoriesTree, user }
   }
 
   @Render('productList')
   @Get('category/:id')
-  async getProductList(@Param('id') id?: number) {
+  async getProductList(@Session() session, @Param('id') id?: number) {
     const productList = await this.productService.findByCategory(id);
     const category = await this.categoryService.findOne(id);
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const user = session.user;
 
-    return { productList, category, categoriesTree }
+    return { productList, category, categoriesTree, user }
   }
 
   @Render('cart')
   @Get('cart')
-  async cart() {
+  async cart(@Session() session) {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    return { categoriesTree }
+    const user = session.user;
+    return { categoriesTree, user }
   }
 
   @Post('createOrder')
@@ -94,9 +99,10 @@ export class AppController {
 
   @Render('account')
   @Get('account')
-  async account() {
+  async account(@Session() session) {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     const orders = await this.orderService.findAll(1)
-    return { categoriesTree, orders }
+    const user = session.user;
+    return { categoriesTree, orders, user }
   }
 }

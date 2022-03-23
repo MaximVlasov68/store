@@ -210,13 +210,16 @@ article{
     /* margin-top: 70px; */
 }
 .content-box{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5vh;
 }
 .content-box .item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 2vw;
-    margin-bottom: 2vw;
+    /* margin-bottom: 2vw; */
 }
 .item .picture{
     width: 375px;

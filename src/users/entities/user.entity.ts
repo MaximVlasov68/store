@@ -1,6 +1,6 @@
 import { Order } from "src/admin/order/entities/order.entity";
 import { Column, PrimaryGeneratedColumn, Entity, Unique, OneToMany } from "typeorm";
-import { Roles } from "../enums/roles";
+import { UserRoles } from "../enums/roles";
 
 @Entity()
 export class User {
@@ -24,7 +24,7 @@ export class User {
     @Column({
         default: 'user'
     })
-    role: Roles;
+    role: UserRoles;
 
     @OneToMany(() => Order, order => order.user)
     orders: Order[]
