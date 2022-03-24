@@ -36,8 +36,11 @@
                 
                 
                 {{#each orders}}
-                    <h3>Заказ № 1</h3>
-                                                            {{!-- добавить общую стоимость --}}
+                    <div class="head-orders">
+                        <h3>Заказ № 1</h3>
+                        <p>Общая стоимость: {{orders.cost}} ₽</p>
+                    </div>
+                    
                     <div class="line">
                         <hr>
                     </div>

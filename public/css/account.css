@@ -12,7 +12,20 @@
     color:  #9A9A9A; 
 }
 .current-box{
-    margin: 5vh 0;
+    margin-top: 5vh;
+}
+.head-orders{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.head-orders h3{
+    margin-top: 5vh;
+}
+.head-orders p{
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    color: #262626;
 }
 .filter-box{
     display: flex;

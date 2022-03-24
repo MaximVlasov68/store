@@ -219,7 +219,7 @@ class Cart {
         }
 
         /* увеличение поля ввода */
-        const inputAdress = document.querySelector('.inputAdress');  /* нужно доработать */
+        const inputAdress = document.querySelector('.inputAdress');  
 
         if (inputAdress) {
             inputAdress.oninput = function () {

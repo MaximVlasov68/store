@@ -353,7 +353,7 @@
     opacity: 0.5;
 }
 .cartModal{
-    display: none;
+    display: flex;
     position: fixed;
     flex-direction: column;
     z-index: 8; 
