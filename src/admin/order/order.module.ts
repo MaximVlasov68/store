@@ -9,12 +9,15 @@ import { Product } from '../product/entities/product.entity';
 import { OrderProductsModule } from '../orderProducts/orderProducts.module';
 import { OrderProducts } from '../orderProducts/entities/orderProducts.entity';
 import { OrderProductsService } from '../orderProducts/orderProducts.service';
+import { UsersModule } from 'src/users/users.module';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Order, Product, OrderProducts]),
+    TypeOrmModule.forFeature([Order, Product, OrderProducts, User]),
     ProductModule,
     OrderProductsModule,
+    UsersModule,
   ],
   controllers: [OrderController],
   providers: [OrderService, ProductService, OrderProductsService],

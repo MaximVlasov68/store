@@ -1,12 +1,20 @@
 import { Type } from "class-transformer";
-import { IsArray, ValidateNested } from "class-validator";
+import { IsArray, IsNumber, IsNumberString, ValidateNested } from "class-validator";
 import { Product } from "src/admin/product/entities/product.entity";
+
+export class OrderItem {
+    @IsNumberString()
+    productId: number;
+    @IsNumber()
+    quantity: number;
+}
 
 export class CreateOrderDto {
     @IsArray()
     @ValidateNested({ each: true })
-    items: {
-        productId: number,
-        quantity: number;
-    }[]
+    @Type(() => OrderItem)
+    items: OrderItem[]
+
+    @IsNumber()
+    userId: number;
 }

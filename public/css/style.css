@@ -378,9 +378,9 @@ footer{
 /*Модалка для входа и регистрации*/
 
 /* класс для body при открытой модалке*/
-.shadow{
+/* .shadow{
     filter: blur(16px);
-}
+} */
 
 .modal{
     display: none;
@@ -416,8 +416,8 @@ footer{
     font-size: 3em;
 }
 .close:hover, .close:focus, .closeCatalog:hover, .closeCatalog:focus{
-  color: rgb(168, 19, 19);
-  cursor: pointer;
+    color: rgb(168, 19, 19);
+    cursor: pointer;
 }
 .modal-content-login, .modal-content-register{ 
     display: flex;

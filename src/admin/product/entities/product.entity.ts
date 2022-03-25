@@ -28,7 +28,7 @@ export class Product {
     size: string;
 
     @Column()
-    numberOfStock: number;
+    isAvailable: boolean;
 
     @Column({ type: 'text', default: '' })
     description: string;

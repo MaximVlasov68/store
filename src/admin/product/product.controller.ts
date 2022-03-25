@@ -17,9 +17,15 @@ export class ProductController {
   @Post()
   async createOrUpdate(@Res() res: Response, @Body() createOrUpdateProductDto: CreateProductDto | UpdateProductDto) {
     if ("id" in createOrUpdateProductDto) {
-      await this.productService.update(createOrUpdateProductDto.id, createOrUpdateProductDto);
+      await this.productService.update(createOrUpdateProductDto.id, {
+        ...createOrUpdateProductDto,
+        isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
+      });
     } else {
-      await this.productService.create(createOrUpdateProductDto);
+      await this.productService.create({
+        ...createOrUpdateProductDto,
+        isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
+      });
     }
     
     return res.redirect('/admin/product')

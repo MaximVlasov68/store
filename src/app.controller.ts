@@ -93,15 +93,18 @@ export class AppController {
   }
 
   @Post('createOrder')
-  async createOrder(createOrderDto: CreateOrderDto) {
-    return this.orderService.create(createOrderDto)
+  async createOrder(@Body() createOrderDto: Omit<CreateOrderDto, 'userId'>, @Session() session) {
+    return this.orderService.create({
+      ...createOrderDto,
+      userId: session.user.id,
+    })
   }
 
   @Render('account')
   @Get('account')
   async account(@Session() session) {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    const orders = await this.orderService.findAll(1)
+    const orders = await this.orderService.findAll(session.user.id)
     const user = session.user;
     return { categoriesTree, orders, user }
   }

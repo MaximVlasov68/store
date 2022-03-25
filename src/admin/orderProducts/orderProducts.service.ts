@@ -17,12 +17,12 @@ export class OrderProductsService {
   async add(addOrderItemsDto: AddOrderItemsDto) {
     const order = await this.orderRepository.findOne(addOrderItemsDto.orderId);
     await Promise.all(
-      addOrderItemsDto.items.map(async ({productId, quantity}) => {
+      addOrderItemsDto.items.map(async ({ productId, quantity }) => {
         const product = await this.productRepository.findOne(productId);
-        const orderProduct = await this.orderProductsRepository.create({product, quantity});
+        const orderProduct = await this.orderProductsRepository.create({ order, product, quantity });
         return this.orderProductsRepository.save(orderProduct);
       })
-    ) 
+    )
   }
 
   async findAll() {

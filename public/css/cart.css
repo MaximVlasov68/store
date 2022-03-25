@@ -294,15 +294,13 @@
 	visibility: hidden;
 }
 
-.check, #select{
+.check, #selectAll{
 	transform:scale(1.2); /*Equal to scaleX(1.2) scaleY(1.2) */
 	opacity:0.9;
 	cursor:pointer;
 }
 .adress-box{
 	display: none;
-	/* transform: translateY(-50%); */
-  	/* animation: upToDown 1s forwards; */
 }
 @keyframes upToDown{
 	0%{
@@ -320,7 +318,6 @@
 	}
 	100%{
 		transform: translateY(-50%);
-		visibility: hidden;
 		opacity: 0;
 	}
 }
@@ -353,7 +350,7 @@
     opacity: 0.5;
 }
 .cartModal{
-    display: flex;
+    display: none;
     position: fixed;
     flex-direction: column;
     z-index: 8; 
@@ -362,6 +359,55 @@
     transform: translate(-50%, -50%);
     max-width: 460px; /* Полная ширина */
     background-color: rgba(0,0,0,0.4); /*Черный с непрозрачностью */
-    background: #F9F9F9;
+    background:  #EEEEEE;
     border-radius: 8px;
+	padding: 40px;
+	/* animation: text 5s infinite; */
+}
+.box-item{
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+.outline{
+	background-color:  #DCDCDC; 
+    color:  #DCDCDC; 
+}
+.closeModalCart{
+	position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #000;
+    font-size: 2.5em;
+}
+.closeModalCart:hover{
+	color: rgb(168, 19, 19);
+    cursor: pointer;
+}
+.textModal{
+	letter-spacing: 0.015em;
+}
+.bold{
+	font-weight: 600;
+}
+.priceModal{
+	font-size: 1.5em;
+}
+@keyframes upToDownCartModal{
+	0% {
+		transform: translate(-50%, -100%);
+	}
+	100% {
+		transform: translateY(-50%, -50%);
+		
+	}
+}
+@keyframes downToUpCartModal{
+	0%{
+		transform: translate(-50%, -50%);
+	}
+	100%{
+		transform: translate(-50%, -100%);
+		opacity: 0;
+	}
 }

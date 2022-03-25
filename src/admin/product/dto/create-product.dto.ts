@@ -1,3 +1,4 @@
+import { IsBoolean } from "class-validator";
 import { Category } from "../../category/entities/category.entity";
 import { Manufacturer } from "../../manufacturer/entities/manufacturer.entity";
 
@@ -8,7 +9,7 @@ export class CreateProductDto {
     color: string;
     weight: number;
     size: string;
-    numberOfStock: number;
+    isAvailable: boolean;
     description: string;
     category: Category;
     manufacturer: Manufacturer

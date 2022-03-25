@@ -37,8 +37,8 @@
                 
                 {{#each orders}}
                     <div class="head-orders">
-                        <h3>Заказ № 1</h3>
-                        <p>Общая стоимость: {{orders.cost}} ₽</p>
+                        <h3>Заказ № {{this.id}}</h3>
+                        <p>Общая стоимость: {{this.totalCost}} ₽</p>
                     </div>
                     
                     <div class="line">

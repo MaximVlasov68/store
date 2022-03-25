@@ -22,7 +22,7 @@
                     <div class="head-box">
                         <div class="move-box">
                             <label>
-                                <input type="checkbox" id="select"> Выбрать все
+                                <input type="checkbox" id="selectAll" \{{#if cart.isAllChecked}} checked \{{/if}}> Выбрать все
                             </label>
                             <a href="#" class="deleteItem">Удалить выбранные</a>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="right-count">
                         <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span> </p>
                         <p class="discountText">\{{this.totalCost}} ₽</p>
-                        <button class="forming">Оформить заказ</button>
+                        <button class="forming" id="createOrderButton">Оформить заказ</button>
                     </div>
                     \{{/with}}
                     </div>

@@ -84,6 +84,10 @@ class Cart {
         return this.products.filter(product => product.checked === true).reduce((sum, product) => sum + product.weight, 0)
     }
 
+    get isAllChecked() {
+        return this.products.every(product => product.checked === true)
+    }
+
     toJSON() {
         return JSON.stringify(
             this.products.map(product => product.toJSON())
@@ -144,6 +148,13 @@ class Cart {
         product.checked = value;
     }
 
+    setCheckedAll(value) {
+        this.products = this.products.map(product => {
+            product.checked = value
+            return product
+        })
+    }
+
     render() {
         const cartView = document.querySelector('script#cart');
         if (cartView) {
@@ -154,6 +165,7 @@ class Cart {
                     totalCost: this.totalCost,
                     totalCostWithDiscount: this.totalCostWithDiscount,
                     totalWeight: this.totalWeight,
+                    isAllChecked: this.isAllChecked,
                 }
             };
             const html = template(data, { allowProtoPropertiesByDefault: true }); /* пазрешить использовать геттеры */
@@ -163,17 +175,19 @@ class Cart {
 
 
         /* select checkbox */
-        const checkbox = document.querySelector('#select');
+        const checkbox = document.querySelector('#selectAll');
         const allCheckboxes = document.querySelectorAll('.check');
         /* console.log(allCheckbox); */
         if (checkbox && allCheckboxes) {
             checkbox.onclick = function () {
                 if (checkbox.checked) {
-                    allCheckboxes.forEach(el => el.checked = true);
+                    cart.setCheckedAll(true)
                 }
                 else {
-                    allCheckboxes.forEach(el => el.checked = false);
+                    cart.setCheckedAll(false)
                 }
+                cart.save()
+                cart.render()
             }
         }
         allCheckboxes.forEach(checkbox =>
@@ -219,7 +233,7 @@ class Cart {
         }
 
         /* увеличение поля ввода */
-        const inputAdress = document.querySelector('.inputAdress');  
+        const inputAdress = document.querySelector('.inputAdress');
 
         if (inputAdress) {
             inputAdress.oninput = function () {
@@ -284,5 +298,39 @@ document.addEventListener('DOMContentLoaded', e => {
             const product = new Product(id, name, price, quantity, weight, image, checked);
             cart.add(product);
         }
+    }
+
+    const createOrderButton = document.querySelector('#createOrderButton');
+    const cartModal = document.querySelector('.cartModal');
+    const overlay = document.querySelector('.overlay');
+    const close = document.querySelector('.closeModalCart');
+    if (createOrderButton) {
+        createOrderButton.addEventListener('click', async (event) => {
+            const body = JSON.stringify({
+                items: cart.products.map(product => ({
+                    productId: product.id,
+                    quantity: product.quantity,
+                }))
+            })
+            const res = await fetch('/createOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body,
+            })
+            const data = await res.json();
+            alert(JSON.stringify(data));
+        })
+        createOrderButton.addEventListener('click', (e) => {
+            cartModal.style.display = "flex";
+            cartModal.style.animation = "upToDownCartModal 1.8s forwards";  /* forwards - После того, как анимация заканчивается , анимация будет применять значения свойств к моменту окончания анимации */
+            overlay.style.display = "block";
+        })
+        close.addEventListener('click', (e) => {
+            cartModal.style.animation = "downToUpCartModal 1.8s forwards"; 
+            overlay.style.display = "none";
+            /* cartModal.style.display = "none"; */
+        })
     }
 })

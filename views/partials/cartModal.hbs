@@ -1,10 +1,32 @@
 <div class="overlay"></div>
 
 <div class="cartModal">
+    <span class="closeModalCart" onclick="closeModalCart()" title="Закрыть Modal">&times;</span>
     <h2>Ваш заказ формлен</h2>
-    <p>родробности заказа</p>
-    <div>
-        <p>Товары() на сумму</p>    {{!-- Решить чем лучше воспользоваться grid или table --}}
-        <p>35 000 ₽</p>
+    <p class="textModal bold">Подробности заказа</p>
+    <div class="box-item">
+        <p class="textModal">Товары(4) на сумму</p>    
+        <p class="textModal bold">31 500₽</p>
+    </div>
+    <div class="box-item">
+        <p class="textModal">Сумма скидки</p>    
+        <p class="textModal bold">3500 ₽</p>
+    </div>
+    <div class="box-item">
+        <p class="textModal">Общий вес</p>    
+        <p class="textModal bold">30.7 кг</p>
+    </div>
+    <div class="box-item">
+        <p class="textModal">Доставка</p>    
+        <p class="textModal bold">Курьером</p>
+    </div>
+
+    <div class="line">
+        <hr class="outline">
+    </div>
+
+    <div class="box-item">
+        <p class="textModal bold">Итого:</p>
+        <p class="textModal bold priceModal">31 500₽</p>
     </div>
 </div>

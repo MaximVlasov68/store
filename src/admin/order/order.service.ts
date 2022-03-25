@@ -6,29 +6,38 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { OrderProductsService } from '../orderProducts/orderProducts.service';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order) private orderRepository: Repository<Order>,
+    @InjectRepository(User) private userRepository: Repository<User>,
     private orderProductsService: OrderProductsService,
   ) { }
 
   async create(createOrderDto: CreateOrderDto) {
-    const order = await this.orderRepository.create();
-    const orderId = order.id;
+    const userId = createOrderDto.userId
+    const user = await this.userRepository.findOne(userId)
+
+    const order = await this.orderRepository.create({ user });
+    const { id: orderId } = await this.orderRepository.save(order);
+
     const items = createOrderDto.items;
     const orderProducts = await this.orderProductsService.add({ orderId, items })
     return this.orderRepository.save(order);
   }
 
   async findAll(userId?: number) {
-    const orders = await this.orderRepository
+    let orders = this.orderRepository
       .createQueryBuilder("order")
       .leftJoinAndSelect("order.orderProducts", "orderProducts")
       .leftJoinAndSelect("orderProducts.product", "product")
-      .getMany()
-    return orders
+      .leftJoinAndSelect("order.user", "user");
+    if (userId) {
+      orders = orders.where("user.id = :userId", { userId })
+    }
+    return orders.getMany()
   }
 
   async findOne(id: number) {

@@ -21,9 +21,9 @@ export class OrderController {
   async findAll(@Query('id') id?: number) {
     let order;
     if (id) {
-      order = await this.orderService.findOne(id)
+      order = await this.orderService.findOne(id,)
     }
-    const orderList = await this.orderService.findAll(1);
+    const orderList = await this.orderService.findAll();
     return {
       order, orderList
     }
