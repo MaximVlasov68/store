@@ -18,9 +18,10 @@ export class OrderService {
 
   async create(createOrderDto: CreateOrderDto) {
     const userId = createOrderDto.userId
+    const address = createOrderDto.address;
     const user = await this.userRepository.findOne(userId)
 
-    const order = await this.orderRepository.create({ user });
+    const order = await this.orderRepository.create({ user, address });
     const { id: orderId } = await this.orderRepository.save(order);
 
     const items = createOrderDto.items;

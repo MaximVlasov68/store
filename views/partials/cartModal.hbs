@@ -1,24 +1,24 @@
 <div class="overlay"></div>
 
 <div class="cartModal">
-    <span class="closeModalCart" onclick="closeModalCart()" title="Закрыть Modal">&times;</span>
-    <h2>Ваш заказ формлен</h2>
+    <span class="closeModalCart" title="Закрыть Modal">&times;</span>
+    <h2>Ваш заказ оформлен</h2>
     <p class="textModal bold">Подробности заказа</p>
     <div class="box-item">
-        <p class="textModal">Товары(4) на сумму</p>    
-        <p class="textModal bold">31 500₽</p>
+        <p class="textModal">Товары(\{{quantity}}) на сумму</p>    
+        <p class="textModal bold">\{{cost}}₽</p>
     </div>
     <div class="box-item">
         <p class="textModal">Сумма скидки</p>    
-        <p class="textModal bold">3500 ₽</p>
+        <p class="textModal bold">\{{discount}} ₽</p>
     </div>
     <div class="box-item">
         <p class="textModal">Общий вес</p>    
-        <p class="textModal bold">30.7 кг</p>
+        <p class="textModal bold">\{{weight}} кг</p>
     </div>
     <div class="box-item">
         <p class="textModal">Доставка</p>    
-        <p class="textModal bold">Курьером</p>
+        <p class="textModal bold">\{{#if address}}Курьером\{{else}}Самовывоз\{{/if}}</p>
     </div>
 
     <div class="line">
@@ -27,6 +27,6 @@
 
     <div class="box-item">
         <p class="textModal bold">Итого:</p>
-        <p class="textModal bold priceModal">31 500₽</p>
+        <p class="textModal bold priceModal">\{{costWithDiscount}}₽</p>
     </div>
 </div>

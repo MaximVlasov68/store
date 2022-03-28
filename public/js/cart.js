@@ -1,11 +1,11 @@
 class Product {
-    id;
-    name;
-    price;
-    quantity;
-    weight;
-    image;
-    checked;
+    id = "";
+    name = "";
+    price = 0;
+    quantity = 0;
+    weight = 0;
+    image = "";
+    checked = true;
 
     constructor(id, name, price, quantity, weight, image, checked) {
         this.id = id;
@@ -246,7 +246,7 @@ class Cart {
         /* выпадение уточнения адреса */
         const selectDelivery = document.querySelector('#delivery');
         const selectPickup = document.querySelector('#pickup');
-        const deliveryBox = document.querySelector('.adress-box');
+        const deliveryBox = document.querySelector('.address-box');
 
         if (selectDelivery && selectPickup) {
             selectDelivery.onclick = function () {
@@ -264,6 +264,55 @@ class Cart {
                 }
                 /* deliveryBox.style.display = "none"; */
             }
+        }
+    }
+}
+
+class CartModal {
+
+    cart = new Cart();
+    address = ''
+
+    constructor(cart, address) {
+        this.cart = cart;
+        this.address = address;
+    }
+
+    static from(cart, address) {
+        if (cart instanceof Cart) {
+            return new CartModal(cart, address)
+        } else throw new TypeError('cart must be an instance of Cart class')
+    }
+
+    render() {
+        const cartModalView = document.querySelector('script#cartModal');
+        if (cartModalView) {
+            const template = Handlebars.compile(cartModalView.innerHTML);
+            const data = {
+                cost: this.cart.totalCost,
+                weight: this.cart.totalWeight,
+                quantity: this.cart.products.length,
+                discount: this.cart.totalCost - this.cart.totalCostWithDiscount,
+                costWithDiscount: this.cart.totalCostWithDiscount,
+                address: this.address,
+            };
+            const html = template(data, { allowProtoPropertiesByDefault: true }); /* пазрешить использовать геттеры */
+            const root = document.querySelector('#cartModalRoot');
+            root.innerHTML = html;
+
+            const cartModal = document.querySelector('.cartModal');
+            const overlay = document.querySelector('.overlay');
+            const close = document.querySelector('.closeModalCart');
+
+            cartModal.style.display = "flex";
+            cartModal.style.animation = "upToDownCartModal 1.8s forwards";  /* forwards - После того, как анимация заканчивается , анимация будет применять значения свойств к моменту окончания анимации */
+            overlay.style.display = "block";
+
+            close.addEventListener('click', (e) => {
+                cartModal.style.animation = "downToUpCartModal 1.8s forwards";
+                overlay.style.display = "none";
+                /* cartModal.style.display = "none"; */
+            })
         }
     }
 }
@@ -301,16 +350,15 @@ document.addEventListener('DOMContentLoaded', e => {
     }
 
     const createOrderButton = document.querySelector('#createOrderButton');
-    const cartModal = document.querySelector('.cartModal');
-    const overlay = document.querySelector('.overlay');
-    const close = document.querySelector('.closeModalCart');
     if (createOrderButton) {
         createOrderButton.addEventListener('click', async (event) => {
+            const address = document.querySelector('.inputAddress')?.value;
             const body = JSON.stringify({
                 items: cart.products.map(product => ({
                     productId: product.id,
                     quantity: product.quantity,
-                }))
+                })),
+                address: address === "" ? null : address,
             })
             const res = await fetch('/createOrder', {
                 method: 'POST',
@@ -320,17 +368,12 @@ document.addEventListener('DOMContentLoaded', e => {
                 body,
             })
             const data = await res.json();
-            alert(JSON.stringify(data));
-        })
-        createOrderButton.addEventListener('click', (e) => {
-            cartModal.style.display = "flex";
-            cartModal.style.animation = "upToDownCartModal 1.8s forwards";  /* forwards - После того, как анимация заканчивается , анимация будет применять значения свойств к моменту окончания анимации */
-            overlay.style.display = "block";
-        })
-        close.addEventListener('click', (e) => {
-            cartModal.style.animation = "downToUpCartModal 1.8s forwards"; 
-            overlay.style.display = "none";
-            /* cartModal.style.display = "none"; */
+
+            if (!data.error) {
+                const cartModal = CartModal.from(cart, address === "" ? null : address);
+                cartModal.render();
+            }
+            console.log(JSON.stringify(data));
         })
     }
 })

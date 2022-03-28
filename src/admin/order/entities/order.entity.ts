@@ -14,6 +14,9 @@ export class Order {
         this.totalCost = this.orderProducts.reduce((sum, product) => sum + product.cost, 0)
     } */
 
+    @Column({ default: null })
+    address: string;
+
     @ManyToOne(() => User, user => user.orders)
     user: User;
     

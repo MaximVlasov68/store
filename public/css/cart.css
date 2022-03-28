@@ -118,6 +118,12 @@
     background: none;
     cursor: pointer;
 }
+.forming:disabled{
+	background-color: #A9A9A9 ;
+    color: #DCDCDC ;
+    border-color: #707070 ;
+	cursor: no-drop;
+}
 .sum{
     margin-left: 30px;
     font-size: 32px;
@@ -299,7 +305,7 @@
 	opacity:0.9;
 	cursor:pointer;
 }
-.adress-box{
+.address-box{
 	display: none;
 }
 @keyframes upToDown{
@@ -321,7 +327,7 @@
 		opacity: 0;
 	}
 }
-.inputAdress{
+.inputAddress{
 	height: 40px;
 	font-size: 1.025em;
 	padding-left: 15px;
@@ -336,7 +342,7 @@
 	max-width: 500px;
 	transition: width 1s ease;
 }
-.inputAdress:focus {
+.inputAddress:focus {
 	transition: all 1s ease;
 }  
 /*modal*/

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsArray, IsNumber, IsNumberString, ValidateNested } from "class-validator";
+import { IsArray, IsNumber, IsNumberString, IsString, ValidateNested } from "class-validator";
 import { Product } from "src/admin/product/entities/product.entity";
 
 export class OrderItem {
@@ -17,4 +17,7 @@ export class CreateOrderDto {
 
     @IsNumber()
     userId: number;
+
+    @IsString()
+    address: string;
 }

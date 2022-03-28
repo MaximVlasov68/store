@@ -4,7 +4,6 @@
 
 <body>
 
-    {{#>cartModal}}{{/cartModal}}
     {{#>loginModal}}{{/loginModal}}
     {{#>header}}{{/header}}
 
@@ -80,11 +79,11 @@
                                 <div class="b-input"></div>
                             </label>
                         </div>
-                        <div class="adress-box">
+                        <div class="address-box">
                             <h3>Адрес доставки</h3>
-                            <form class="adress" action="">
+                            <form class="address" action="">
                                 <label for="">
-                                    <input type="text" class="inputAdress" placeholder="Укажите адрес">
+                                    <input type="text" class="inputAddress" placeholder="Укажите адрес">
                                 </label>
                             </form>
                         </div>
@@ -93,10 +92,14 @@
                     <div class="right-count">
                         <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span> </p>
                         <p class="discountText">\{{this.totalCost}} ₽</p>
-                        <button class="forming" id="createOrderButton">Оформить заказ</button>
+                        <button class="forming" id="createOrderButton" {{#unless user}} disabled {{/unless}}>Оформить заказ</button>
                     </div>
                     \{{/with}}
                     </div>
+                </script>
+                <div id="cartModalRoot"></div>
+                <script id="cartModal" type="text/x-handlebars-template">
+                    {{#>cartModal}}{{/cartModal}}
                 </script>
             </section>
         </article>
