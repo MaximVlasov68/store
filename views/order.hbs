@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
     <!-- библиотека для таблиц(сортировка, фильтры) -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
@@ -26,28 +27,39 @@
             <th>Цена</th>
             <th>Адрес</th>
             <th></th>
-            <th></th>
         </thead>
         <tbody>
             {{#each orderList}}
                 <tr>
-                    <td>{{this.id}}</td>
+                    <td id="orderId">{{this.id}}</td>
                     <td>{{this.orderProducts}}</td>
-                    <td></td>
+                    <td>
+                        {{#if this.completed}}Завершен{{else}}
+                        Выполняется
+                        <button id="complete">Завершить</button>
+                        {{/if}}
+                    </td>
                     <td>{{this.totalCost}}</td>
                     <td>{{this.order.address}}</td>
-                    <td><a href="/admin/product?id={{this.id}}">edit</a></td>
                     <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
 
-    <script src="/js/filter.js"></script>
     <script>
         $(document).ready( function () {
         $('#order').DataTable(); 
         } );
+    </script>
+    <script>
+        $('button#complete').click(async function() {
+            const orderId = $(this).parent().siblings('#orderId').html()
+            await fetch(`complete/${orderId}`, {
+                method: 'POST',
+            })
+            document.location.reload()
+        })
     </script>
 </body>
 </html>

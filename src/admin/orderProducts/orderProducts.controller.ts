@@ -32,9 +32,4 @@ export class OrderProductController {
   findOne(@Param('id') id: string) {
     return this.orderProductService.findOne(+id);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.orderProductService.remove(+id);
-  }
 }

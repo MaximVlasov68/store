@@ -30,12 +30,12 @@ export class OrderController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.orderService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.orderService.findOne(id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.orderService.remove(+id);
+  @Post('/complete/:id')
+  complete(@Param('id') id: number) {
+    return this.orderService.setCompleted(id);
   }
 }

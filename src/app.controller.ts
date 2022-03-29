@@ -104,8 +104,9 @@ export class AppController {
   @Get('account')
   async account(@Session() session) {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    const orders = await this.orderService.findAll(session.user.id)
+    const ordersInProgress = await this.orderService.findAll(session.user.id, false)
+    const completedOrders = await this.orderService.findAll(session.user.id, true)
     const user = session.user;
-    return { categoriesTree, orders, user }
+    return { categoriesTree, ordersInProgress, completedOrders, user }
   }
 }

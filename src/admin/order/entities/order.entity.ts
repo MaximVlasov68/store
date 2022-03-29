@@ -9,13 +9,24 @@ export class Order {
 
     totalCost: number
 
-    /* @AfterLoad()
+    @AfterLoad()
     getTotalCost() {
-        this.totalCost = this.orderProducts.reduce((sum, product) => sum + product.cost, 0)
-    } */
+        const cost = this.orderProducts?.reduce((sum, product) => sum + product.cost, 0);
+        let discount = 0;
+        if (cost >= 5000) {
+            discount = 0.05;
+        }
+        if (cost >= 10000) {
+            discount = 0.1;
+        }
+        this.totalCost = cost - cost * discount;
+    }
 
     @Column({ default: null })
     address: string;
+
+    @Column({ default: false })
+    completed: boolean;
 
     @ManyToOne(() => User, user => user.orders)
     user: User;

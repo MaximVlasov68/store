@@ -29,7 +29,7 @@ export class OrderService {
     return this.orderRepository.save(order);
   }
 
-  async findAll(userId?: number) {
+  async findAll(userId?: number, completed?: boolean) {
     let orders = this.orderRepository
       .createQueryBuilder("order")
       .leftJoinAndSelect("order.orderProducts", "orderProducts")
@@ -38,14 +38,17 @@ export class OrderService {
     if (userId) {
       orders = orders.where("user.id = :userId", { userId })
     }
+    if (completed !== undefined) {
+      orders = orders.where("order.completed = :completed", { completed })
+    }
     return orders.getMany()
+  }
+
+  async setCompleted(id: number) {
+    return this.orderRepository.update(id, { completed: true })
   }
 
   async findOne(id: number) {
     return this.orderRepository.findOne(id);
-  }
-
-  async remove(id: number) {
-    return this.orderRepository.delete(id);
   }
 }

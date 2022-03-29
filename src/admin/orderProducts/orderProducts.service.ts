@@ -33,8 +33,4 @@ export class OrderProductsService {
   async findOne(id: number) {
     return this.orderProductsRepository.findOne(id);
   }
-
-  async remove(id: number) {
-    return this.orderProductsRepository.delete(id);
-  }
 }

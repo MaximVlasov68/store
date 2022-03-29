@@ -272,15 +272,17 @@ class CartModal {
 
     cart = new Cart();
     address = ''
+    orderId = ''
 
-    constructor(cart, address) {
+    constructor(cart, address, orderId) {
         this.cart = cart;
         this.address = address;
+        this.orderId = orderId
     }
 
-    static from(cart, address) {
+    static from(cart, address, orderId) {
         if (cart instanceof Cart) {
-            return new CartModal(cart, address)
+            return new CartModal(cart, address, orderId)
         } else throw new TypeError('cart must be an instance of Cart class')
     }
 
@@ -295,6 +297,7 @@ class CartModal {
                 discount: this.cart.totalCost - this.cart.totalCostWithDiscount,
                 costWithDiscount: this.cart.totalCostWithDiscount,
                 address: this.address,
+                orderId: this.orderId,
             };
             const html = template(data, { allowProtoPropertiesByDefault: true }); /* пазрешить использовать геттеры */
             const root = document.querySelector('#cartModalRoot');
@@ -368,9 +371,9 @@ document.addEventListener('DOMContentLoaded', e => {
                 body,
             })
             const data = await res.json();
-
+            const orderId = data.id;
             if (!data.error) {
-                const cartModal = CartModal.from(cart, address === "" ? null : address);
+                const cartModal = CartModal.from(cart, address === "" ? null : address, orderId);
                 cartModal.render();
             }
             console.log(JSON.stringify(data));
