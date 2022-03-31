@@ -233,14 +233,14 @@ class Cart {
         }
 
         /* увеличение поля ввода */
-        const inputAdress = document.querySelector('.inputAdress');
+        const inputAddress = document.querySelector('.inputAddress');
 
-        if (inputAdress) {
-            inputAdress.oninput = function () {
-                let contentLength = inputAdress.value.length;
+        if (inputAddress) {
+            inputAddress.oninput = function () {
+                let contentLength = inputAddress.value.length;
                 let size = contentLength > 0 ? contentLength + 5 + "ch" : "";
-                inputAdress.style.width = size;
-                inputAdress.style.transition = "none";
+                inputAddress.style.width = size;
+                inputAddress.style.transition = "none";
             }
         }
         /* выпадение уточнения адреса */

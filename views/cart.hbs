@@ -37,9 +37,9 @@
                         <div class="product-box">
                             <div class="left-item">
                                 <input type="checkbox" class="check" \{{#if this.checked}} checked \{{/if}}>
-                                <a href="#ссылка_на_товар"><img class="productImg" src="\{{this.image}}" alt="фото продукта"></a>
+                                <a href="/product/\{{this.id}}"><img class="productImg" src="\{{this.image}}" alt="фото продукта"></a>
                                 <div class="info-product">
-                                    <a href="#ссылка_на_товар">
+                                    <a href="/product/\{{this.id}}">
                                         <p class="productName">\{{this.name}}</p>
                                     </a>
                                     <p class="productWeight">\{{this.weight}} кг</p>
