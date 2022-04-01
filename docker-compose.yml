@@ -1,9 +1,21 @@
 services:
   db:
+    env_file: .env
     image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: store
     ports: 
       - 5432:5432
+    networks:
+      - store-network
+  store:
+    env_file: .env
+    build: .
+    ports:
+        - 3000:3000
+    networks:
+        - store-network
+    volumes:
+        - .:/usr/src/app
+        - /usr/src/app/node_modules
+networks:
+  store-network:
+version: '2'

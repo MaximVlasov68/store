@@ -5,10 +5,12 @@ import { AppModule } from './app.module';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import * as hbs from 'hbs';
 import * as session from 'express-session';
+import { config } from "dotenv";
 import { ValidationPipe } from '@nestjs/common';
-import IMask from 'imask';
 
 async function bootstrap() {
+  config()
+
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
   );
@@ -23,10 +25,10 @@ async function bootstrap() {
     session({
       store: new (require('connect-pg-simple')(session))({
         conObject: {
-          host: 'localhost',
-          port: 5432,
-          user: 'postgres',
-          password: 'postgres',
+          host: process.env.POSTGRES_HOST,
+          port: process.env.POSTGRES_PORT,
+          user: process.env.POSTGRES_USER,
+          password: process.env.POSTGRES_PASSWORD,
         },
         createTableIfMissing: true,
       }),

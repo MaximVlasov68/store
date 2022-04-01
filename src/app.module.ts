@@ -17,16 +17,19 @@ import { OrderModule } from './admin/order/order.module';
 import { Order } from './admin/order/entities/order.entity';
 import { OrderProductsModule } from './admin/orderProducts/orderProducts.module';
 import { OrderProducts } from './admin/orderProducts/entities/orderProducts.entity';
+import { config } from 'dotenv';
+
+config()
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'store',
+      host: process.env.POSTGRES_HOST,
+      port: parseInt(process.env.POSTGRES_PORT),
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
       entities: [Product, Category, Manufacturer, User, Order, OrderProducts],
       synchronize: true,
       logging: 'all'
