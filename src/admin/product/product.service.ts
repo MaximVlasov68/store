@@ -6,7 +6,6 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 
 @Injectable()
-
 export class ProductService {
   constructor(@InjectRepository(Product) private productRepository: Repository<Product>) { }
 
@@ -41,4 +40,8 @@ export class ProductService {
   async remove(id: number) {
     return this.productRepository.delete(id);
   }
+}
+
+export interface UpdateProductParams extends UpdateProductDto {
+  id: number;
 }

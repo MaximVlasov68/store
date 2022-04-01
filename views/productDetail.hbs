@@ -24,11 +24,10 @@
 
                 <div class="swiper mySwiperDetail">
                     {{#with product}}
-                    <div class="swiper-wrapper" id="image" data-src="/img/{{this.foto}}">
-                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
-                        <div class="swiper-slide"><img src="/img/{{this.foto}}" alt="{{this.foto}}"></div>
+                    <div class="swiper-wrapper" id="image" data-src="/img/product-images/{{this.images.[0]}}">
+                        {{#each this.images}}
+                        <div class="swiper-slide"><img src="/img/product-images/{{this}}" alt="{{this}}"></div>
+                        {{/each}}
                     </div>
                     {{/with}}
                     <div class="swiper-scrollbar"></div>
@@ -38,7 +37,7 @@
                     {{#with product}}
 
                     <div class="name-box">
-                        <span class="articul">#<span  id="id">{{this.id}}</span></span>
+                        <span class="articul">#<span id="id">{{this.id}}</span></span>
                         <h2 id="name">{{this.productName}}</h2>
                     </div>
 

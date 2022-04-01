@@ -17,7 +17,7 @@
 
 <body>
 
-    <form class="admin-form" method="POST">
+    <form enctype="multipart/form-data" class="admin-form" method="POST">
         <h2>{{#if product}}Редактирование{{else}}Создание{{/if}} продукта</h2>
         {{#if product}}
             <input type="hidden" name="id" id="id", value="
@@ -29,7 +29,7 @@
             Цена<input type="number" step="0.01" placeholder="Цена" name="price" value="{{product.price}}" required>
         </label>
         <label>
-            Фото<input type="text" placeholder="Фото" name="foto" value="{{product.foto}}" required>
+            Фото<input type="file" name="images" multiple accept=".png,.jpeg,.jpg">
         </label>
         <label>
             Цвет<input type="text" placeholder="Цвет" name="color" value="{{product.color}}" required>
@@ -95,7 +95,7 @@
                     
                     <td>{{this.productName}}</td>
                     <td>{{this.price}}</td>
-                    <td>{{this.foto}}</td>
+                    <td>{{this.images}}</td>
                     <td>{{this.color}}</td>
                     <td>{{this.weight}}</td>
                     <td>{{this.size}}</td>

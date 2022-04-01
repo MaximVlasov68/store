@@ -224,6 +224,7 @@ article{
 .item .picture{
     width: 375px;
     height: 300px;
+    object-fit: cover;
 }
 .item .name{
     font-weight: 600;

@@ -15,8 +15,8 @@ export class Product {
     @Column()
     price: number;
 
-    @Column()
-    foto: string;
+    @Column("varchar", {array: true, default: []})
+    images: string[];
 
     @Column()
     color: string;

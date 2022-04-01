@@ -5,7 +5,7 @@ import { Manufacturer } from "../../manufacturer/entities/manufacturer.entity";
 export class CreateProductDto {
     productName: string;
     price: number;
-    foto: string;
+    images: string[];
     color: string;
     weight: number;
     size: string;
