@@ -19,7 +19,7 @@ import { OrderProductsModule } from './admin/orderProducts/orderProducts.module'
 import { OrderProducts } from './admin/orderProducts/entities/orderProducts.entity';
 import { config } from 'dotenv';
 
-config()
+config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'})
 
 @Module({
   imports: [

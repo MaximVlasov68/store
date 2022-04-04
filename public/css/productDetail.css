@@ -17,6 +17,10 @@
 }
 .swiper-slide img{
     max-width: 700px;
+    height: 500px;
+}
+.swiper-autoheight, .swiper-autoheight .swiper-slide {
+    height: inherit;
 }
 .mySwiperDetail, .description{
     max-width: 60%;

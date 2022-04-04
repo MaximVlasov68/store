@@ -39,7 +39,7 @@ class Product {
         })
     }
 
-    static from(str) {
+    static fromString(str) {
         const { id, name, price, quantity, weight, image, checked } = JSON.parse(str);
         return new Product(id, name, price, quantity, weight, image, checked)
     }
@@ -96,12 +96,12 @@ class Cart {
 
     static load() {
         const data = localStorage.getItem(Cart.STORAGE_KEY);
-        return Cart.from(data);
+        return Cart.fromString(data);
     }
 
-    static from(data) {
+    static fromString(data) {
         return new Cart(
-            JSON.parse(data)?.map(el => Product.from(el))
+            JSON.parse(data)?.map(el => Product.fromString(el))
         );
     }
 
@@ -265,6 +265,34 @@ class Cart {
                 /* deliveryBox.style.display = "none"; */
             }
         }
+
+        const createOrderButton = document.querySelector('#createOrderButton');
+        if (createOrderButton) {
+            createOrderButton.addEventListener('click', async (event) => {
+                const address = document.querySelector('.inputAddress')?.value;
+                const body = JSON.stringify({
+                    items: cart.products.map(product => ({
+                        productId: product.id,
+                        quantity: product.quantity,
+                    })),
+                    address: address === "" ? null : address,
+                })
+                const res = await fetch('/createOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body,
+                })
+                const data = await res.json();
+                const orderId = data.id;
+                if (!data.error) {
+                    const cartModal = CartModal.from(cart, address === "" ? null : address, orderId);
+                    cartModal.render();
+                }
+                console.log(JSON.stringify(data));
+            })
+        }
     }
 }
 
@@ -350,33 +378,5 @@ document.addEventListener('DOMContentLoaded', e => {
             const product = new Product(id, name, price, quantity, weight, image, checked);
             cart.add(product);
         }
-    }
-
-    const createOrderButton = document.querySelector('#createOrderButton');
-    if (createOrderButton) {
-        createOrderButton.addEventListener('click', async (event) => {
-            const address = document.querySelector('.inputAddress')?.value;
-            const body = JSON.stringify({
-                items: cart.products.map(product => ({
-                    productId: product.id,
-                    quantity: product.quantity,
-                })),
-                address: address === "" ? null : address,
-            })
-            const res = await fetch('/createOrder', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body,
-            })
-            const data = await res.json();
-            const orderId = data.id;
-            if (!data.error) {
-                const cartModal = CartModal.from(cart, address === "" ? null : address, orderId);
-                cartModal.render();
-            }
-            console.log(JSON.stringify(data));
-        })
     }
 })

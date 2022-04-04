@@ -39,7 +39,7 @@ export class OrderService {
       orders = orders.where("user.id = :userId", { userId })
     }
     if (completed !== undefined) {
-      orders = orders.where("order.completed = :completed", { completed })
+      orders = orders.andWhere("order.completed = :completed", { completed })
     }
     return orders.getMany()
   }

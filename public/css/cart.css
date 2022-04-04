@@ -92,7 +92,7 @@
 }
 .deliveryText, .productWeight{
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1em;
     letter-spacing: 0.015em;
     color: #9A9A9A;
 }
@@ -126,7 +126,7 @@
 }
 .sum{
     margin-left: 30px;
-    font-size: 32px;
+    font-size: 2em;
     line-height: 39px;
 }
 .discountText{
