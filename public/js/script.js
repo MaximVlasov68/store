@@ -113,4 +113,23 @@ registerForm.onsubmit = async (event) => {
   }
 }
 
+/* +- на главной странице для footer */
+
+const coll = document.getElementsByClassName("collapsible");
+let i;
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function () {
+    if (document.documentElement.scrollWidth < 576) {
+      this.classList.toggle("open");
+      let info = this.nextElementSibling;
+      console.log(info)
+      if (info.style.maxHeight) {
+        info.style.maxHeight = null;
+      } else {
+        info.style.maxHeight = 200 + "px";
+      }
+    }
+  });
+}
+
 

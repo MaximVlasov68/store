@@ -16,8 +16,7 @@
                         {{#each recommendedProducts}}
                         <div class="swiper-slide">
                             <div class="info-box">
-                                <h2>{{this.productName}}</h2>
-                                <p class="price">{{this.price}} ₽</p>
+                                <h3>{{this.productName}}</h3>
                                 <a  href="/product/{{this.id}}" class="moreInfo">Узнать больше</a>
                             </div>
                             <img src="/img/product-images/{{this.images.[0]}}" alt="{{this.images.[0]}}">

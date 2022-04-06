@@ -94,13 +94,16 @@ header p{
     border-radius: 0 12px 12px 0;
     cursor: pointer;
 }
-.wrapper-search  button:before {
+.wrapper-search button:before {
     content: url("/img/Search.svg");
     color: #F9F0DA;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
 }
 .wrapper-login-shop{
     display: flex;
     gap: 1.5vw;
+    align-items: baseline;
 }
 .wrapper-login-shop .item a{
     display: flex;
@@ -121,6 +124,7 @@ header p{
 .wrapper-login-shop p{
     margin-left:13px;
     font-weight: 600;
+    color: #001400;
 }
 .header-bottom{
     gap: 1vw;
@@ -132,6 +136,8 @@ header p{
 }
 .header-bottom .catalogButton p{
     font-weight: 600;
+    color: #001400;
+    margin: 0;
 }
 .header-bottom .navigation{
     display: flex;
@@ -195,12 +201,11 @@ article{
     margin: auto auto auto 10% ;
     border-radius: 8px;
 }
-.info-box h2{
+.info-box h3{
     max-width: 350px;
+    margin-bottom: 4vh;
 }
-.info-box .price{
-    margin-bottom: 5vh;
-}
+
 .info-box .moreInfo{
     width: 250px;
     font-weight: 600;
@@ -210,6 +215,7 @@ article{
     padding: 16px 54px;
     border: 2px solid #001400;
     border-radius: 8px;
+    margin-top: 4vh;
 }
 .info-box .moreInfo:hover{
     color: #EEEEEE;
@@ -328,7 +334,7 @@ article{
 }
 .map h2{
     padding: 0 calc(50% - 810px);
-    margin-bottom: 3vw;
+    margin-bottom: 3vh;
 }
 footer{
     padding: 0 calc(50% - 810px);
@@ -471,7 +477,7 @@ footer{
     color: #001400;
     font-weight: 600;
     letter-spacing: 0.015em;
-    font-size: 1.125rem;
+    font-size: 1.125em;
     cursor: pointer;
 }
 .login-btn{
@@ -529,8 +535,7 @@ footer{
     align-items: center;
     background-color:#EEEEEE;
     border-radius: 4px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 12px 12px;
     cursor: pointer;
 }
 .catalogContent {
@@ -545,6 +550,9 @@ footer{
     border-radius: 5px;
     padding: 10px;
     z-index: 6;
+    -webkit-box-shadow: 0px -2px 50px -5px rgba(58, 58, 58, 0.6);
+    -moz-box-shadow: 0px -2px 50px -5px rgba(58, 58, 58, 0.6);
+    box-shadow: 0px -2px 50px -5px rgba(58, 58, 58, 0.6);
 }
 .category-box{
     display: flex;
@@ -702,6 +710,9 @@ footer{
         left: 0;
         margin-top: 37px;
     }
+    .swiper-slide img{
+        max-height: 525px;
+    }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
     header{
@@ -737,6 +748,9 @@ footer{
         left: 0;
         margin-top: 37px;
     }
+    .swiper-slide img{
+        max-height: 420px;
+    }
 }
 @media (min-width: 768px) and (max-width: 991px) {
     header{
@@ -762,6 +776,9 @@ footer{
     }
     footer{
         padding: 0 calc(50% - 370px);
+    }
+    .footer-head{
+        gap: 1vw;
     }
     .footer-left, .container{
         gap: 2.5vw;
@@ -795,19 +812,363 @@ footer{
     .info-box .moreInfo {
         padding: 12px;
     }
-    .info-box .price{
-        font-size: 1.5em;
-        margin-bottom: 3.5vh;
-    }
     .catalogContent{
         width: 100%;
         left: 0;
-        margin-top: 30px;
+        margin-top: 20px;
     }
     .product-list{
         grid-template-columns: 1fr 1fr;
     }
+    .swiper-slide img{
+        max-height: 285px;
+    }
 }
-@media (min-width: 576px) and (max-width: 767px) {  }
-@media (max-width: 575px) {  }
+@media (min-width: 576px) and (max-width: 767px) {
+    body{
+        font-size: 14px;
+    }
+    header{
+        align-items: center;
+        padding: 1.5vw calc(50% - 280px) 2vw calc(50% - 280px);
+    }
+    .header-left{
+        width: 15%;
+    }
+    .line{
+        padding: 0 calc(50% - 280px);
+    }
+    .wrapperSlider{
+        padding: 0 calc(50% - 280px);
+    }
+    .content{
+        padding: 0 calc(50% - 280px);
+    }
+    .content-box{
+        grid-template-columns: 1fr;
+    }
+    .map h2{
+        padding: 0 calc(50% - 280px);
+    }
+    footer{
+        padding: 0 calc(50% - 280px);
+    }
+    .footer-head{
+        /* flex-direction: column; */
+        flex-flow: wrap;
+        justify-content: space-around;
+        gap: 0.5vw;
+    }
+    .footer-left{
+        gap: 10vw;
+    }
+    .footer-left, .container{
+        align-items: center;
+    }
+    .footer-center, .footer-right{
+        order: -2;
+    }
+    .item .picture{
+        width: 300px;
+        height: 250px;
+    }
+    .catalogButton .text{
+        display: none;
+    }
+    .header-bottom .catalogButton {
+        background-color: transparent;
+        border-radius: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .header-bottom .catalogButton img {
+        margin-right: 0;
+    }
+    .header-bottom{
+        gap: 4vw;
+    }
+    .wrapper-search button{
+        width: 31px;
+        height: 33px;
+    }
+    .wrapper-search input{
+        height: 30px;
+    }
+    .info-box .moreInfo {
+        padding: 10px;
+        border: 1px solid #001400;
+    }
+    .catalogContent{
+        width: 100%;
+        left: 0;
+        margin-top: 20px;
+    }
+    .product-list{
+        grid-template-columns: 1fr;
+    }
+    .categories-box, .sirvices-box {
+        margin: 12px 10px 10px 10px;
+    }
+    .headText{
+        margin: 5px 0;
+    }
+    .swiper-slide img{
+        max-height: 225px;
+    }
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 9px;
+        height: 9px;
+    }
+    .header-bottom .navigation{
+        display: none;
+    }
+    .header-right {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2vw;
+    }
+    .header-bottom {
+        order: -1;
+    }
+    .logo {
+        width: 60px;
+    }
+    .text{
+        display: none;
+    }
+    .wrapper-search button:before {
+        content: url(/img/Search2.svg);
+        vertical-align: middle;
+        vertical-align: -webkit-baseline-middle;
+    }
+    .wrapper-search input {
+        border: 1px solid #A3A3A3;
+    }
+    .under-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+}
+@media (min-width: 375px) and (max-width: 575px) {  
+
+    body{
+        font-size: 12px;
+    }
+    header{
+        align-items: center;
+        padding: 1.5vw calc(50% - 180px) 2vw calc(50% - 180px);
+    }
+    .header-left{
+        width: 15%;
+    }
+    .line{
+        padding: 0 calc(50% - 180px);
+    }
+    .wrapperSlider{
+        padding: 0 calc(50% - 180px);
+    }
+    .content{
+        padding: 0 calc(50% - 180px);
+    }
+    .content-box{
+        grid-template-columns: 1fr;
+    }
+    .map h2{
+        padding: 0 calc(50% - 180px);
+    }
+    footer{
+        padding: 0 calc(50% - 180px);
+    }
+    .footer-head{
+        /* flex-direction: column; */
+        flex-flow: wrap;
+        justify-content: space-around;
+        gap: 0.5vw;
+    }
+    .footer-left{
+        gap: 10vw;
+    }
+    .footer-left, .container{
+        align-items: center;
+    }
+    .footer-center, .footer-right{
+        order: -2;
+    }
+    .item .picture{
+        width: 300px;
+        height: 250px;
+    }
+    .catalogButton .text{
+        display: none;
+    }
+    .header-bottom .catalogButton {
+        background-color: transparent;
+        border-radius: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .header-bottom .catalogButton img {
+        margin-right: 0;
+    }
+    .header-bottom{
+        gap: 4vw;
+    }
+    .wrapper-search button{
+        width: 26px;
+        height: 31px;
+    }
+    .wrapper-search input{
+        height: 27px;
+    }
+    .info-box .moreInfo {
+        padding: 10px;
+        border: 1px solid #001400;
+    }
+    .catalogContent{
+        width: 100%;
+        left: 0;
+        margin-top: 15px;
+    }
+    .product-list{
+        grid-template-columns: 1fr;
+    }
+    .category-box {
+        flex-direction: column;
+    }
+    .categories-box, .sirvices-box {
+        margin: 12px 10px 10px 10px;
+    }
+    .headText{
+        margin: 5px 0;
+    }
+    .info-box {
+        margin: auto auto auto 5%;
+    }
+    .info-box .moreInfo {
+        padding: 6px;
+    }
+    .swiper-slide img{
+        max-height: 168px;
+    }
+    .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 8px;
+        height: 8px;
+    }
+    .header-bottom .navigation{
+        display: none;
+    }
+    .item .icon, .header-bottom .catalogButton img{
+        width: 20px;
+        height: 20px;
+    }
+    .header-right {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2vw;
+    }
+    .header-bottom {
+        order: -1;
+    }
+    .logo {
+        width: 60px;
+    }
+    .text{
+        display: none;
+    }
+    .wrapper-search button:before {
+        content: url(/img/Search3.svg);
+        vertical-align: middle;
+        vertical-align: -webkit-baseline-middle;
+    }
+    .wrapper-search input {
+        border: 1px solid #A3A3A3;
+        padding-left: 10px;
+    }
+    .under-logo {
+        width: 120px;
+        height: 120px;
+    }
+    .item .addBusket{
+        width: 135px;
+        height: 35px;
+    }
+    .item .price{
+        margin-bottom: 8px;
+    }
+    .head-modal {
+        padding-top: 45px;
+        padding-left: 85px;
+    }
+    .modal-content-login, .modal-content-register{
+        gap: 10px;
+        padding: 20px 25px 20px 25px;
+    }
+    .name[type=text], .password[type=password], .telPhone[type=tel]{
+        padding: 10px 20px;
+        border: 1px solid #9A9A9A;
+    }
+    .singIn{
+        height: 45px;
+    }
+    .item .picture {
+        width: 255px;
+        height: 200px;
+    }
+    .content{
+        gap: 5vh;
+    }
+    .more{
+        padding: 10px 25px;
+        border: 1px solid #001400;
+    }
+    /*выпадашка*/
+    footer .headText{
+        cursor: pointer;
+    }
+    footer .headText::after{
+        content: '\002B';
+        color: black;
+        font-size: 1.5em;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    footer .headText.open::after{
+        content: "\2212";
+    }
+    .under-logo{
+        display: none;
+    }
+    .link-list{
+        margin-top: 2vh;
+    }
+    .hots-links a li{
+        padding: 2px 4px 2px 4px;
+    }
+    .footer-left{
+        display: block;
+    }
+    .footer-head{
+        flex-direction: column;
+    }
+
+    .info {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        /* background-color: #f1f1f1; */
+      }
+}
 
