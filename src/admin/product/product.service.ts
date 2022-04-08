@@ -40,6 +40,23 @@ export class ProductService {
   async remove(id: number) {
     return this.productRepository.delete(id);
   }
+
+  async getMainPageItems(): Promise<{
+    sliderItems: Product[];
+    recommendedItems: Product[];
+   }> {
+    const sliderItems = await this.productRepository.find({
+      where: {
+        showInSlider: true
+      }
+    })
+    const recommendedItems = await this.productRepository.find({
+      where: {
+        showInRecommended: true
+      }
+    })
+    return { sliderItems, recommendedItems }
+  }
 }
 
 export interface UpdateProductParams extends UpdateProductDto {

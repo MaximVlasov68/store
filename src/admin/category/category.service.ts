@@ -22,16 +22,16 @@ export class CategoryService {
   async getAll(): Promise<Category[]> {
     return this.categoryRepository.find({ relations: ['parentCategory'] });
   }
-  
+
   async getRoots(): Promise<Category[]> {
-      return this.categoryRepository.find({
-        where: {
-          parentCategory: IsNull()
-        },
-        relations: ['parentCategory'], 
-      });
+    return this.categoryRepository.find({
+      where: {
+        parentCategory: IsNull()
+      },
+      relations: ['parentCategory'],
+    });
   }
-  
+
   async getTree(): Promise<Category[]> {
     return this.categoryRepository.find({
       where: {
@@ -39,6 +39,23 @@ export class CategoryService {
       },
       relations: ['childCategories']
     });
+  }
+
+  async getMenuItems(): Promise<{
+    headerItems: Category[];
+    footerItems: Category[];
+  }> {
+    const headerItems = await this.categoryRepository.find({
+      where: {
+        showInHeader: true
+      }
+    })
+    const footerItems = await this.categoryRepository.find({
+      where: {
+        showInFooter: true
+      }
+    })
+    return { headerItems, footerItems }
   }
 
   async findOne(id: number): Promise<Category> {

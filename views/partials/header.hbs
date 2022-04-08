@@ -83,10 +83,9 @@
 
 
                 <nav class="navigation">
-                    <div><a href="#">Кровати и диваны</a></div>
-                    <div><a href="#">Товары для дома</a></div>
-                    <div><a href="#">Строительные смеси</a></div>
-                    <div><a href="#">Кресла качалки</a></div>
+                    {{#each headerItems}}
+                    <div><a href="/category/{{this.id}}">{{this.name}}</a></div>
+                    {{/each}}
                 </nav>
             </div>
         </div>

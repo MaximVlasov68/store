@@ -55,8 +55,13 @@
                     </div>
 
                     <div class="stock-box">
-                        <img src="/img/dot.svg" alt="icon">
-                        <p class="text">В наличии {{this.numberOfStock}} штук</p>
+                        {{#if this.isAvailable}}
+                            <img src="/img/dot.svg" alt="icon">
+                            <p class="text">Есть в наличии</p>
+                        {{else}}
+                            <img src="/img/dot2.svg" alt="icon">
+                            <p class="text">Нет в наличии</p>
+                        {{/if}}
                     </div>
 
                     <div class="delivery-box">

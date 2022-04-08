@@ -26,7 +26,7 @@ export class AppController {
     if (req.user) {
       req.session.user = req.user;
     }
-    if (req.user.role === UserRoles.admin) {   
+    if (req.user.role === UserRoles.admin) {
       return res.redirect('/admin');
     } else {
       return res.redirect('/account');
@@ -55,42 +55,52 @@ export class AppController {
   @Render('main')
   @Get()
   async main(@Session() session) {
-    const recommendedProducts = await this.productService.findAll();
-    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const commonData = await this.getCommonData();
+    const {recommendedItems, sliderItems} = await this.productService.getMainPageItems();
     const user = session.user;
 
-    return { recommendedProducts, categoriesTree, user }
+    return { ...commonData, user, recommendedItems, sliderItems }
   }
 
   @Render('productDetail')
   @Get('product/:id')
-
   async getProduct(@Session() session, @Param('id') id: number) {
     const product = await this.productService.findOne(id);
-    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const commonData = await this.getCommonData();
     const user = session.user;
 
-    return { product, categoriesTree, user }
+    return { ...commonData, product, user }
   }
 
   @Render('productList')
   @Get('category/:id')
   async getProductList(@Session() session, @Param('id') id?: number) {
+    const commonData = await this.getCommonData();
     const productList = await this.productService.findByCategory(id);
     const category = await this.categoryService.findOne(id);
-    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     const user = session.user;
 
-    return { productList, category, categoriesTree, user }
+    return { ...commonData, productList, category, user }
   }
 
   @Render('cart')
   @Get('cart')
   async cart(@Session() session) {
-    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const commonData = await this.getCommonData();
     const user = session.user;
-    return { categoriesTree, user }
+    return { ...commonData, user }
   }
+
+  @Render('account')
+  @Get('account')
+  async account(@Session() session) {
+    const commonData = await this.getCommonData();
+    const ordersInProgress = await this.orderService.findAll(session.user.id, false)
+    const completedOrders = await this.orderService.findAll(session.user.id, true)
+    const user = session.user;
+    return { ...commonData, ordersInProgress, completedOrders, user }
+  }
+
 
   @Post('createOrder')
   async createOrder(@Body() createOrderDto: Omit<CreateOrderDto, 'userId'>, @Session() session) {
@@ -100,13 +110,9 @@ export class AppController {
     })
   }
 
-  @Render('account')
-  @Get('account')
-  async account(@Session() session) {
+  protected async getCommonData() {
     const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    const ordersInProgress = await this.orderService.findAll(session.user.id, false)
-    const completedOrders = await this.orderService.findAll(session.user.id, true)
-    const user = session.user;
-    return { categoriesTree, ordersInProgress, completedOrders, user }
+    const { headerItems, footerItems } = await this.categoryService.getMenuItems();
+    return { categoriesTree, headerItems, footerItems }
   }
 }

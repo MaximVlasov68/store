@@ -113,7 +113,7 @@ registerForm.onsubmit = async (event) => {
   }
 }
 
-/* +- на главной странице для footer */
+/* +- на главной странице для footer при размере страницы < 576 */
 
 const coll = document.getElementsByClassName("collapsible");
 let i;

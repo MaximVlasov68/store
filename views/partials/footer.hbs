@@ -19,43 +19,12 @@
         <div class="footer-center">
             <p class="headText collapsible">Товары</p>
             <div class="container info">
-                <ul class="hots-links ">
-                    <a href="#">
-                        <li>Спальни и кровати</li>
+                <ul class="hots-links">
+                    {{#each footerItems}}
+                    <a href="/category/{{this.id}}">
+                        <li>{{this.name}}</li>
                     </a>
-                    <a href="#">
-                        <li>Спальни</li>
-                    </a>
-                    <a href="#">
-                        <li>Диваны</li>
-                    </a>
-                    <a href="#">
-                        <li>Креслы-качалки</li>
-                    </a>
-                    <a href="#">
-                        <li>Строительные смеси</li>
-                    </a>
-                    <a href="#">
-                        <li>Товары для дома</li>
-                    </a>
-                    <a href="#">
-                        <li>Кухни</li>
-                    </a>
-                </ul>
-               {{!--  <ul class="hots-links">
-                    <a href="#">
-                        <li>Украшения для дома</li>
-                    </a>
-                    <a href="#">
-                        <li>Мелочи для ремонта</li>
-                    </a>
-                    <a href="#">
-                        <li>Натяжные потолки</li>
-                    </a>
-                    <a href="#">
-                        <li>Тканевые диваны</li>
-                    </a>
-                </ul> --}}
+                    {{/each}}
             </div>
         </div>
         <div class="footer-right">

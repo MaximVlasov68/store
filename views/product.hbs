@@ -41,6 +41,12 @@
             Размер<input type="text" placeholder="Размер x" name="size" value="{{product.size}}" required>
         </label>
         <label>
+            Слайдер<input type="checkbox" name="showInSlider" {{#if product.showInSlider}} checked {{/if}} value="true">
+        </label>
+        <label>
+            Рекомендации<input type="checkbox" name="showInRecommended" {{#if product.showInRecommended}} checked {{/if}} value="true">
+        </label>
+        <label>
             Есть в наличии<input type="checkbox" name="isAvailable" {{#if product.isAvailable}} checked {{/if}} value="true">
         </label>
         <label>
@@ -84,6 +90,8 @@
             <th>Вес</th>
             <th>Размер</th>
             <th>Наличие</th>
+            <th>Слайдер</th>
+            <th>Рекомендации</th>
             <th>Категория</th>
             <th>Производитель</th>
             <th></th>
@@ -100,6 +108,8 @@
                     <td>{{this.weight}}</td>
                     <td>{{this.size}}</td>
                     <td>{{#if this.isAvailable}}Есть{{else}}Нет{{/if}}</td>
+                    <td>{{#if this.showInSlider}}Добавлен{{else}}Нет{{/if}}</td>
+                    <td>{{#if this.showInRecommended}}Добавлен{{else}}Нет{{/if}}</td>
                     <td>{{this.category.name}}</td>
                     <td>{{this.manufacturer.name}}</td>
                     <td><a href="/admin/product?id={{this.id}}">edit</a></td>

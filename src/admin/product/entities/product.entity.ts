@@ -38,4 +38,10 @@ export class Product {
 
     @ManyToOne(() => Manufacturer, manufacturer => manufacturer.products)
     manufacturer: Manufacturer;
+
+    @Column({ default: false })
+    showInSlider: boolean;
+   
+    @Column({ default: false })
+    showInRecommended: boolean;
 }

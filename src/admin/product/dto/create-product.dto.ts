@@ -10,7 +10,9 @@ export class CreateProductDto {
     weight: number;
     size: string;
     isAvailable: boolean;
+    showInSlider: boolean;
+    showInRecommended: boolean;
     description: string;
     category: Category;
-    manufacturer: Manufacturer
+    manufacturer: Manufacturer;
 }

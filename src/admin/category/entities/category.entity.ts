@@ -4,7 +4,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "ty
 @Entity()
 export class Category {
 
-    @PrimaryGeneratedColumn({type: 'int'})
+    @PrimaryGeneratedColumn({ type: 'int' })
     id: number;
 
     @Column()
@@ -12,10 +12,16 @@ export class Category {
 
     @OneToMany(() => Product, product => product.category)
     products: Product[]
-    
+
     @ManyToOne(() => Category, child => child.childCategories)
     parentCategory: Category;
 
     @OneToMany(() => Category, category => category.parentCategory)
     childCategories: Category[]
+
+    @Column({ default: false })
+    showInHeader: boolean;
+    
+    @Column({ default: false })
+    showInFooter: boolean;
 }

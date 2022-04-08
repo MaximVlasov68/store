@@ -21,17 +21,19 @@ export class ProductController {
   @Post()
   @UseInterceptors(FilesInterceptor('images'))
   async createOrUpdate(@Res() res: Response, @Body() createOrUpdateProductDto: CreateProductDto | UpdateProductDto, @UploadedFiles() images: Array<Express.Multer.File>) {
-    createOrUpdateProductDto.images = []
-    await Promise.all(
-      images.map(async image => {
-        const imageExt = image.mimetype === 'image/jpeg' ? 'jpg' : 'png';
-        const imageName = randomUUID();
-        const imagePath = join(__dirname, '..', '..', '..', 'public', 'img', 'product-images')
-        const imageFullPath = `${imagePath}/${imageName}.${imageExt}`;
-        await writeFile(imageFullPath, image.buffer)
-        createOrUpdateProductDto.images.push(`${imageName}.${imageExt}`)
-      })
-    )
+    if (images.length > 0) {
+      createOrUpdateProductDto.images = []
+      await Promise.all(
+        images.map(async image => {
+          const imageExt = image.mimetype === 'image/jpeg' ? 'jpg' : 'png';
+          const imageName = randomUUID();
+          const imagePath = join(__dirname, '..', '..', '..', 'public', 'img', 'product-images')
+          const imageFullPath = `${imagePath}/${imageName}.${imageExt}`;
+          await writeFile(imageFullPath, image.buffer)
+          createOrUpdateProductDto.images.push(`${imageName}.${imageExt}`)
+        })
+      )
+    }
 
     if ("id" in createOrUpdateProductDto) {
       if (typeof createOrUpdateProductDto.id === 'string') {
@@ -40,19 +42,25 @@ export class ProductController {
 
       const oldProduct = await this.productService.findOne(createOrUpdateProductDto.id);
       try {
-        await Promise.all(
-          oldProduct.images.map(image => unlink(join(__dirname, '..', '..', '..', 'public', 'img', 'product-images', image)))
-        )
-      } catch {}
+        if (images.length > 0) {
+          await Promise.all(
+            oldProduct.images.map(image => unlink(join(__dirname, '..', '..', '..', 'public', 'img', 'product-images', image)))
+          )
+        }
+      } catch { }
 
       await this.productService.update(createOrUpdateProductDto.id, {
         ...createOrUpdateProductDto,
         isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
+        showInSlider: Boolean(createOrUpdateProductDto.showInSlider),
+        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended)
       });
     } else {
       await this.productService.create({
         ...createOrUpdateProductDto,
         isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
+        showInSlider: Boolean(createOrUpdateProductDto.showInSlider),
+        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended)
       });
     }
 
