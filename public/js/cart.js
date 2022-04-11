@@ -125,6 +125,10 @@ class Cart {
         this.products = this.products.filter(product => product.id !== productId);
     }
 
+    clear() {
+        this.products = []
+    }
+
     getProductById(productId) {
         return this.products.find(product => product.id === productId)
     }
@@ -289,6 +293,8 @@ class Cart {
                 if (!data.error) {
                     const cartModal = CartModal.from(cart, address === "" ? null : address, orderId);
                     cartModal.render();
+                    cart.clear();
+                    cart.save();
                 }
                 console.log(JSON.stringify(data));
             })

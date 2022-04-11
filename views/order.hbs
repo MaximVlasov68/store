@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 
     <title>store</title>
@@ -26,34 +28,38 @@
             <th>Статус</th>
             <th>Цена</th>
             <th>Адрес</th>
-            <th></th>
         </thead>
         <tbody>
             {{#each orderList}}
-                <tr>
-                    <td id="orderId">{{this.id}}</td>
-                    <td>{{this.orderProducts}}</td>
-                    <td>
-                        {{#if this.completed}}Завершен{{else}}
-                        Выполняется
-                        <button id="complete">Завершить</button>
-                        {{/if}}
-                    </td>
-                    <td>{{this.totalCost}}</td>
-                    <td>{{this.order.address}}</td>
-                    <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
-                </tr>
+            <tr>
+                <td id="orderId">{{this.id}}</td>
+                <td>
+                    <ol>
+                        {{#each this.orderProducts}}
+                        <li>{{this.product.productName}} - {{this.quantity}} шт.</li>
+                        {{/each}}
+                    </ol>
+                </td>
+                <td>
+                    {{#if this.completed}}Завершен{{else}}
+                    Выполняется
+                    <button id="complete">Завершить</button>
+                    {{/if}}
+                </td>
+                <td>{{this.totalCost}} ₽</td>
+                <td>{{this.address}}</td>
+            </tr>
             {{/each}}
         </tbody>
     </table>
 
     <script>
-        $(document).ready( function () {
-        $('#order').DataTable(); 
-        } );
+        $(document).ready(function () {
+            $('#order').DataTable();
+        });
     </script>
     <script>
-        $('button#complete').click(async function() {
+        $('button#complete').click(async function () {
             const orderId = $(this).parent().siblings('#orderId').html()
             await fetch(`complete/${orderId}`, {
                 method: 'POST',
@@ -62,4 +68,5 @@
         })
     </script>
 </body>
+
 </html>
