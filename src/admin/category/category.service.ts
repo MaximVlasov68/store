@@ -10,11 +10,11 @@ import { Category } from './entities/category.entity';
 export class CategoryService {
   constructor(@InjectRepository(Category) private categoryRepository: Repository<Category>) { }
 
-  async create(createCategoryDto: CreateCategoryDto) {
-    const parent = await this.categoryRepository.findOne(createCategoryDto.parent);
-    const category = await this.categoryRepository.create({
+  async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+    const parentCategory = await this.categoryRepository.findOne(createCategoryDto.parentCategory);
+    const category = this.categoryRepository.create({
       ...createCategoryDto,
-      parentCategory: parent,
+      parentCategory
     })
     return this.categoryRepository.save(category);
   }
@@ -63,10 +63,10 @@ export class CategoryService {
   }
 
   async update(updateCategoryDto: UpdateCategoryDto): Promise<any> {
-    const parent = await this.categoryRepository.findOne(updateCategoryDto.parent);
+    const parentCategory = await this.categoryRepository.findOne(updateCategoryDto.parentCategory);
     return this.categoryRepository.update(updateCategoryDto.id, {
       ...updateCategoryDto,
-      parentCategory: parent,
+      parentCategory
     });
   }
 

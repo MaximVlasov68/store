@@ -14,9 +14,8 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  async findAll(options: { take?: number } = {}): Promise<Product[]> {
-    const { take = 10 } = options;
-    return this.productRepository.find({ relations: ['category', 'manufacturer'], take })
+  async findAll(): Promise<Product[]> {
+    return this.productRepository.find({ relations: ['category', 'manufacturer']})
   }
  
   async findByCategory(categoryId: number): Promise<Product[]> {
@@ -48,12 +47,14 @@ export class ProductService {
     const sliderItems = await this.productRepository.find({
       where: {
         showInSlider: true
-      }
+      },
+      relations: ['category']
     })
     const recommendedItems = await this.productRepository.find({
       where: {
         showInRecommended: true
-      }
+      },
+      relations: ['category']
     })
     return { sliderItems, recommendedItems }
   }

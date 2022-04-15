@@ -12,7 +12,7 @@ export class SessionAuthGuard extends AuthGuard('local') {
     }
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-        const adminRequired = this.reflector.get<string[]>('adminRequired', context.getClass());
+        const adminRequired = this.reflector.get<boolean>('adminRequired', context.getClass());
         const request = context.switchToHttp().getRequest();
         console.log(request.session);
         const user = request.session.user;

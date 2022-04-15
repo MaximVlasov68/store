@@ -33,6 +33,12 @@ export class AppController {
     }
   }
 
+  @Get('/auth/logout')
+  async logout(@Request() req, @Res() res: Response) {
+    req.session.destroy();
+    return res.redirect('/');
+  }
+
   @Post('auth/register')
   async register(@Body() registerUserDto: RegisterUserDto) {
     try {
@@ -47,10 +53,6 @@ export class AppController {
       throw new BadRequestException();
     }
   }
-
-  @Render('loginForm')
-  @Get('login')
-  async loginForm() { }
 
   @Render('main')
   @Get()
@@ -74,7 +76,7 @@ export class AppController {
 
   @Render('productList')
   @Get('category/:id')
-  async getProductList(@Session() session, @Param('id') id?: number) {
+  async getProductList(@Session() session, @Param('id') id: number) {
     const commonData = await this.getCommonData();
     const productList = await this.productService.findByCategory(id);
     const category = await this.categoryService.findOne(id);

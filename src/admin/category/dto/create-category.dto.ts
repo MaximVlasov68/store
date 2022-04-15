@@ -1,8 +1,10 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber} from "class-validator";
 
 export class CreateCategoryDto {  
     @IsString()
     name: string;
     @IsNumber()
-    parent: number;
+    parentCategory: number;
+    showInHeader: boolean;
+    showInFooter: boolean;
 }

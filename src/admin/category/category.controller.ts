@@ -13,10 +13,15 @@ export class CategoryController {
 
   @Post()
   async createOrUpdate(@Res() res: Response, @Body() createOrUpdateCategoryDto: CreateCategoryDto | UpdateCategoryDto) {
+    const params = {
+      ...createOrUpdateCategoryDto,
+      showInHeader: Boolean(createOrUpdateCategoryDto.showInHeader),
+      showInFooter: Boolean(createOrUpdateCategoryDto.showInFooter),
+    }
     if ("id" in createOrUpdateCategoryDto) {
-      await this.categoryService.update(createOrUpdateCategoryDto as UpdateCategoryDto);
+      await this.categoryService.update(params as UpdateCategoryDto);
     } else {
-      await this.categoryService.create(createOrUpdateCategoryDto as CreateCategoryDto);
+      await this.categoryService.create(params as CreateCategoryDto);
     }
     return res.redirect('/admin/category')
   }

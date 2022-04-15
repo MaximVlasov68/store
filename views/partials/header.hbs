@@ -16,7 +16,13 @@
                 <div class="wrapper-login-shop">
 
                     <div class="item">
-                        <a class="login" {{#if user}} href="/account" {{else}} onclick="openModal()" {{/if}}>
+                        <div class="dropdown-content">
+                            <span id="close" onclick="closeLinks()" title="Закрыть dropdown">&times;</span>
+                            <a href="/account">Мои заказы</a>
+                            {{#eq user.role 'admin'}}<a href="/admin">Админ-панель</a>{{/eq}}
+                            <a href="/auth/logout">Выйти из аккаунта</a>
+                        </div>
+                        <a class="login" {{#if user}} onclick="dropDownLinks()" {{else}} onclick="openModal()" {{/if}}>
                             <img class="icon" src="/img/Login.svg" alt="">
                             <p>
                                 {{#if user}}

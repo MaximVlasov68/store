@@ -105,6 +105,9 @@ header p{
     gap: 1.5vw;
     align-items: baseline;
 }
+.wrapper-login-shop .item{
+    position: relative;
+}
 .wrapper-login-shop .item a{
     display: flex;
     align-items: center;
@@ -115,6 +118,23 @@ header p{
     /* font-size: 1.0125em;  */ 
     cursor: pointer;
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;     
+}
+.item .dropdown-content{
+    display: none;
+    position: absolute;
+    padding-top: 10px;
+    background-color: #f1f1f1;
+    max-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9;
+    top: 38px;
+    left: -10px;
+    border-radius: 8px;
+}
+.item .dropdown-content a{
+    padding: 10px 12px;
+    white-space: nowrap;
+    display: block;
 }
 .item .icon{
     width: 24px;
@@ -450,6 +470,13 @@ footer{
     background: #000;
     opacity: 0.5;
 }
+#close{
+    position: absolute;
+    right: 5px;
+    top: -4px;
+    font-size: 2.5em;
+    color: #000;
+}
 .close, .closeCatalog{
     position: absolute;
     right: 25px;
@@ -457,7 +484,7 @@ footer{
     color: #000;
     font-size: 3em;
 }
-.close:hover, .close:focus, .closeCatalog:hover, .closeCatalog:focus{
+.close:hover, .close:focus, .closeCatalog:hover, .closeCatalog:focus, #close:hover, #close:focus{
     color: rgb(168, 19, 19);
     cursor: pointer;
 }
@@ -648,6 +675,28 @@ footer{
 @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+}
+
+@keyframes upToDown{
+	0%{
+		transform: translateY(-50%);
+		opacity: 0;
+	}
+	100%{
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes downToUp{
+	0%{
+		transform: translateY(0);
+	}
+	100%{
+		transform: translateY(-50%);
+		opacity: 0;
+        /* visibility: hidden; */
+	}
 }
 
 /*media*/
@@ -952,7 +1001,9 @@ footer{
         width: 120px;
         height: 120px;
     }
-
+    .item .dropdown-content{
+        left: -60px;
+    }
 }
 @media (min-width: 375px) and (max-width: 575px) {  
 
@@ -1162,13 +1213,15 @@ footer{
     .footer-head{
         flex-direction: column;
     }
-
-    .info {
+    .info{
         padding: 0 18px;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.2s ease-out;
         /* background-color: #f1f1f1; */
-      }
+    }
+    .item .dropdown-content{
+        left: -55px;
+    }
 }
 

@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Category } from "../../category/entities/category.entity";
 import { Manufacturer } from "../../manufacturer/entities/manufacturer.entity";
-import { SchemaFactory } from "@nestjs/mongoose";
+
 
 @Entity()
 export class Product {

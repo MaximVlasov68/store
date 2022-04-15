@@ -21,14 +21,21 @@
         <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
 
          <label>Родительская категория
-            <select name="parent">
+            <select name="parentCategory">
                 <option value="0">-</option>
                 {{#each parentCategoryList}}                    
-                    <option {{#eq this.id ../category.parent.id}}
+                    <option {{#eq this.id ../category.parentCategory.id}}
                         selected
                     {{/eq}} value="{{this.id}}">{{this.name}}</option>
                {{/each}}
             </select>
+        </label>
+
+        <label>
+            Сссылка в шапке<input type="checkbox" name="showInHeader" {{#if category.showInHeader}} checked {{/if}} value="true">
+        </label>
+        <label>
+            Ссылка в подвале<input type="checkbox" name="showInFooter" {{#if category.showInFooter}} checked {{/if}} value="true">
         </label>
 
         <input class="btn" type="submit">
@@ -39,13 +46,17 @@
         <thead>
             <th>Название</th>
             <th>Родительская категория</th>
+            <th>Наличие в шапке</th>
+            <th>Наличие в подвале</th>
             <th></th>
             <th></th>
         </thead>
         {{#each categoryList}}
             <tr>
                 <td>{{this.name}}</td>
-                <td>{{#if this.parent.name}}{{this.parent.name}}{{else}} - {{/if}}</td>
+                <td>{{#if this.parentCategory.name}}{{this.parentCategory.name}}{{else}} - {{/if}}</td>
+                <td>{{#if this.showInHeader}}Добавлено{{else}}Нет{{/if}}</td>
+                <td>{{#if this.showInFooter}}Добавлено{{else}}Нет{{/if}}</td>
                 <td><a href="/admin/category?id={{this.id}}">edit</a></td>
                 <td><a href="/admin/category/{{this.id}}/delete">delete</a></td>
             </tr>

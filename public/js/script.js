@@ -82,7 +82,10 @@ function minus(target) {
 
 registerForm.onsubmit = async (event) => {
   event.preventDefault();
-  const { username, password, telephoneNumber } = registerForm.elements
+  const { username, password, telephoneNumber, checkPassword } = registerForm.elements
+  if (password.value !== checkPassword.value) {
+    password.setCustomValidity('Пароли не совпадают')
+  }
   const data = {
     username: username.value,
     password: password.value,
@@ -111,6 +114,18 @@ registerForm.onsubmit = async (event) => {
   } catch (e) {
     console.error(`Fetch error: ${e}`);
   }
+}
+
+/* dropdown на главной странице для ссылок взаимодействия с профилем*/
+
+let dropdownContent = document.querySelector(".dropdown-content");
+function dropDownLinks(){
+  dropdownContent.style.display = "block";
+  dropdownContent.style.animation = "upToDown .8s forwards";
+}
+function closeLinks(){
+  /* dropdownContent.style.animation = "downToUp .8s forwards"; */
+  dropdownContent.style.display = "none";
 }
 
 /* +- на главной странице для footer при размере страницы < 576 */
