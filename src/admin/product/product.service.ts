@@ -7,7 +7,9 @@ import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectRepository(Product) private productRepository: Repository<Product>) { }
+  constructor(
+    @InjectRepository(Product) private productRepository: Repository<Product>,
+  ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const product = this.productRepository.create(createProductDto);
@@ -15,21 +17,26 @@ export class ProductService {
   }
 
   async findAll(): Promise<Product[]> {
-    return this.productRepository.find({ relations: ['category', 'manufacturer']})
+    return this.productRepository.find({
+      relations: ['category', 'manufacturer'],
+    });
   }
- 
+
   async findByCategory(categoryId: number): Promise<Product[]> {
-    return this.productRepository.find({ 
+    return this.productRepository.find({
       where: {
         category: {
           id: categoryId,
-        }
+        },
       },
-      relations: ['category', 'manufacturer'] })
+      relations: ['category', 'manufacturer'],
+    });
   }
 
   async findOne(id: number): Promise<Product> {
-    return this.productRepository.findOne(id, { relations: ['category', 'manufacturer'] })
+    return this.productRepository.findOne(id, {
+      relations: ['category', 'manufacturer'],
+    });
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -43,20 +50,20 @@ export class ProductService {
   async getMainPageItems(): Promise<{
     sliderItems: Product[];
     recommendedItems: Product[];
-   }> {
+  }> {
     const sliderItems = await this.productRepository.find({
       where: {
-        showInSlider: true
+        showInSlider: true,
       },
-      relations: ['category']
-    })
+      relations: ['category'],
+    });
     const recommendedItems = await this.productRepository.find({
       where: {
-        showInRecommended: true
+        showInRecommended: true,
       },
-      relations: ['category']
-    })
-    return { sliderItems, recommendedItems }
+      relations: ['category'],
+    });
+    return { sliderItems, recommendedItems };
   }
 }
 

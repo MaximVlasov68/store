@@ -7,11 +7,18 @@ import { Manufacturer } from './entities/manufacturer.entity';
 
 @Injectable()
 export class ManufacturerService {
-  constructor(@InjectRepository(Manufacturer) private manufacturerRepository: Repository<Manufacturer>){}
+  constructor(
+    @InjectRepository(Manufacturer)
+    private manufacturerRepository: Repository<Manufacturer>,
+  ) {}
 
-  async create(createManufacturerDto: CreateManufacturerDto): Promise<Manufacturer> {
-   const manufacturer = await this.manufacturerRepository.create(createManufacturerDto)
-   return this.manufacturerRepository.save(manufacturer);
+  async create(
+    createManufacturerDto: CreateManufacturerDto,
+  ): Promise<Manufacturer> {
+    const manufacturer = await this.manufacturerRepository.create(
+      createManufacturerDto,
+    );
+    return this.manufacturerRepository.save(manufacturer);
   }
 
   async findAll(): Promise<Manufacturer[]> {

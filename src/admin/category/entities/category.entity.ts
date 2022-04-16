@@ -1,27 +1,32 @@
-import { Product } from "../../product/entities/product.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
+import { Product } from '../../product/entities/product.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class Category {
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number;
 
-    @PrimaryGeneratedColumn({ type: 'int' })
-    id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 
-    @OneToMany(() => Product, product => product.category)
-    products: Product[]
+  @ManyToOne(() => Category, (child) => child.childCategories)
+  parentCategory: Category;
 
-    @ManyToOne(() => Category, child => child.childCategories)
-    parentCategory: Category;
+  @OneToMany(() => Category, (category) => category.parentCategory)
+  childCategories: Category[];
 
-    @OneToMany(() => Category, category => category.parentCategory)
-    childCategories: Category[]
+  @Column({ default: false })
+  showInHeader: boolean;
 
-    @Column({ default: false })
-    showInHeader: boolean;
-    
-    @Column({ default: false })
-    showInFooter: boolean;
+  @Column({ default: false })
+  showInFooter: boolean;
 }

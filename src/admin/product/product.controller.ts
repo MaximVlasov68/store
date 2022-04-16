@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Redirect, Res, Query, UseGuards, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Render,
+  Redirect,
+  Res,
+  Query,
+  UseGuards,
+  UseInterceptors,
+  UploadedFiles,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -16,62 +31,92 @@ import { join } from 'path';
 @AdminRequired()
 @UseGuards(SessionAuthGuard)
 export class ProductController {
-  constructor(private readonly productService: ProductService, private readonly categoryService: CategoryService, private readonly manufacturerService: ManufacturerService) { }
+  constructor(
+    private readonly productService: ProductService,
+    private readonly categoryService: CategoryService,
+    private readonly manufacturerService: ManufacturerService,
+  ) {}
 
   @Post()
   @UseInterceptors(FilesInterceptor('images'))
-  async createOrUpdate(@Res() res: Response, @Body() createOrUpdateProductDto: CreateProductDto | UpdateProductDto, @UploadedFiles() images: Array<Express.Multer.File>) {
+  async createOrUpdate(
+    @Res() res: Response,
+    @Body() createOrUpdateProductDto: CreateProductDto | UpdateProductDto,
+    @UploadedFiles() images: Array<Express.Multer.File>,
+  ) {
     if (images.length > 0) {
-      createOrUpdateProductDto.images = []
+      createOrUpdateProductDto.images = [];
       await Promise.all(
-        images.map(async image => {
+        images.map(async (image) => {
           const imageExt = image.mimetype === 'image/jpeg' ? 'jpg' : 'png';
           const imageName = randomUUID();
-          const imagePath = join(__dirname, '..', '..', '..', 'public', 'img', 'product-images')
+          const imagePath = join(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            'public',
+            'img',
+            'product-images',
+          );
           const imageFullPath = `${imagePath}/${imageName}.${imageExt}`;
-          await writeFile(imageFullPath, image.buffer)
-          createOrUpdateProductDto.images.push(`${imageName}.${imageExt}`)
-        })
-      )
+          await writeFile(imageFullPath, image.buffer);
+          createOrUpdateProductDto.images.push(`${imageName}.${imageExt}`);
+        }),
+      );
     }
 
-    if ("id" in createOrUpdateProductDto) {
+    if ('id' in createOrUpdateProductDto) {
       if (typeof createOrUpdateProductDto.id === 'string') {
-        createOrUpdateProductDto.id = parseInt(createOrUpdateProductDto.id)
+        createOrUpdateProductDto.id = parseInt(createOrUpdateProductDto.id);
       }
 
-      const oldProduct = await this.productService.findOne(createOrUpdateProductDto.id);
+      const oldProduct = await this.productService.findOne(
+        createOrUpdateProductDto.id,
+      );
       try {
         if (images.length > 0) {
           await Promise.all(
-            oldProduct.images.map(image => unlink(join(__dirname, '..', '..', '..', 'public', 'img', 'product-images', image)))
-          )
+            oldProduct.images.map((image) =>
+              unlink(
+                join(
+                  __dirname,
+                  '..',
+                  '..',
+                  '..',
+                  'public',
+                  'img',
+                  'product-images',
+                  image,
+                ),
+              ),
+            ),
+          );
         }
-      } catch { }
+      } catch {}
 
       await this.productService.update(createOrUpdateProductDto.id, {
         ...createOrUpdateProductDto,
         isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
         showInSlider: Boolean(createOrUpdateProductDto.showInSlider),
-        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended)
+        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended),
       });
     } else {
       await this.productService.create({
         ...createOrUpdateProductDto,
         isAvailable: Boolean(createOrUpdateProductDto.isAvailable),
         showInSlider: Boolean(createOrUpdateProductDto.showInSlider),
-        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended)
+        showInRecommended: Boolean(createOrUpdateProductDto.showInRecommended),
       });
     }
 
-    return res.redirect('/admin/product')
-
+    return res.redirect('/admin/product');
   }
 
   @Get()
   @Render('product')
   async findAll(@Query('id') id?: number) {
-    let product
+    let product;
     if (id) {
       product = await this.productService.findOne(id);
     }
@@ -79,7 +124,6 @@ export class ProductController {
     const manufacturerList = await this.manufacturerService.findAll();
     const productList = await this.productService.findAll();
     return { productList, categoryList, manufacturerList, product };
-
   }
 
   @Get(':id/delete')

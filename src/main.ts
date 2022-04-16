@@ -5,25 +5,28 @@ import { AppModule } from './app.module';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import * as hbs from 'hbs';
 import * as session from 'express-session';
-import { config } from "dotenv";
+import { config } from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
+import * as connectPg from 'connect-pg-simple';
 
 async function bootstrap() {
-  config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'})
+  config({
+    path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
+  });
 
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      forbidNonWhitelisted: true,
+      enableDebugMessages: true,
+      forbidUnknownValues: true,
+    }),
   );
-
-  app.useGlobalPipes(new ValidationPipe({
-    forbidNonWhitelisted: true,
-    enableDebugMessages: true,
-    forbidUnknownValues: true,
-  }));
 
   app.use(
     session({
-      store: new (require('connect-pg-simple')(session))({
+      store: new (connectPg(session))({
         conObject: {
           host: process.env.POSTGRES_HOST,
           port: process.env.POSTGRES_PORT,
@@ -35,7 +38,7 @@ async function bootstrap() {
       secret: 'my-secret',
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+      cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
     }),
   );
 
@@ -43,8 +46,8 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
-  hbs.handlebars.registerHelper({ ...handlebarsHelpers() })
-  hbs.registerPartials(join(__dirname, '..', 'views/partials'))
+  hbs.handlebars.registerHelper({ ...handlebarsHelpers() });
+  hbs.registerPartials(join(__dirname, '..', 'views/partials'));
 
   await app.listen(3000);
 }

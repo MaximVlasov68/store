@@ -1,9 +1,22 @@
-import { Controller, Get, Post, Render, Request, Res, UseGuards, Param, Query, Body, BadRequestException, Session } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Render,
+  Request,
+  Res,
+  UseGuards,
+  Param,
+  Query,
+  Body,
+  BadRequestException,
+  Session,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { ProductService } from './admin/product/product.service';
 import { CategoryService } from './admin/category/category.service';
-import { RegisterUserDto } from "./users/dto/register-user-dto";
+import { RegisterUserDto } from './users/dto/register-user-dto';
 import { UsersService } from './users/users.service';
 import { OrderService } from './admin/order/order.service';
 import { CreateOrderDto } from './admin/order/dto/create-order.dto';
@@ -12,13 +25,12 @@ import { UserRoles } from './users/enums/roles';
 
 @Controller()
 export class AppController {
-
   constructor(
     private readonly productService: ProductService,
     private readonly categoryService: CategoryService,
     private readonly usersService: UsersService,
     private readonly orderService: OrderService,
-  ) { }
+  ) {}
 
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
@@ -45,9 +57,9 @@ export class AppController {
       const user = await this.usersService.registerUser(registerUserDto);
       return user;
     } catch (e) {
-      if (e.code = '23505') {
+      if ((e.code = '23505')) {
         const keyName = e.detail.match('".*"');
-        throw new KeyNotUniqueException('user', keyName)
+        throw new KeyNotUniqueException('user', keyName);
       }
       console.error('Registration error' + e);
       throw new BadRequestException();
@@ -58,10 +70,11 @@ export class AppController {
   @Get()
   async main(@Session() session) {
     const commonData = await this.getCommonData();
-    const {recommendedItems, sliderItems} = await this.productService.getMainPageItems();
+    const { recommendedItems, sliderItems } =
+      await this.productService.getMainPageItems();
     const user = session.user;
 
-    return { ...commonData, user, recommendedItems, sliderItems }
+    return { ...commonData, user, recommendedItems, sliderItems };
   }
 
   @Render('productDetail')
@@ -71,7 +84,7 @@ export class AppController {
     const commonData = await this.getCommonData();
     const user = session.user;
 
-    return { ...commonData, product, user }
+    return { ...commonData, product, user };
   }
 
   @Render('productList')
@@ -82,7 +95,7 @@ export class AppController {
     const category = await this.categoryService.findOne(id);
     const user = session.user;
 
-    return { ...commonData, productList, category, user }
+    return { ...commonData, productList, category, user };
   }
 
   @Render('cart')
@@ -90,31 +103,41 @@ export class AppController {
   async cart(@Session() session) {
     const commonData = await this.getCommonData();
     const user = session.user;
-    return { ...commonData, user }
+    return { ...commonData, user };
   }
 
   @Render('account')
   @Get('account')
   async account(@Session() session) {
     const commonData = await this.getCommonData();
-    const ordersInProgress = await this.orderService.findAll(session.user.id, false)
-    const completedOrders = await this.orderService.findAll(session.user.id, true)
+    const ordersInProgress = await this.orderService.findAll(
+      session.user.id,
+      false,
+    );
+    const completedOrders = await this.orderService.findAll(
+      session.user.id,
+      true,
+    );
     const user = session.user;
-    return { ...commonData, ordersInProgress, completedOrders, user }
+    return { ...commonData, ordersInProgress, completedOrders, user };
   }
 
-
   @Post('createOrder')
-  async createOrder(@Body() createOrderDto: Omit<CreateOrderDto, 'userId'>, @Session() session) {
+  async createOrder(
+    @Body() createOrderDto: Omit<CreateOrderDto, 'userId'>,
+    @Session() session,
+  ) {
     return this.orderService.create({
       ...createOrderDto,
       userId: session.user.id,
-    })
+    });
   }
 
   protected async getCommonData() {
-    const categoriesTree = await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    const { headerItems, footerItems } = await this.categoryService.getMenuItems();
-    return { categoriesTree, headerItems, footerItems }
+    const categoriesTree =
+      await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
+    const { headerItems, footerItems } =
+      await this.categoryService.getMenuItems();
+    return { categoriesTree, headerItems, footerItems };
   }
 }

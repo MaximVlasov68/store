@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Render, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Res,
+  Render,
+  Query,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { AdminRequired } from '../admin.decorator';
 import { CategoryService } from './category.service';
@@ -9,21 +20,24 @@ import { Category } from './entities/category.entity';
 @Controller()
 @AdminRequired()
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) { }
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  async createOrUpdate(@Res() res: Response, @Body() createOrUpdateCategoryDto: CreateCategoryDto | UpdateCategoryDto) {
+  async createOrUpdate(
+    @Res() res: Response,
+    @Body() createOrUpdateCategoryDto: CreateCategoryDto | UpdateCategoryDto,
+  ) {
     const params = {
       ...createOrUpdateCategoryDto,
       showInHeader: Boolean(createOrUpdateCategoryDto.showInHeader),
       showInFooter: Boolean(createOrUpdateCategoryDto.showInFooter),
-    }
-    if ("id" in createOrUpdateCategoryDto) {
+    };
+    if ('id' in createOrUpdateCategoryDto) {
       await this.categoryService.update(params as UpdateCategoryDto);
     } else {
       await this.categoryService.create(params as CreateCategoryDto);
     }
-    return res.redirect('/admin/category')
+    return res.redirect('/admin/category');
   }
 
   @Get()
@@ -36,7 +50,6 @@ export class CategoryController {
     const categoryList = await this.categoryService.getAll();
     const parentCategoryList = await this.categoryService.getRoots();
     return { categoryList, parentCategoryList, category };
-
   }
 
   @Get(':id/delete')

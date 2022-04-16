@@ -1,13 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Render,
+  Query,
+} from '@nestjs/common';
 import { OrderProductsService } from './orderProducts.service';
 import { AddOrderItemsDto } from './dto/add-order-item.dto';
-import { ProductService } from "../product/product.service";
+import { ProductService } from '../product/product.service';
 import { AdminRequired } from '../admin.decorator';
 
 @Controller()
 @AdminRequired()
 export class OrderProductController {
-  constructor(private readonly orderProductService: OrderProductsService, private readonly productService: ProductService) { }
+  constructor(
+    private readonly orderProductService: OrderProductsService,
+    private readonly productService: ProductService,
+  ) {}
 
   @Post()
   async create(@Body() createOrderDto: AddOrderItemsDto) {
@@ -20,12 +33,13 @@ export class OrderProductController {
   async findAll(@Query('id') id?: number) {
     let order;
     if (id) {
-      order = await this.orderProductService.findOne(id)
+      order = await this.orderProductService.findOne(id);
     }
     const orderList = await this.orderProductService.findAll();
     return {
-      order, orderList
-    }
+      order,
+      orderList,
+    };
   }
 
   @Get(':id')

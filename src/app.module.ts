@@ -19,7 +19,9 @@ import { OrderProductsModule } from './admin/orderProducts/orderProducts.module'
 import { OrderProducts } from './admin/orderProducts/entities/orderProducts.entity';
 import { config } from 'dotenv';
 
-config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'})
+config({
+  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
+});
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'})
       database: process.env.POSTGRES_DB,
       entities: [Product, Category, Manufacturer, User, Order, OrderProducts],
       synchronize: true,
-      logging: 'all'
+      logging: 'all',
     }),
     AdminModule,
     ProductModule,
@@ -63,11 +65,11 @@ config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'})
             path: 'order',
             module: OrderModule,
           },
-        ]
+        ],
       },
     ]),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

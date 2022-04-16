@@ -19,6 +19,6 @@ import { User } from 'src/users/entities/user.entity';
   ],
   controllers: [OrderProductController],
   providers: [OrderProductsService, ProductService, OrderService],
-  exports: [OrderProductsModule]
+  exports: [OrderProductsModule],
 })
 export class OrderProductsModule {}
