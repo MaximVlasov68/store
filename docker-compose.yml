@@ -8,7 +8,10 @@ services:
       - store-network
   store:
     env_file: .env
-    build: .
+    build: 
+      context: .
+      target: production
+    command: npm run start:prod
     ports:
         - 3000:3000
     networks:
