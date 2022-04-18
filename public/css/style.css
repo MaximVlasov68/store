@@ -352,6 +352,9 @@ article{
     background-color:#001400;
     color: white;
 }
+.map-box{
+    background-color: #F9F9F9;
+}
 .map h2{
     padding: 0 calc(50% - 810px);
     margin-bottom: 3vh;
