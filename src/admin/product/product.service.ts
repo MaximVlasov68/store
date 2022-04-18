@@ -66,7 +66,3 @@ export class ProductService {
     return { sliderItems, recommendedItems };
   }
 }
-
-export interface UpdateProductParams extends UpdateProductDto {
-  id: number;
-}

@@ -134,6 +134,7 @@ export class AppController {
   }
 
   protected async getCommonData() {
+    /* Общие переменные для свех страниц */
     const categoriesTree =
       await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
     const { headerItems, footerItems } =

@@ -90,9 +90,9 @@
                     </div>
 
                     <div class="right-count">
-                        <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span> </p>
+                        <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span></p>
                         <p class="discountText">\{{this.totalCost}} ₽</p>
-                        <button class="forming" id="createOrderButton" {{#unless user}} disabled {{/unless}}>Оформить заказ</button>
+                        <button class="forming" id="createOrderButton" {{#unless user}} disabled {{/unless}} \{{#unless ../products.length}} disabled \{{/unless}} >Оформить заказ</button>
                     </div>
                     \{{/with}}
                     </div>
