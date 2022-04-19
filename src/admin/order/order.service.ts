@@ -21,11 +21,11 @@ export class OrderService {
     const address = createOrderDto.address;
     const user = await this.userRepository.findOne(userId);
 
-    const order = await this.orderRepository.create({ user, address });
+    const order = this.orderRepository.create({ user, address });
     const { id: orderId } = await this.orderRepository.save(order);
 
     const items = createOrderDto.items;
-    const orderProducts = await this.orderProductsService.add({
+    await this.orderProductsService.add({
       orderId,
       items,
     });
@@ -49,9 +49,5 @@ export class OrderService {
 
   async setCompleted(id: number) {
     return this.orderRepository.update(id, { completed: true });
-  }
-
-  async findOne(id: number) {
-    return this.orderRepository.findOne(id);
   }
 }
