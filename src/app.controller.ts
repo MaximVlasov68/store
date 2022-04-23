@@ -22,6 +22,7 @@ import { OrderService } from './admin/order/order.service';
 import { CreateOrderDto } from './admin/order/dto/create-order.dto';
 import { KeyNotUniqueException } from './common/exceptions';
 import { UserRoles } from './users/enums/roles';
+import { LoadProductsDto } from './admin/product/dto/load-products.dto';
 
 @Controller()
 export class AppController {
@@ -131,6 +132,12 @@ export class AppController {
       ...createOrderDto,
       userId: session.user.id,
     });
+  }
+
+  @Post('loadProducts')
+  async loadProducts(@Body() loadProductsDto: LoadProductsDto) {
+    const { count = 8 } = loadProductsDto;
+    return this.productService.findAll(count);
   }
 
   protected async getCommonData() {

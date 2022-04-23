@@ -29,7 +29,9 @@ export class OrderService {
       orderId,
       items,
     });
-    return this.orderRepository.save(order);
+    const res = await this.orderRepository.save(order);
+    res.user = undefined;
+    return res;
   }
 
   async findAll(userId?: number, completed?: boolean) {

@@ -142,3 +142,23 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
+
+const loadMoreButton = document.querySelector('.more');
+if (loadMoreButton) {
+  const productView = document.querySelector('script#recommendedProduct');
+  const productTemplate = Handlebars.compile(productView.innerHTML);
+
+  const contentBox = document.querySelector('.content-box');
+
+  loadMoreButton.onclick = async function () {
+    const res = await fetch('/loadProducts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const products = await res.json();
+    const html = productTemplate({ products });
+    contentBox.insertAdjacentHTML('beforeend', html);
+  };
+}

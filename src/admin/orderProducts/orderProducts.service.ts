@@ -30,11 +30,6 @@ export class OrderProductsService {
     );
   }
 
-  async findAll() {
-    const orders = await this.orderProductsRepository.find();
-    return orders;
-  }
-
   async findOne(id: number) {
     return this.orderProductsRepository.findOne(id);
   }

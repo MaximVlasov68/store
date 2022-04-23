@@ -16,9 +16,10 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  async findAll(): Promise<Product[]> {
+  async findAll(take?: number): Promise<Product[]> {
     return this.productRepository.find({
       relations: ['category', 'manufacturer'],
+      take,
     });
   }
 

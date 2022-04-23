@@ -18,7 +18,6 @@ export class SessionAuthGuard extends AuthGuard('local') {
       context.getClass(),
     );
     const request = context.switchToHttp().getRequest();
-    console.log(request.session);
     const user = request.session.user;
     if (adminRequired && user.role === UserRoles.user) {
       return false;

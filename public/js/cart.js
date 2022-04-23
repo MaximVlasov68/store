@@ -180,12 +180,12 @@ class Cart {
     }
 
     /* select checkbox */
-    const checkbox = document.querySelector('#selectAll');
+    const checkboxSelectAll = document.querySelector('#selectAll');
     const allCheckboxes = document.querySelectorAll('.check');
     /* console.log(allCheckbox); */
-    if (checkbox && allCheckboxes) {
-      checkbox.onclick = function () {
-        if (checkbox.checked) {
+    if (checkboxSelectAll && allCheckboxes) {
+      checkboxSelectAll.onclick = function () {
+        if (checkboxSelectAll.checked) {
           cart.setCheckedAll(true);
         } else {
           cart.setCheckedAll(false);
@@ -277,10 +277,12 @@ class Cart {
       createOrderButton.addEventListener('click', async () => {
         const address = document.querySelector('.inputAddress')?.value;
         const body = JSON.stringify({
-          items: cart.products.map((product) => ({
-            productId: product.id,
-            quantity: product.quantity,
-          })),
+          items: cart.products
+            .filter((product) => product.checked === true)
+            .map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
           address: address === '' ? null : address,
         });
         const res = await fetch('/createOrder', {
