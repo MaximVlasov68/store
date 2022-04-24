@@ -28,6 +28,7 @@
             <th>Статус</th>
             <th>Цена</th>
             <th>Адрес</th>
+            <th>Телефон клиента</th>
         </thead>
         <tbody>
             {{#each orderList}}
@@ -48,6 +49,7 @@
                 </td>
                 <td>{{this.totalCost}} ₽</td>
                 <td>{{this.address}}</td>
+                <td>{{this.user.telephoneNumber}}</td>
             </tr>
             {{/each}}
         </tbody>

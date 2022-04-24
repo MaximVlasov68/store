@@ -334,15 +334,19 @@ class CartModal {
       const data = {
         cost: this.cart.totalCost,
         weight: this.cart.totalWeight,
-        quantity: this.cart.products.length,
-        discount: this.cart.totalCost - this.cart.totalCostWithDiscount,
+        quantity: this.cart.products
+          .filter((product) => product.checked === true)
+          .reduce((sum, product) => sum + product.quantity, 0), //.filter((product) => product.checked === true).length, кол-во по наименоваию
+        discount: Math.round(
+          this.cart.totalCost - this.cart.totalCostWithDiscount,
+        ),
         costWithDiscount: this.cart.totalCostWithDiscount,
         address: this.address,
         orderId: this.orderId,
       };
       const html = template(data, {
         allowProtoPropertiesByDefault: true,
-      }); /* пазрешить использовать геттеры */
+      }); /* разрешить использовать геттеры */
       const root = document.querySelector('#cartModalRoot');
       root.innerHTML = html;
 
