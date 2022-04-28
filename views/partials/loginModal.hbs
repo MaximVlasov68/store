@@ -25,23 +25,23 @@
         <form class="modal-content-register animate" action="auth/register" method="post">
             <div>
                 <label for="username">Логин</label>
-                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" required>
+                <input class="name" type="text" placeholder="Введите имя пользователя" name="username" id="username" required>
             </div>
 
             <div class="reg">
-                <label for="tel">Телефон</label>
-                <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="telephoneNumber" id="tel"
+                <label for="telephoneNumber">Телефон</label>
+                <input class="telPhone" type="tel" placeholder="Ведите номер телефона" name="telephoneNumber" id="telephoneNumber"
                     pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
             </div>
 
             <div>
                 <label for="password">Пароль</label>
-                <input class="password" type="password" placeholder=" Ведите пароль" name="password" required minlength="6">
+                <input class="password" type="password" placeholder=" Введите пароль" name="password" id="password" required minlength="6">
             </div>
 
             <div class="reg">
-                <label for="psw">Повторите пароль</label>
-                <input class="password" type="password" placeholder=" Повторите пароль" name="checkPassword" required>
+                <label for="checkPassword">Повторите пароль</label>
+                <input class="password" type="password" placeholder=" Повторите пароль" name="checkPassword" id="checkPassword" required>
             </div>
 
            {{!--  <div class="saveMe">

@@ -26,6 +26,20 @@ function closeModal() {
   overlay.style.display = 'none';
 }
 
+/* функция "подняться вверх" */
+const scrollBtn = document.querySelector('#scrollTop');
+window.onscroll = () => {
+  if (window.scrollY > 700) {
+    scrollBtn.classList.remove('hideBtn');
+  } else if (window.scrollY < 700) {
+    scrollBtn.classList.add('hideBtn');
+  }
+};
+
+scrollBtn.onclick = () => {
+  window.scrollTo(0, 0);
+};
+
 /* функция выбора действий в модальном окне регистрация/авторизация на главной странице */
 function select(event) {
   event.target.classList.add('active');
@@ -78,7 +92,7 @@ function minus(target) {
 registerForm.onsubmit = async (event) => {
   event.preventDefault();
   const { username, password, telephoneNumber, checkPassword } =
-    registerForm.elements;
+    registerForm.elements; /* взять переменные по name из коллекции registerForm */
   if (password.value !== checkPassword.value) {
     password.setCustomValidity('Пароли не совпадают');
   }
@@ -102,7 +116,7 @@ registerForm.onsubmit = async (event) => {
     } else {
       const error = await result.json();
       if (error.name === 'KeyNotUniqueException') {
-        alert(error.detail);
+        alert(error.detail); /* поле должно быть уникальным */
       } else {
         alert(`Registration error: ${JSON.stringify(error)}`);
       }

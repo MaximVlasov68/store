@@ -301,6 +301,7 @@ class Cart {
             orderId,
           );
           cartModal.render();
+          createOrderButton.disabled = true; /* чтобы отсечь возможность пустого заказа */
           cart.clear();
           cart.save();
         }
