@@ -8,6 +8,7 @@ import * as session from 'express-session';
 import { config } from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import * as connectPg from 'connect-pg-simple';
+import { HttpExceptionFilter } from './common/http-exception.filter';
 
 async function bootstrap() {
   config({
@@ -48,6 +49,8 @@ async function bootstrap() {
 
   hbs.handlebars.registerHelper({ ...handlebarsHelpers() });
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(3000);
 }

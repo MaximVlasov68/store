@@ -23,6 +23,7 @@ import { CreateOrderDto } from './admin/order/dto/create-order.dto';
 import { KeyNotUniqueException } from './common/exceptions';
 import { UserRoles } from './users/enums/roles';
 import { LoadProductsDto } from './admin/product/dto/load-products.dto';
+import { SessionAuthGuard } from './auth/session-auth.guard';
 
 @Controller()
 export class AppController {
@@ -107,6 +108,7 @@ export class AppController {
     return { ...commonData, user };
   }
 
+  @UseGuards(SessionAuthGuard)
   @Render('account')
   @Get('account')
   async account(@Session() session) {
@@ -123,6 +125,7 @@ export class AppController {
     return { ...commonData, ordersInProgress, completedOrders, user };
   }
 
+  @UseGuards(SessionAuthGuard)
   @Post('createOrder')
   async createOrder(
     @Body() createOrderDto: Omit<CreateOrderDto, 'userId'>,

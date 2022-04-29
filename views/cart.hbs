@@ -21,7 +21,7 @@
             <section class="wrapper-cart">
                 <h2> Корзина </h2>
 
-                <div class="box-cart"></div>
+                <div class="box-cart" data-user-id="{{user.id}}"></div>
                 <script id="cart" type="text/x-handlebars-template">
                     <div class="head-box">
                         <div class="move-box">
@@ -80,7 +80,7 @@
                             </label>
                             <label class="b-contain">
                                 <span>Доставка курьером</span>
-                                <input name="delivery" type="radio" id="delivery">
+                                <input name="delivery" type="radio" id="delivery" \{{#unless canBeDelivered}} disabled \{{/unless}}>
                                 <div class="b-input"></div>
                             </label>
                         </div>
@@ -97,7 +97,7 @@
                     <div class="right-count">
                         <p class="sumText">Итого: <span class="sum">\{{this.totalCostWithDiscount}} ₽</span></p>
                         <p class="discountText">\{{this.totalCost}} ₽</p>
-                        <button class="forming" id="createOrderButton" {{#unless user}} disabled {{/unless}} \{{#unless ../products.length}} disabled \{{/unless}} >Оформить заказ</button>
+                        <button class="forming" id="createOrderButton" \{{#if ../isCreateOrderDisabled}} disabled \{{/if}} >Оформить заказ</button>
                     </div>
                     \{{/with}}
                     </div>

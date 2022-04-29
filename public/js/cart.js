@@ -59,8 +59,16 @@ class Cart {
 
   products = [];
 
+  _isCreateOrderBlocked = false;
+
+  _userId = 0;
+
   constructor(products) {
     this.products = products ?? [];
+  }
+
+  get checkedProducts() {
+    return this.products.filter((product) => product.checked === true);
   }
 
   get totalCostWithDiscount() {
@@ -76,19 +84,30 @@ class Cart {
   }
 
   get totalCost() {
-    return this.products
-      .filter((product) => product.checked === true)
-      .reduce((sum, product) => sum + product.cost, 0);
+    return this.checkedProducts.reduce((sum, product) => sum + product.cost, 0);
   }
 
   get totalWeight() {
-    return this.products
-      .filter((product) => product.checked === true)
-      .reduce((sum, product) => sum + product.weight, 0);
+    return this.checkedProducts.reduce(
+      (sum, product) => sum + product.weight,
+      0,
+    );
   }
 
   get isAllChecked() {
     return this.products.every((product) => product.checked === true);
+  }
+
+  get isCreateOrderDisabled() {
+    return (
+      this._isCreateOrderBlocked ||
+      this.checkedProducts.length === 0 ||
+      !this._userId
+    );
+  }
+
+  get canBeDelivered() {
+    return this.totalCost >= 2000;
   }
 
   toJSON() {
@@ -107,6 +126,7 @@ class Cart {
   save() {
     localStorage.setItem(Cart.STORAGE_KEY, this.toJSON());
     console.log(`Saved ${this.toJSON()}`);
+    return this;
   }
 
   add(product) {
@@ -125,7 +145,10 @@ class Cart {
   }
 
   clear() {
-    this.products = [];
+    this.products = this.products.filter(
+      (product) => product.checked === false,
+    );
+    return this;
   }
 
   getProductById(productId) {
@@ -160,7 +183,12 @@ class Cart {
 
   render() {
     const cartView = document.querySelector('script#cart');
+
     if (cartView) {
+      const root = document.querySelector('.box-cart');
+      this._userId = root?.dataset.userId;
+      this._isCreateOrderBlocked = false;
+
       const template = Handlebars.compile(cartView.innerHTML);
       const data = {
         products: this.products,
@@ -169,12 +197,13 @@ class Cart {
           totalCostWithDiscount: this.totalCostWithDiscount,
           totalWeight: this.totalWeight,
           isAllChecked: this.isAllChecked,
+          canBeDelivered: this.canBeDelivered,
         },
+        isCreateOrderDisabled: this.isCreateOrderDisabled,
       };
       const html = template(data, {
         allowProtoPropertiesByDefault: true,
       }); /* пазрешить использовать геттеры */
-      const root = document.querySelector('.box-cart');
       root.innerHTML = html;
       console.log(data);
     }
@@ -190,8 +219,7 @@ class Cart {
         } else {
           cart.setCheckedAll(false);
         }
-        cart.save();
-        cart.render();
+        cart.save().render();
       };
     }
     allCheckboxes.forEach((checkbox) =>
@@ -200,8 +228,7 @@ class Cart {
         const parentItemElement = event.target.closest('.cart-item');
         const productId = parentItemElement.dataset.id;
         cart.setChecked(productId, value);
-        cart.save();
-        cart.render();
+        cart.save().render();
       }),
     );
 
@@ -212,8 +239,7 @@ class Cart {
         const parentItemElement = event.target.closest('.cart-item');
         const productId = parentItemElement.dataset.id;
         cart.increaseQuantity(productId);
-        cart.save();
-        cart.render();
+        cart.save().render();
       }),
     );
     minusButtons.forEach((button) =>
@@ -221,8 +247,7 @@ class Cart {
         const parentItemElement = event.target.closest('.cart-item');
         const productId = parentItemElement.dataset.id;
         cart.decreaseQuantity(productId);
-        cart.save();
-        cart.render();
+        cart.save().render();
       }),
     );
 
@@ -233,8 +258,7 @@ class Cart {
           document.querySelectorAll('.cart-item'),
         ).filter((el) => el.querySelector('.check').checked === true);
         itemsForDelete.forEach((item) => cart.delete(item.dataset.id));
-        cart.save();
-        cart.render();
+        cart.save().render();
       };
     }
 
@@ -277,12 +301,10 @@ class Cart {
       createOrderButton.addEventListener('click', async () => {
         const address = document.querySelector('.inputAddress')?.value;
         const body = JSON.stringify({
-          items: cart.products
-            .filter((product) => product.checked === true)
-            .map((product) => ({
-              productId: product.id,
-              quantity: product.quantity,
-            })),
+          items: cart.checkedProducts.map((product) => ({
+            productId: product.id,
+            quantity: product.quantity,
+          })),
           address: address === '' ? null : address,
         });
         const res = await fetch('/createOrder', {
@@ -301,13 +323,14 @@ class Cart {
             orderId,
           );
           cartModal.render();
-          createOrderButton.disabled = true; /* чтобы отсечь возможность пустого заказа */
-          cart.clear();
-          cart.save();
+
+          this._isCreateOrderBlocked = true; /* чтобы отсечь возможность пустого заказа */
+          cart.clear().render().save();
         }
         console.log(JSON.stringify(data));
       });
     }
+    return this;
   }
 }
 
@@ -369,7 +392,7 @@ class CartModal {
   }
 }
 
-let cart;
+let cart = new Cart();
 document.addEventListener('DOMContentLoaded', (e) => {
   cart = Cart.load();
   console.log(`Loaded cart ${cart.toJSON()}`);
