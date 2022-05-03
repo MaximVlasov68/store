@@ -1395,11 +1395,22 @@ footer{
         height: 120px;
     }
     .item .addBusket{
-        width: 135px;
+        width: 120px;
         height: 35px;
     }
     .item .price{
-        margin-bottom: 8px;
+        margin-bottom: 4px;
+    }
+    .item .category{
+        line-height: 10px;
+        font-size: 1.2em ;
+    }
+    .item .name{
+        margin-top: 10px;
+        font-size: 1.2em ;
+    }
+    .item .addBusket{
+        font-size: 1.2em ;
     }
     .head-modal {
         padding-top: 45px;
