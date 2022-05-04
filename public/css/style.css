@@ -98,6 +98,7 @@ header p{
     color: #F9F0DA;
     vertical-align: middle;
     vertical-align: -webkit-baseline-middle;
+    vertical-align: -moz-middle-with-baseline;
 }
 .wrapper-login-shop{
     display: flex;
@@ -161,6 +162,7 @@ header p{
 .header-bottom .navigation{
     display: flex;
     gap: 2vw;
+    white-space: nowrap;
 }
 .header-bottom .navigation a{
     text-align:center;
@@ -208,7 +210,7 @@ main{
 article{
     display: flex;
     flex-direction: column;
-    gap: 2vw;
+    gap: 2vh;
     margin-top: 2.5vw;
     /* border: 1px solid green; */
 }
@@ -345,7 +347,6 @@ article{
     border-radius: 8px;
     font-size: 1.125em;
     font-weight: 500;
-    margin-top: 8px;
     cursor: pointer;
 }
 .item .addBusket:hover, .addBusket:hover{
@@ -784,7 +785,7 @@ footer{
         margin-top: 37px;
     }
     .swiper-slide img{
-        max-height: 525px;
+        height: 525px;
     }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -822,7 +823,7 @@ footer{
         margin-top: 37px;
     }
     .swiper-slide img{
-        max-height: 420px;
+        height: 420px;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -894,7 +895,7 @@ footer{
         grid-template-columns: 1fr 1fr;
     }
     .swiper-slide img{
-        max-height: 285px;
+        height: 285px;
     }
 }
 @media (min-width: 576px) and (max-width: 767px) {
@@ -986,7 +987,7 @@ footer{
         margin: 5px 0;
     }
     .swiper-slide img{
-        max-height: 225px;
+        height: 225px;
     }
     .swiper-pagination-bullet {
         width: 8px;
@@ -1131,7 +1132,7 @@ footer{
         padding: 6px;
     }
     .swiper-slide img{
-        max-height: 161px;
+        height: 161px;
     }
     .swiper-pagination-bullet {
         width: 7px;
@@ -1353,15 +1354,15 @@ footer{
         padding: 6px;
     }
     .swiper-slide img{
-        max-height: 139px;
+        height: 139px;
     }
     .swiper-pagination-bullet {
-        width: 7px;
-        height: 7px;
+        width: 5px;
+        height: 5px;
     }
     .swiper-pagination-bullet-active {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
     }
     .header-bottom .navigation{
         display: none;
