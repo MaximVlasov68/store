@@ -25,7 +25,7 @@
                 <script id="cart" type="text/x-handlebars-template">
                     <div class="head-box">
                         <div class="move-box">
-                            <label>
+                            <label class="selectAll">
                                 <input type="checkbox" id="selectAll" \{{#if cart.isAllChecked}} checked \{{/if}}> Выбрать все
                             </label>
                             <a href="#" class="deleteItem">Удалить выбранные</a>
@@ -87,8 +87,8 @@
                         <div class="address-box">
                             <h3>Адрес доставки</h3>
                             <form class="address" action="">
-                                <label for="">
-                                    <input type="text" class="inputAddress" placeholder="Укажите адрес">
+                                <label for="address">
+                                    <input type="text" class="inputAddress" placeholder="Укажите адрес" id="address">
                                 </label>
                             </form>
                         </div>

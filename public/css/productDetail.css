@@ -24,12 +24,14 @@
 }
 .mySwiperDetail, .description{
     max-width: 60%;
-    /* border: 1px solid black; */
 }
 .mySwiperDetail{
     margin: 0;
     border: 2px solid #EEEEEE;;
     border-radius: 8px;
+    -webkit-box-shadow: -1px 5px 27px 11px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -1px 5px 27px 11px rgba(34, 60, 80, 0.2);
+    box-shadow: -1px 5px 27px 11px rgba(34, 60, 80, 0.2);
 }
 .product-information{
     max-width: 50%;
