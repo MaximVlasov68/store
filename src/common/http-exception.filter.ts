@@ -4,12 +4,14 @@ import {
   HttpException,
   InternalServerErrorException,
   ArgumentsHost,
+  NotFoundException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { readFile } from 'fs/promises';
 import { compile } from 'handlebars';
 import { Response } from 'express';
 
-@Catch(HttpException, Error)
+@Catch(NotFoundException, ForbiddenException)
 export class HttpExceptionFilter implements ExceptionFilter {
   async catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -30,6 +32,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       return response.end(template(data));
     } catch (e) {
       console.error(e);
+      throw e;
     }
   }
 }

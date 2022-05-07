@@ -394,6 +394,7 @@ class CartModal {
 
 let cart = new Cart();
 document.addEventListener('DOMContentLoaded', (e) => {
+  // Работает на всех страницах
   cart = Cart.load();
   console.log(`Loaded cart ${cart.toJSON()}`);
   cart.render();
@@ -406,10 +407,30 @@ document.addEventListener('DOMContentLoaded', (e) => {
     };
   }
 
-  const addProductButton = document.querySelector('.addBusket');
+  const cartBadge = document.querySelector('.wrapper-cart>.badge');
 
+  if (cart.products.length > 0) {
+    cartBadge.classList.remove('hide');
+  }
+
+  // Для страницы продукта
+  const addProductButton = document.querySelector('.addBusket');
   if (addProductButton) {
-    addProductButton.onclick = function (event) {
+    const id = document.querySelector('#id').innerHTML;
+
+    if (cart.getProductById(id)) {
+      addProductButton.classList.add('addBusketActive');
+      addProductButton.disabled = true;
+      addProductButton.innerHTML = 'В корзине';
+    }
+
+    addProductButton.onclick = function () {
+      addProductButton.classList.add('addBusketActive');
+      addProductButton.disabled = true;
+      addProductButton.innerHTML = 'В корзине';
+
+      cartBadge.classList.remove('hide');
+
       const id = document.querySelector('#id').innerHTML;
       const name = document.querySelector('#name').innerHTML;
       const price = document.querySelector('#priceNumber').innerHTML;

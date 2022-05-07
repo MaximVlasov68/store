@@ -24,6 +24,7 @@ import { KeyNotUniqueException } from './common/exceptions';
 import { UserRoles } from './users/enums/roles';
 import { LoadProductsDto } from './admin/product/dto/load-products.dto';
 import { SessionAuthGuard } from './auth/session-auth.guard';
+import { AuthService } from './auth/auth.service';
 
 @Controller()
 export class AppController {
@@ -32,19 +33,23 @@ export class AppController {
     private readonly categoryService: CategoryService,
     private readonly usersService: UsersService,
     private readonly orderService: OrderService,
+    private readonly authService: AuthService,
   ) {}
-
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  async login(@Request() req, @Res() res: Response) {
+  async login(@Request() req) {
     if (req.user) {
       req.session.user = req.user;
     }
-    if (req.user.role === UserRoles.admin) {
-      return res.redirect('/admin');
-    } else {
-      return res.redirect('/account');
+    const res = await this.authService.validateUser(
+      req.body.username,
+      req.body.password,
+    );
+
+    if (res === null) {
+      return { user: null };
     }
+    return { user: res.username };
   }
 
   @Get('/auth/logout')

@@ -141,6 +141,15 @@ header p{
     height: 24px;
     transition: text-shadow .3s;
 }
+.wrapper-cart{
+    position: relative;
+}
+.badge{
+    position: absolute;
+    top: 0;
+    right: -3px;
+    width: 6px;
+}
 .wrapper-login-shop p{
     margin-left:13px;
     font-weight: 600;
@@ -349,7 +358,7 @@ article{
     font-weight: 500;
     cursor: pointer;
 }
-.item .addBusket:hover, .addBusket:hover{
+.item .addBusket:hover, .addBusket:hover, .addBusketActive{
     background: none;
     color: #599233;
 }
@@ -576,7 +585,11 @@ footer{
     cursor: pointer;
     box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.5);
 }
-
+.error{
+    color: #ed1010;
+    font-weight: 500;
+    font-size: .9em;
+}
 /*каталог*/
 
 .catalogDropdown {
@@ -1398,6 +1411,7 @@ footer{
     .item .addBusket{
         width: 120px;
         height: 35px;
+        font-size: 1.2em ;
     }
     .item .price{
         margin-bottom: 4px;
@@ -1408,9 +1422,6 @@ footer{
     }
     .item .name{
         margin-top: 10px;
-        font-size: 1.2em ;
-    }
-    .item .addBusket{
         font-size: 1.2em ;
     }
     .head-modal {

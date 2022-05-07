@@ -23,7 +23,7 @@
                             <a href="/auth/logout">Выйти из аккаунта</a>
                         </div>
                         <a class="login" {{#if user}} onclick="dropDownLinks()" {{else}} onclick="openModal()" {{/if}}>
-                            <img class="icon" src="/img/Login.svg" alt="">
+                            <img class="icon" src="/img/Login.svg" alt="Профиль">
                             <p>
                                 {{#if user}}
                                 {{user.username}}
@@ -35,7 +35,10 @@
                     </div>
                     <div class="item">
                         <a href="/cart">
-                            <img class="icon" src="/img/Shop.svg" alt="">
+                            <div class="wrapper-cart">
+                                <img class="icon" src="/img/Shop.svg" alt="Корзина">
+                                <img class="badge hide" src="/img/dot2.svg" alt="Точка">
+                            </div>
                             <p class="text">Корзина</p>
                         </a>
                     </div>

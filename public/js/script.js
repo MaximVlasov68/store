@@ -89,12 +89,22 @@ function minus(target) {
   }
 }
 
+registerForm.elements.password.oninput = function () {
+  document.querySelector('.passwordError').classList.add('hide');
+};
+registerForm.elements.checkPassword.oninput = function () {
+  document.querySelector('.passwordError').classList.add('hide');
+};
+
 registerForm.onsubmit = async (event) => {
   event.preventDefault();
+  document.querySelector('.passwordError').classList.add('hide');
+  document.querySelector('.registerError').classList.add('hide');
   const { username, password, telephoneNumber, checkPassword } =
     registerForm.elements; /* взять переменные по name из коллекции registerForm */
   if (password.value !== checkPassword.value) {
-    password.setCustomValidity('Пароли не совпадают');
+    document.querySelector('.passwordError').classList.remove('hide');
+    return;
   }
   const data = {
     username: username.value,
@@ -112,17 +122,47 @@ registerForm.onsubmit = async (event) => {
     if (result.ok) {
       const data = await result.json();
       console.log(data);
-      alert('Успешная регистрация');
+      registerBtn.classList.remove('active'); /* переход на форму авторизации */
+      loginBtn.classList.add('active');
+      loginForm.style.display = 'flex';
+      registerForm.style.display = 'none';
+      /* alert('Успешная регистрация'); */
     } else {
       const error = await result.json();
       if (error.name === 'KeyNotUniqueException') {
-        alert(error.detail); /* поле должно быть уникальным */
+        document.querySelector('.registerError').classList.remove('hide');
+        /* alert(error.detail);  поле должно быть уникальным */
       } else {
         alert(`Registration error: ${JSON.stringify(error)}`);
       }
     }
   } catch (e) {
     console.error(`Fetch error: ${e}`);
+  }
+};
+
+loginForm.onsubmit = async function (event) {
+  event.preventDefault();
+
+  const { username, password } = loginForm.elements;
+
+  const data = {
+    username: username.value,
+    password: password.value,
+  };
+
+  const res = await fetch('/auth/login', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const resData = await res.json();
+  if (resData.user) {
+    location.reload();
+  } else {
+    document.querySelector('.loginError').classList.remove('hide');
   }
 };
 
@@ -164,6 +204,7 @@ if (loadMoreButton) {
 
   const contentBox = document.querySelector('.content-box');
 
+  /* запрос на подгрузку товаров на main page */
   loadMoreButton.onclick = async function () {
     const res = await fetch('/loadProducts', {
       method: 'POST',
