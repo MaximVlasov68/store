@@ -1,48 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/SemanticUI-2.8.8/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="/DataTables/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/semantic.min.js"></script>
+    <script src="/DataTables/datatables.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/dropdown.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/transition.min.js"></script>
 
-    <title>store</title>
+    <title>Категории</title>
 
 </head>
 <body>
 
-    <form class="admin-form" method="POST">
-        <h2>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</h2>
-        {{#if category}}<input type="hidden" name="id" value="{{category.id}}">{{/if}}
-        <label>Название<input type="text" placeholder="Название" name="name" value="{{category.name}}"></label>
+    <h2>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</h2>
+    <form class="admin-form ui form" method="POST">
+        
+        {{#if category}}
+        <input type="hidden" name="id" value="{{category.id}}">
+        {{/if}}
 
-         <label>Родительская категория
-            <select name="parentCategory">
-                <option value="0">-</option>
-                {{#each parentCategoryList}}                    
-                    <option {{#eq this.id ../category.parentCategory.id}}
-                        selected
-                    {{/eq}} value="{{this.id}}">{{this.name}}</option>
-               {{/each}}
-            </select>
-        </label>
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Название
+                </div>
+                <input type="text" name="name" value="{{category.name}}" required>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label>Родительская категория</label>
+            <div class="ui search selection dropdown dropdown-parentCategory">
+                <input type="hidden" name="parentCategory">
+                <i class="dropdown icon"></i>
+                <div class="default text">Родительская категория</div>
+                <div class="menu">
+                    {{#each parentCategoryList}}                    
+                    <div class="item {{#eq this.id ../category.parentCategory.id}}active selected{{/eq}}"
+                        data-value="{{this.id}}">
+                        {{this.name}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
 
-        <label>
-            Сссылка в шапке<input type="checkbox" name="showInHeader" {{#if category.showInHeader}} checked {{/if}} value="true">
-        </label>
-        <label>
-            Ссылка в подвале<input type="checkbox" name="showInFooter" {{#if category.showInFooter}} checked {{/if}} value="true">
-        </label>
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" id="showInHeader" name="showInHeader" {{#if category.showInHeader}} checked {{/if}} value="true">
+                <label for="showInHeader">Сссылка в шапке</label>
+            </div>
+        </div>
 
-        <input class="btn" type="submit">
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" id="showInFooter" name="showInFooter" {{#if category.showInFooter}} checked {{/if}} value="true">
+                <label for="showInFooter">Ссылка в подвале</label>
+            </div>
+        </div>
+
+        <button class="ui green button" type="submit">{{#if category}}Сохранить{{else}}Создать{{/if}}</button>
+    
     </form>
 
    
-    <table id="category">
+    <table id="category" class="ui celled table dataTable">
         <thead>
             <th>Название</th>
             <th>Родительская категория</th>
@@ -57,14 +87,17 @@
                 <td>{{#if this.parentCategory.name}}{{this.parentCategory.name}}{{else}} - {{/if}}</td>
                 <td>{{#if this.showInHeader}}Добавлено{{else}}Нет{{/if}}</td>
                 <td>{{#if this.showInFooter}}Добавлено{{else}}Нет{{/if}}</td>
-                <td><a href="/admin/category?id={{this.id}}">edit</a></td>
-                <td><a href="/admin/category/{{this.id}}/delete">delete</a></td>
+                <td><a href="/admin/category?id={{this.id}}"><img src="/img/edit.svg"></a></td>
+                <td><a href="/admin/category/{{this.id}}/delete"><img src="/img/delete.svg"></a></td>
             </tr>
         {{/each}}
     </table>
     <script>
         $(document).ready( function () {
-        $('#category').DataTable(); 
+        $('#category').DataTable();
+        $('div.dropdown-parentCategory')
+        .dropdown('set selected', {{ category.parentCategory.id }})
+        .dropdown({ clearable: true });
         } );
     </script>
 </body>

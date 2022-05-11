@@ -1,32 +1,65 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/SemanticUI-2.8.8/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
-    <title>store</title>
+    <script src="/DataTables/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/semantic.min.js"></script>
+    <script src="/DataTables/datatables.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/dropdown.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/transition.min.js"></script>
+    <title>Производители</title>
 </head>
 <body>
 
-    <form class="admin-form" method="POST">
-        <h2>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</h2>
-        {{#if manufacturer}}<input type="hidden" name="id" value="{{manufacturer.id}}">{{/if}}
-        <label>Название<input type="text" placeholder="Название" name="name" value="{{manufacturer.name}}"></label>
-        <label>Страна<input type="text" placeholder="Страна" name="country" value="{{manufacturer.country}}"></label>
-        <label>Город<input type="text" placeholder="Город" name="city" value="{{manufacturer.city}}"></label>
-        <input class="btn" type="submit">
+    <h2>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</h2>
+    <form class="admin-form ui form" method="POST">
+        
+        {{#if manufacturer}}
+            <input type="hidden" name="id" value="{{manufacturer.id}}">
+        {{/if}}
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Название
+                </div>
+                <input type="text" name="name" value="{{manufacturer.name}}" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Страна
+                </div>
+                <input type="text" name="country" value="{{manufacturer.country}}" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Город
+                </div>
+                <input type="text" name="city" value="{{manufacturer.city}}" required>
+            </div>
+        </div>          
+
+        <button class="ui green button" type="submit">{{#if manufacturer}}Сохранить{{else}}Создать{{/if}}</button>
+
     </form>
 
 
   
-    <table id="manufacturer">
+    <table id="manufacturer" class="ui celled table dataTable">
         <thead>
             <th>Название</th>
             <th>Страна</th>
@@ -39,8 +72,8 @@
             <td>{{this.name}}</td>
             <td>{{this.country}}</td>
             <td>{{this.city}}</td>
-            <td><a href="/admin/manufacturer?id={{this.id}}">edit</a></td>
-            <td><a href="/admin/manufacturer/{{this.id}}/delete">delete</a></td>
+            <td><a href="/admin/manufacturer?id={{this.id}}"><img src="/img/edit.svg"></a></td>
+            <td><a href="/admin/manufacturer/{{this.id}}/delete"><img src="/img/delete.svg"></a></td>
             
         </tr>
             {{/each}}

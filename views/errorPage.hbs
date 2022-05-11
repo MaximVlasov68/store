@@ -1,2 +1,44 @@
-<b>{{status}}</b>
-{{message}}
+{{#>head}}{{/head}}
+
+<body>
+    {{#>loginModal}}{{/loginModal}}
+    {{#>header}}{{/header}}
+
+    <div class="line">
+        <hr>
+    </div>
+
+    <main>
+        <article>
+
+            <div id="scrollTop" class="isScrollShow hideBtn">
+                <img src="/img/Arrow.svg" alt="Подняться вверх">
+            </div>
+
+            <section class="error-wrapper">
+                <div class="message">
+                    {{#eq status 404}}
+                    <h2>Не найдено</h2>
+                    {{message}}
+                    {{/eq}}
+                    {{#unlessEq status 404}}
+                    <h2>Необходима авторизация</h2>
+                    {{message}}
+                    {{/unlessEq}}
+                </div>
+                <div>
+                    <img src="/img/errorPictures.svg" alt="Картинка с ошибкой">
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+
+    {{#>footer}}
+        <script src="/js/cart.js"></script>
+    {{/footer}}
+
+</body>
+
+</html>

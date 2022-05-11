@@ -3,9 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   Res,
   Render,
   Query,
@@ -29,6 +27,7 @@ export class CategoryController {
   ) {
     const params = {
       ...createOrUpdateCategoryDto,
+      parentCategory: createOrUpdateCategoryDto.parentCategory || null,
       showInHeader: Boolean(createOrUpdateCategoryDto.showInHeader),
       showInFooter: Boolean(createOrUpdateCategoryDto.showInFooter),
     };

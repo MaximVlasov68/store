@@ -697,6 +697,14 @@ footer{
     line-height: 20px;
     letter-spacing: 0.015em;
 }
+.error-wrapper{
+    display: flex;
+    padding: calc(50% - 720px) calc(50% - 810px);
+    margin: auto;
+}
+.message{
+    align-items: center;
+}
 
 
 /* !!!! Добавить анимацию масштабирования для формы в модалке */

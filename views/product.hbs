@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
     <!-- библиотека для таблиц(сортировка, фильтры) -->
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
     <link rel="stylesheet" type="text/css" href="/DataTables/SemanticUI-2.8.8/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -22,59 +23,86 @@
 
     <h2>{{#if product}}Редактирование{{else}}Создание{{/if}} продукта</h2>
     <form enctype="multipart/form-data" class="admin-form ui form" method="POST">
+
         {{#if product}}
-        <input type="hidden" name="id" id="id" value="{{product.id}}">
+            <input type="hidden" name="id" id="id" value="{{product.id}}">
         {{/if}}
-        <div class="ui labeled input">
-            <div class="ui label">
-                Название
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Название
+                </div>
+                <input type="text" name="productName" value="{{product.productName}}" required>
             </div>
-            <input type="text" name="productName" value="{{product.productName}}" required>
         </div>
-        <div class="ui labeled input">
-            <div class="ui label">
-                Цена
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Цена
+                </div>
+                <input type="number" step="0.01" name="price" value="{{product.price}}" required>
             </div>
-            <input type="number" step="0.01" name="price" value="{{product.price}}" required>
         </div>
-        <div class="ui labeled input">
-            <div class="ui label">
-                Фото
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">Фото</div>
+                <input type="file" name="images" multiple accept=".png,.jpeg,.jpg">
             </div>
-            <input type="file" name="images" multiple accept=".png,.jpeg,.jpg">
         </div>
-        <div class="ui labeled input">
-            <div class="ui label">
-                Цвет
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Цвет
+                </div>
+                <input type="text" name="color" value="{{product.color}}" required>
             </div>
-            <input type="text" name="color" value="{{product.color}}" required>
         </div>
-        <div class="ui labeled input">
-            <div class="ui label">
-                Вес
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Вес
+                </div>
+                <input type="number" step="0.1" name="weight" value="{{product.weight}}" required>
             </div>
-            <input type="number" step="0.1" name="weight" value="{{product.weight}}" required>
         </div>
-        <div class="ui labeled input">
-            <div class="ui label">
-                Размер
+
+        <div class="field">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    Размер
+                </div>
+                <input type="text" name="size" value="{{product.size}}" required>
             </div>
-            <input type="text" name="size" value="{{product.size}}" required>
         </div>
-        <div class="ui toggle checkbox">
-            <input type="checkbox" id="showInSlider" name="showInSlider" {{#if product.showInSlider}} checked {{/if}}
-                value="true">
-            <label for="showInSlider">Показывать в слайдере</label>
+
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" id="showInSlider" name="showInSlider" {{#if product.showInSlider}} checked
+                    {{/if}} value="true">
+                <label for="showInSlider">Показывать в слайдере</label>
+            </div>
         </div>
-        <div class="ui toggle checkbox">
-            <input type="checkbox" name="showInRecommended" {{#if product.showInRecommended}} checked{{/if}}
-                value="true">
-            <label>Показывать в рекомендациях</label>
+
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" id="showInRecommended" name="showInRecommended" {{#if product.showInRecommended}} checked{{/if}}
+                    value="true">
+                <label for="showInRecommended">Показывать в рекомендациях</label>
+            </div>
         </div>
-        <div class="ui toggle checkbox">
-            <input type="checkbox" name="isAvailable" {{#if product.isAvailable}} checked {{/if}}value="true">
-            <label>Есть в наличии</label>
+
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" id="isAvailable" name="isAvailable" {{#if product.isAvailable}} checked {{/if}}value="true">
+                <label for="isAvailable">Есть в наличии</label>
+            </div>
         </div>
+
         <div class="field">
             <label for="">Описание продукта</label>
             <textarea name="description" rows="10" cols="50">{{product.description}}</textarea>
@@ -88,14 +116,15 @@
                 <div class="default text">Категория</div>
                 <div class="menu">
                     {{#each categoryList}}
-                    <div class="item {{#eq this.id ../product.category.id}}active selected{{/eq}}" data-value="{{this.id}}">
+                    <div class="item {{#eq this.id ../product.category.id}}active selected{{/eq}}"
+                        data-value="{{this.id}}">
                         {{this.name}}
                     </div>
                     {{/each}}
                 </div>
             </div>
         </div>
-      
+
         <div class="field">
             <label>Производитель</label>
             <div class="ui search selection dropdown dropdown-manufacturer">
@@ -104,7 +133,8 @@
                 <div class="default text">Производитель</div>
                 <div class="menu">
                     {{#each manufacturerList}}
-                    <div class="item {{#eq this.id ../product.manufacturer.id}}active selected{{/eq}}" data-value="{{this.id}}">
+                    <div class="item {{#eq this.id ../product.manufacturer.id}}active selected{{/eq}}"
+                        data-value="{{this.id}}">
                         {{this.name}}
                     </div>
                     {{/each}}
@@ -136,7 +166,6 @@
         <tbody>
             {{#each productList}}
             <tr>
-
                 <td>{{this.productName}}</td>
                 <td>{{this.price}}</td>
                 <td>
@@ -152,8 +181,8 @@
                 <td>{{#if this.showInRecommended}}Добавлен{{else}}Нет{{/if}}</td>
                 <td>{{this.category.name}}</td>
                 <td>{{this.manufacturer.name}}</td>
-                <td><a href="/admin/product?id={{this.id}}">edit</a></td>
-                <td><a href="/admin/product/{{this.id}}/delete">delete</a></td>
+                <td><a href="/admin/product?id={{this.id}}"><img src="/img/edit.svg"></a></td>
+                <td><a href="/admin/product/{{this.id}}/delete"><img src="/img/delete.svg"></a></td>
             </tr>
             {{/each}}
         </tbody>
@@ -161,8 +190,8 @@
     <script>
         $(document).ready(function () {
             $('#product').DataTable();
-            $('div.dropdown-category').dropdown('set selected', {{product.category.id}});
-            $('div.dropdown-manufacturer').dropdown('set selected', {{product.manufacturer.id}});
+            $('div.dropdown-category').dropdown('set selected', {{ product.category.id }});
+        $('div.dropdown-manufacturer').dropdown('set selected', {{ product.manufacturer.id }});
         });
 
     </script>

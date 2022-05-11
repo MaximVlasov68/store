@@ -25,6 +25,7 @@ import { UserRoles } from './users/enums/roles';
 import { LoadProductsDto } from './admin/product/dto/load-products.dto';
 import { SessionAuthGuard } from './auth/session-auth.guard';
 import { AuthService } from './auth/auth.service';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
@@ -34,6 +35,7 @@ export class AppController {
     private readonly usersService: UsersService,
     private readonly orderService: OrderService,
     private readonly authService: AuthService,
+    private readonly appService: AppService,
   ) {}
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
@@ -105,6 +107,16 @@ export class AppController {
     return { ...commonData, productList, category, user };
   }
 
+  @Render('productList')
+  @Get('search')
+  async search(@Session() session, @Query('text') search: string) {
+    const commonData = await this.getCommonData();
+    const productList = await this.productService.findAll({ search });
+
+    const user = session.user;
+    return { ...commonData, productList, user };
+  }
+
   @Render('cart')
   @Get('cart')
   async cart(@Session() session) {
@@ -145,15 +157,13 @@ export class AppController {
   @Post('loadProducts')
   async loadProducts(@Body() loadProductsDto: LoadProductsDto) {
     const { count = 8 } = loadProductsDto;
-    return this.productService.findAll(count);
+    const { recommendedItems } = await this.productService.getMainPageItems(
+      count,
+    );
+    return recommendedItems;
   }
 
   protected async getCommonData() {
-    /* Общие переменные для свех страниц */
-    const categoriesTree =
-      await this.categoryService.getTree(); /* и родительская и детская (дерево)*/
-    const { headerItems, footerItems } =
-      await this.categoryService.getMenuItems();
-    return { categoriesTree, headerItems, footerItems };
+    return this.appService.getCommonData();
   }
 }

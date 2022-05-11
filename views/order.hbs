@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
     <!-- библиотека для таблиц(сортировка, фильтры) -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/SemanticUI-2.8.8/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
-
-    <title>store</title>
+    <script src="/DataTables/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/semantic.min.js"></script>
+    <script src="/DataTables/datatables.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/dropdown.min.js"></script>
+    <script src="/DataTables/SemanticUI-2.8.8/components/transition.min.js"></script>
+    <title>Заказы</title>
 </head>
 
 <body>
 
-
-    <table id="order">
+    <table id="order" class="ui celled table dataTable">
 
         <thead>
             <th>Номер заказа</th>

@@ -415,8 +415,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
   // Для страницы продукта
   const addProductButton = document.querySelector('.addBusket');
-  if (addProductButton) {
-    const id = document.querySelector('#id').innerHTML;
+  const idElement = document.querySelector('#id');
+  if (addProductButton && idElement) {
+    const id = idElement.innerHTML;
 
     if (cart.getProductById(id)) {
       addProductButton.classList.add('addBusketActive');

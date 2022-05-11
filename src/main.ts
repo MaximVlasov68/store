@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { ModuleRef, NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
@@ -9,6 +9,8 @@ import { config } from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import * as connectPg from 'connect-pg-simple';
 import { HttpExceptionFilter } from './common/http-exception.filter';
+import { AppService } from './app.service';
+import { CategoryService } from './admin/category/category.service';
 
 async function bootstrap() {
   config({
@@ -50,7 +52,11 @@ async function bootstrap() {
   hbs.handlebars.registerHelper({ ...handlebarsHelpers() });
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
 
-  app.useGlobalFilters(new HttpExceptionFilter());
+  const appService =
+    app.get<AppService>(
+      AppService,
+    ); /* получить app сервис в приложении для передачи его в обработчик ошибок */
+  app.useGlobalFilters(new HttpExceptionFilter(hbs, appService));
 
   await app.listen(3000);
 }

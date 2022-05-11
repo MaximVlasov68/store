@@ -1,6 +1,6 @@
 /* для админки */
 body{
-    font-family: "Montserrat";
+    font-family: "Montserrat" !important;
     font-size: 16px;
     max-width: 1920px;
     padding:0;
@@ -49,12 +49,10 @@ header{
 
 .admin-form{
     max-width: 500px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items:center;
-    border: 1px solid black;
-    margin:20px;
+    margin: auto;
+}
+h2 {
+    text-align: center;
 }
 .admin-form input, .admin-form select{
     text-align: justify;

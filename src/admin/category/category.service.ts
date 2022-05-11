@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Not, Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
@@ -13,9 +13,10 @@ export class CategoryService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    const parentCategory = await this.categoryRepository.findOne(
-      createCategoryDto.parentCategory,
-    );
+    const parentCategory = createCategoryDto.parentCategory
+      ? await this.categoryRepository.findOne(createCategoryDto.parentCategory)
+      : null;
+
     const category = this.categoryRepository.create({
       ...createCategoryDto,
       parentCategory,
@@ -69,9 +70,10 @@ export class CategoryService {
   }
 
   async update(updateCategoryDto: UpdateCategoryDto): Promise<any> {
-    const parentCategory = await this.categoryRepository.findOne(
-      updateCategoryDto.parentCategory,
-    );
+    const parentCategory = updateCategoryDto.parentCategory
+      ? await this.categoryRepository.findOne(updateCategoryDto.parentCategory)
+      : null;
+
     return this.categoryRepository.update(updateCategoryDto.id, {
       ...updateCategoryDto,
       parentCategory,

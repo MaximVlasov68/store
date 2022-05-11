@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -16,10 +16,19 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  async findAll(take?: number): Promise<Product[]> {
+  async findAll({
+    take,
+    search,
+  }: {
+    take?: number;
+    search?: string;
+  } = {}): Promise<Product[]> {
     return this.productRepository.find({
       relations: ['category', 'manufacturer'],
       take,
+      where: {
+        productName: ILike(`%${search}%`),
+      },
     });
   }
 
@@ -48,7 +57,7 @@ export class ProductService {
     return this.productRepository.delete(id);
   }
 
-  async getMainPageItems(): Promise<{
+  async getMainPageItems(takeRecommended?: number): Promise<{
     sliderItems: Product[];
     recommendedItems: Product[];
   }> {
@@ -63,6 +72,7 @@ export class ProductService {
         showInRecommended: true,
       },
       relations: ['category'],
+      take: takeRecommended,
     });
     return { sliderItems, recommendedItems };
   }
