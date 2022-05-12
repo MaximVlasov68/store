@@ -700,10 +700,10 @@ footer{
 .error-wrapper{
     display: flex;
     padding: calc(50% - 720px) calc(50% - 810px);
-    margin: auto;
+    justify-content: space-around;
 }
 .message{
-    align-items: center;
+    align-self: center;
 }
 
 
@@ -773,6 +773,9 @@ footer{
         width: 100%;
         left: 0;
     }
+    .error-wrapper{
+        padding: calc(50% - 600px) calc(50% - 690px);
+    }
     
 }
 @media (min-width: 1200px) and (max-width: 1399px) {
@@ -807,6 +810,9 @@ footer{
     }
     .swiper-slide img{
         height: 525px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 550px) calc(50% - 585px);
     }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -845,6 +851,12 @@ footer{
     }
     .swiper-slide img{
         height: 420px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 505px) calc(50% - 485px);
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -917,6 +929,12 @@ footer{
     }
     .swiper-slide img{
         height: 285px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 400px) calc(50% - 370px);
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
     }
 }
 @media (min-width: 576px) and (max-width: 767px) {
@@ -1049,6 +1067,12 @@ footer{
     }
     .item .dropdown-content{
         left: -60px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 350px) calc(50% - 280px);
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
     }
 }
 @media (min-width: 375px) and (max-width: 575px) {  
@@ -1271,6 +1295,19 @@ footer{
     }
     .item .dropdown-content{
         left: -55px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 250px) calc(50% - 180px);
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
+    }
+    .img-box img{
+        width: 300px;
+        height: 200px;
+    }
+    .message p{
+        overflow-wrap: anywhere;
     }
 }
 @media (min-width: 320px) and (max-width: 374px) { 
@@ -1502,6 +1539,19 @@ footer{
     #scrollTop img {
         width: 15px;
         height: 15px;
+    }
+    .error-wrapper{
+        padding: calc(50% - 120px) calc(50% - 180px);
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
+    }
+    .img-box img{
+        width: 300px;
+        height: 200px;
+    }
+    .message p{
+        overflow-wrap: anywhere;
     }
 }
 

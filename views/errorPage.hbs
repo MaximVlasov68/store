@@ -19,14 +19,14 @@
                 <div class="message">
                     {{#eq status 404}}
                     <h2>Не найдено</h2>
-                    {{message}}
+                    <p>{{message}}</p>
                     {{/eq}}
                     {{#unlessEq status 404}}
                     <h2>Необходима авторизация</h2>
-                    {{message}}
+                    <p>{{message}}</p>
                     {{/unlessEq}}
                 </div>
-                <div>
+                <div class="img-box">
                     <img src="/img/errorPictures.svg" alt="Картинка с ошибкой">
                 </div>
             </section>
