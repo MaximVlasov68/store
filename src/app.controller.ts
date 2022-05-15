@@ -111,7 +111,7 @@ export class AppController {
   @Get('search')
   async search(@Session() session, @Query('text') search: string) {
     const commonData = await this.getCommonData();
-    const productList = await this.productService.findAll({ search });
+    const productList = await this.productService.findAll(search);
 
     const user = session.user;
     return { ...commonData, productList, user };

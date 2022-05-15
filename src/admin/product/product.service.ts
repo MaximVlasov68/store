@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import e from 'express';
 import { ILike, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -16,19 +17,17 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  async findAll({
-    take,
-    search,
-  }: {
-    take?: number;
-    search?: string;
-  } = {}): Promise<Product[]> {
+  async findAll(search?: string): Promise<Product[]> {
+    if (search) {
+      return this.productRepository.find({
+        relations: ['category', 'manufacturer'],
+        where: {
+          productName: ILike(`%${search}%`),
+        },
+      });
+    }
     return this.productRepository.find({
       relations: ['category', 'manufacturer'],
-      take,
-      where: {
-        productName: ILike(`%${search}%`),
-      },
     });
   }
 

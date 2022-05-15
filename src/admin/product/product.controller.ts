@@ -3,11 +3,8 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   Render,
-  Redirect,
   Res,
   Query,
   UseGuards,
@@ -123,6 +120,7 @@ export class ProductController {
     const categoryList = await this.categoryService.getAll();
     const manufacturerList = await this.manufacturerService.findAll();
     const productList = await this.productService.findAll();
+    console.log(productList);
     return { productList, categoryList, manufacturerList, product };
   }
 
