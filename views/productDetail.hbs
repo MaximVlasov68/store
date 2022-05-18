@@ -51,11 +51,11 @@
                     </div>
 
                     <div class="btn-box">
-                        <button class="addBusket">В корзину</button> 
+                        <button class="addBusket" {{#unless this.isAvailable}} disabled {{/unless}}>В корзину</button> 
                         <div class="counter">
-                            <a class="buttonMinus" onclick="minus(this)"><img src="/img/minus.svg"></a>
+                            <a class="buttonMinus" onclick="minus(this)"><img src="/img/minus.svg" alt="Минус"></a>
                             <div class="buttonCountNumber" id="quantity">1</div>
-                            <a class="buttonPlus" onclick="plus(this)"><img src="/img/plus.svg"></a>
+                            <a class="buttonPlus" onclick="plus(this)"><img src="/img/plus.svg" alt="Плюс"></a>
                         </div>
                     </div>
 
@@ -72,9 +72,9 @@
                     <div class="delivery-box">
                         <div class="group">
                             <img src="/img/delivery.svg" alt="icon">
-                            <p>Доставим</p>
+                            <p>Доставим по городу</p>
                         </div>
-                        <p class="text">от 2000 ₽</p>
+                        <p class="text">200 ₽</p>
                     </div>
 
                     <div class="pickup-box">

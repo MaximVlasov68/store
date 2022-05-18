@@ -18,7 +18,7 @@
 
         <section class="content">
                 
-                <h2>{{category.name}}</h2>   
+                <h2>{{#if category.name}} {{category.name}} {{else}} Поиск {{/if}} </h2>   
                 <div class="content-box">
                     {{#each productList}}
                     <div class="item">

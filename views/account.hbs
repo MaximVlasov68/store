@@ -23,128 +23,129 @@
             <section class="wrapper-account">
                 <h2>Мои заказы</h2>
 
-                <div class="current-box">
-                    <div class="line">
-                        <hr class="accountLine">
-                    </div>
-
-                    <div class="filter-box">
-                        <h3>Текущие</h3>
-                        <p class="filterText">Скрыть всё</p>
-                    </div>
-
-                    <div class="line">
-                        <hr class="accountLine">
-                    </div>
-                </div>
-
-
-
-                {{#each ordersInProgress}}
-                <div class="head-orders">
-                    <h3>Заказ № {{this.id}}</h3>
-                    <p>Общая стоимость: {{this.totalCost}} ₽</p>
-                </div>
-
-                <div class="line">
-                    <hr>
-                </div>
-
-                {{#each this.orderProducts}}
-                <div class="cart-item" data-id="{{this.product.id}}">
-
-                    <div class="product-box">
-                        <div class="left-item">
-                            <a href="/product/{{this.product.id}}"><img class="productImg" src="/img/product-images/{{this.product.images.[0]}}"
-                                    alt="фото продукта"></a>
-                            <div class="info-product">
-                                <a href="/product/{{this.product.id}}">
-                                    <p class="productName">{{this.product.productName}}</p>
-                                </a>
-                                <p class="productWeight">{{this.product.weight}} кг</p>
-                            </div>
+                <div class="collapse-box" data-collapse>  {{!-- добавлена бибиотека jquery.collapse для скрытия элементов заказа --}}
+                    <div class="filter-box open">
+                        <div>
+                            <h3>Текущие</h3>
+                            <p class="filterText">Скрыть всё</p>
                         </div>
-                        <p class="productPrice">{{this.cost}} ₽</p>
-                        <div class="counter-box">
-                            <div class="counter">
-                                <div class="buttonCountNumber">{{this.quantity}} <span class="quantityText"> шт.</span>
+                    </div>
+
+                    <div>
+                        {{#each ordersInProgress}}
+                        <div class="head-orders">
+                            <h3>Заказ № {{this.id}}</h3>
+                            <p>Общая стоимость: {{this.totalCost}} ₽</p>
+                        </div>
+
+                        <div class="line">
+                            <hr>
+                        </div>
+
+                        {{#each this.orderProducts}}
+                        <div class="cart-item" data-id="{{this.product.id}}">
+
+                            <div class="product-box">
+                                <div class="left-item">
+                                    <a href="/product/{{this.product.id}}"><img class="productImg" src="/img/product-images/{{this.product.images.[0]}}"
+                                            alt="фото продукта"></a>
+                                    <div class="info-product">
+                                        <a href="/product/{{this.product.id}}">
+                                            <p class="productName">{{this.product.productName}}</p>
+                                        </a>
+                                        <p class="productWeight">{{this.product.weight}} кг</p>
+                                    </div>
+                                </div>
+                                <p class="productPrice">{{this.cost}} ₽</p>
+                                <div class="counter-box">
+                                    <div class="counter">
+                                        <div class="buttonCountNumber">{{this.quantity}} <span class="quantityText"> шт.</span>
+                                        </div>
+                                    </div>
+                                    <p class="priceOne">{{this.product.price}} ₽/шт</p>
                                 </div>
                             </div>
-                            <p class="priceOne">{{this.product.price}} ₽/шт</p>
+                            {{!-- <div class="line">
+                                <hr>
+                            </div> --}}
+
                         </div>
-                    </div>
-                    {{!-- <div class="line">
+                        {{/each}}
                         <hr>
-                    </div> --}}
-
-                </div>
-                {{/each}}
-                <hr>
-                {{/each}}
-
-
-                <div class="current-box">
-                    <div class="line">
-                        <hr class="accountLine">
-                    </div>
-
-                    <div class="filter-box">
-                        <h3>Завершенные</h3>
-                        <p class="filterText">Скрыть всё</p>
-                    </div>
-
-                    <div class="line">
-                        <hr class="accountLine">
+                        {{/each}}
                     </div>
                 </div>
 
-
-                {{#each completedOrders}}
-                <div class="head-orders">
-                    <h3>Заказ № {{this.id}}</h3>
-                    <p>Общая стоимость: {{this.totalCost}} ₽</p>
-                </div>
-
-                <div class="line">
-                    <hr>
-                </div>
-
-                {{#each this.orderProducts}}
-                <div class="cart-item" data-id="{{this.product.id}}">
-
-                    <div class="product-box">
-                        <div class="left-item">
-                            <a href="/product/{{this.product.id}}"><img class="productImg" src="/img/product-images/{{this.product.images.[0]}}"
-                                    alt="фото продукта"></a>
-                            <div class="info-product">
-                                <a href="/product/{{this.product.id}}">
-                                    <p class="productName">{{this.product.productName}}</p>
-                                </a>
-                                <p class="productWeight">{{this.product.weight}} кг</p>
-                            </div>
+                <div class="collapse-box" data-collapse>
+                    <div class="filter-box open">
+                        <div>
+                            <h3>Завершенные</h3>
+                            <p class="filterText">Скрыть всё</p>
                         </div>
-                        <p class="productPrice">{{this.cost}} ₽</p>
-                        <div class="counter-box">
-                            <div class="counter">
-                                <div class="buttonCountNumber">{{this.quantity}} <span class="quantityText"> шт.</span>
+                    </div>
+                    
+                    <div>
+                        {{#each completedOrders}}
+                        <div class="head-orders">
+                            <h3>Заказ № {{this.id}}</h3>
+                            <p>Общая стоимость: {{this.totalCost}} ₽</p>
+                        </div>
+
+                        <div class="line">
+                            <hr>
+                        </div>
+
+                        {{#each this.orderProducts}}
+                        <div class="cart-item" data-id="{{this.product.id}}">
+
+                            <div class="product-box">
+                                <div class="left-item">
+                                    <a href="/product/{{this.product.id}}"><img class="productImg" src="/img/product-images/{{this.product.images.[0]}}"
+                                            alt="фото продукта"></a>
+                                    <div class="info-product">
+                                        <a href="/product/{{this.product.id}}">
+                                            <p class="productName">{{this.product.productName}}</p>
+                                        </a>
+                                        <p class="productWeight">{{this.product.weight}} кг</p>
+                                    </div>
+                                </div>
+                                <p class="productPrice">{{this.cost}} ₽</p>
+                                <div class="counter-box">
+                                    <div class="counter">
+                                        <div class="buttonCountNumber">{{this.quantity}} <span class="quantityText"> шт.</span>
+                                        </div>
+                                    </div>
+                                    <p class="priceOne">{{this.product.price}} ₽/шт</p>
                                 </div>
                             </div>
-                            <p class="priceOne">{{this.product.price}} ₽/шт</p>
+                            {{!-- <div class="line">
+                                <hr>
+                            </div> --}}
+
                         </div>
-                    </div>
-                    {{!-- <div class="line">
+                        {{/each}}
                         <hr>
-                    </div> --}}
-
+                        {{/each}}
+                    </div>
                 </div>
-                {{/each}}
-                <hr>
-                {{/each}}
-
+                
             </section>
         </article>
     </main>
 
-    {{#>footer}}{{/footer}}
+    {{#>footer}}
+        <script src="/DataTables/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+        <script src="/js/jquery.collapse.js"></script>
+        <script>
+            $(".collapse-box").collapse({
+                open: function() {
+                    this.slideDown(1000);
+                },
+                close: function() {
+                    this.slideUp(400);
+                },
+                });
+        </script>
+    {{/footer}}
 
 </body>

@@ -1,5 +1,6 @@
 .wrapper-account{
     padding: 0 calc(50% - 810px);
+    margin-bottom: 2vh;
 }
 .wrapper-account h2{
     margin: 4vh 0;
@@ -11,7 +12,7 @@
     background-color:  #9A9A9A; 
     color:  #9A9A9A; 
 }
-.current-box{
+.collapse-box{
     margin-top: 5vh;
 }
 .head-orders{
@@ -30,7 +31,27 @@
 .filter-box{
     display: flex;
     align-items: baseline;
-    gap: 2vw;
+    gap: 1vw;
+    border-top: 1px solid #9A9A9A;
+    border-bottom: 1px solid #9A9A9A;
+}
+.filter-box div{
+    display: flex;
+    align-items: baseline;
+    gap: 1vw;
+}
+.filter-box.open::after {
+    content: '';
+    background-image: url('/img/Arrow2.svg');
+    transform: rotate(180deg);
+    width: 14px;
+    height: 9px;
+}
+.filter-box::after {
+    content: '';
+    background-image: url('/img/Arrow2.svg');
+    width: 14px;
+    height: 9px;
 }
 .filterText{
     font-size: .875em;

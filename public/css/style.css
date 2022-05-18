@@ -362,6 +362,17 @@ article{
     background: none;
     color: #599233;
 }
+.addBusketActive{
+    background: none !important;
+    color: #599233 !important;
+    border: 2px solid #599233 !important;
+}
+.addBusket:disabled{
+    background-color: #A9A9A9 ;
+    color: #DCDCDC ;
+    border-color: #707070 ;
+	cursor: no-drop;
+}
 .more{
     display: flex;
     flex-direction: row;
