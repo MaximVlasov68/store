@@ -204,10 +204,15 @@ if (loadMoreButton) {
 
   const contentBox = document.querySelector('.content-box');
 
+  let currentPage = 2; /* потому что первая страница уже загружена */
   /* запрос на подгрузку товаров на main page */
   loadMoreButton.onclick = async function () {
     const res = await fetch('/loadProducts', {
       method: 'POST',
+      body: JSON.stringify({
+        count: 8,
+        page: currentPage++ /* посфикс использовать старое значение а потом увеличить */,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },

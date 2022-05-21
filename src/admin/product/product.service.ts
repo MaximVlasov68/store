@@ -55,7 +55,10 @@ export class ProductService {
     return this.productRepository.delete(id);
   }
 
-  async getMainPageItems(takeRecommended?: number): Promise<{
+  async getMainPageItems(
+    takeRecommended?: number,
+    page?: number,
+  ): Promise<{
     sliderItems: Product[];
     recommendedItems: Product[];
   }> {
@@ -71,6 +74,8 @@ export class ProductService {
       },
       relations: ['category'],
       take: takeRecommended,
+      skip: (page - 1) * takeRecommended,
+      /* для бека, чтобы первый элемент для нас был 1, а для него 0 */
     });
     return { sliderItems, recommendedItems };
   }

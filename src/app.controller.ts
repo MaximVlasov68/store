@@ -155,9 +155,13 @@ export class AppController {
 
   @Post('loadProducts')
   async loadProducts(@Body() loadProductsDto: LoadProductsDto) {
-    const { count = 8 } = loadProductsDto;
+    const count =
+      loadProductsDto.count ||
+      8; /* либо кол-во записей придёт из DTO с фронта или 8 (по умолчанию)*/
+    const page = loadProductsDto.page;
     const { recommendedItems } = await this.productService.getMainPageItems(
       count,
+      page,
     );
     return recommendedItems;
   }
