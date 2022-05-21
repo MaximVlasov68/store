@@ -79,7 +79,7 @@ export class AppController {
   async main(@Session() session) {
     const commonData = await this.getCommonData();
     const { recommendedItems, sliderItems } =
-      await this.productService.getMainPageItems();
+      await this.productService.getMainPageItems(8);
     const user = session.user;
 
     return { ...commonData, user, recommendedItems, sliderItems };
