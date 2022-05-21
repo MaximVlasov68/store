@@ -358,7 +358,7 @@ article{
     font-weight: 500;
     cursor: pointer;
 }
-.item .addBusket:hover, .addBusket:hover, .addBusketActive{
+.item .addBusket:hover, .addBusket:hover{
     background: none;
     color: #599233;
 }

@@ -21,7 +21,6 @@ import { UsersService } from './users/users.service';
 import { OrderService } from './admin/order/order.service';
 import { CreateOrderDto } from './admin/order/dto/create-order.dto';
 import { KeyNotUniqueException } from './common/exceptions';
-import { UserRoles } from './users/enums/roles';
 import { LoadProductsDto } from './admin/product/dto/load-products.dto';
 import { SessionAuthGuard } from './auth/session-auth.guard';
 import { AuthService } from './auth/auth.service';
