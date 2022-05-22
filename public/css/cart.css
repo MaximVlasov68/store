@@ -54,6 +54,7 @@
     max-width: 150px;
     max-height: 150px;
 	object-fit: cover;
+	margin-right: 2vw;
 }
 .productName{
 	width: 380px;
@@ -485,6 +486,8 @@
 	.productImg{
 		width: 130px;
 		height: 130px;
+		object-fit: contain;
+		margin-right: 2vw;
 	}
 	.product-box{
 		align-items: baseline;
