@@ -10,7 +10,6 @@ import { ValidationPipe } from '@nestjs/common';
 import * as connectPg from 'connect-pg-simple';
 import { HttpExceptionFilter } from './common/http-exception.filter';
 import { AppService } from './app.service';
-import { CategoryService } from './admin/category/category.service';
 
 async function bootstrap() {
   config({
