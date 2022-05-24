@@ -89,7 +89,7 @@ class Cart {
 
   get totalWeight() {
     return this.checkedProducts.reduce(
-      (sum, product) => sum + product.weight,
+      (sum, product) => sum + product.totalWeight,
       0,
     );
   }

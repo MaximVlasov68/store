@@ -2,6 +2,7 @@ import { ModuleRef, NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import * as fs from 'fs';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import * as hbs from 'hbs';
 import * as session from 'express-session';
@@ -16,7 +17,17 @@ async function bootstrap() {
     path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
   });
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const httpsOptions =
+    process.env.NODE_ENV == 'prod'
+      ? {
+          key: fs.readFileSync('./private-key.pem'),
+          cert: fs.readFileSync('./public-certificate.pem'),
+        }
+      : undefined;
+
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    httpsOptions,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

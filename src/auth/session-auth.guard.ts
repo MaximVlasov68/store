@@ -7,7 +7,7 @@ import { UserRoles } from 'src/users/enums/roles';
 @Injectable()
 export class SessionAuthGuard extends AuthGuard('local') {
   constructor(private reflector: Reflector) {
-    super();
+    super(); /* В конструкторе ключевое слово super() используется как функция, вызывающая родительский конструктор. */
   }
 
   canActivate(

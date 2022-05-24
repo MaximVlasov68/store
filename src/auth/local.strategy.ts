@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super();
+    super(); /* В конструкторе ключевое слово super() используется как функция, вызывающая родительский конструктор */
   }
 
   async validate(username: string, password: string): Promise<any> {
