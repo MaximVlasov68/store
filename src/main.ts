@@ -1,17 +1,11 @@
 import { ModuleRef, NestFactory } from '@nestjs/core';
-import {
-  ExpressAdapter,
-  NestExpressApplication,
-} from '@nestjs/platform-express';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
-import * as http from 'http';
-import * as https from 'https';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import * as hbs from 'hbs';
 import * as session from 'express-session';
-import * as express from 'express';
 import { config } from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import * as connectPg from 'connect-pg-simple';
@@ -31,12 +25,9 @@ async function bootstrap() {
         }
       : undefined;
 
-  const server = express();
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-    new ExpressAdapter(server),
-  );
-  await app.init();
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    httpsOptions,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -77,7 +68,6 @@ async function bootstrap() {
     ); /* получить app сервис в приложении для передачи его в обработчик ошибок */
   app.useGlobalFilters(new HttpExceptionFilter(hbs, appService));
 
-  http.createServer(server).listen(3000);
-  https.createServer(httpsOptions, server).listen(443);
+  await app.listen(3000);
 }
 bootstrap();

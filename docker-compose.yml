@@ -9,11 +9,10 @@ services:
   store:
     env_file: .env
     environment: 
-      - NODE_ENV=${ENV}
+      - NODE_ENV=prod
     build: .
     ports:
-        - 443:443
-        - 80:3000
+        - 443:3000
     networks:
         - store-network
     volumes:
