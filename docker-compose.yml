@@ -31,4 +31,4 @@ services:
         read_only: true
 networks:
   store-network:
-version: '2'
+version: '3.7'
