@@ -8,6 +8,8 @@ services:
       - store-network
   store:
     env_file: .env
+    environment: 
+      - NODE_ENV=prod
     build: .
     ports:
         - 80:3000
