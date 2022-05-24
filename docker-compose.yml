@@ -3,7 +3,7 @@ services:
     env_file: .env
     image: postgres
     ports: 
-      - ${POSTGRES_OUT_PORT}:${POSTGRES_PORT}
+      - 5432:5432
     networks:
       - store-network
   store:
