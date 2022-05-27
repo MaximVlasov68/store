@@ -7,7 +7,7 @@ import { UserRoles } from 'src/users/enums/roles';
 @Injectable()
 export class SessionAuthGuard extends AuthGuard('local') {
   constructor(private reflector: Reflector) {
-    super(); /* В конструкторе ключевое слово super() используется как функция, вызывающая родительский конструктор. */
+    super(); /* Если класс наследуется от другого класса всегда необходимо вызывать конструктор базового класса через super */
   }
 
   canActivate(
@@ -15,7 +15,7 @@ export class SessionAuthGuard extends AuthGuard('local') {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const adminRequired = this.reflector.get<boolean>(
       'adminRequired',
-      context.getClass(),
+      context.getClass() /* сравниение моего декоратора c полученным типом Controller класса, к которому принадлежит данный конкретный обработчик */,
     );
     const request = context.switchToHttp().getRequest();
     const user = request.session.user;

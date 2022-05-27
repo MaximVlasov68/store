@@ -311,6 +311,10 @@ article{
     justify-content: space-between;
     margin-top: 2vw;
     border-radius: 8px;
+    transition: 1s;
+}
+.content-box .item:hover{
+    transform: scale(1.1);
 }
 .item .picture{
     display: block;

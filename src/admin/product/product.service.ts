@@ -75,7 +75,7 @@ export class ProductService {
       relations: ['category'],
       take: takeRecommended,
       skip: (page - 1) * takeRecommended,
-      /* для бека, чтобы первый элемент для нас был 1, а для него 0 */
+      /* для бека, чтобы первый элемент для меня был 1, а для него 0 */
     });
     return { sliderItems, recommendedItems };
   }

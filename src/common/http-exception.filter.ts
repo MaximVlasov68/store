@@ -19,7 +19,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
   constructor(private handlebars: any, private appService: AppService) {}
 
   async catch(exception: HttpException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
+    const ctx =
+      host.switchToHttp(); /* возвращает HttpArgumentsHostобъект, подходящий для контекста приложения HTTP */
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
