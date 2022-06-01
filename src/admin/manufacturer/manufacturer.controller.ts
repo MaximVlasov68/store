@@ -9,15 +9,18 @@ import {
   Res,
   Render,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ManufacturerService } from './manufacturer.service';
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 import { UpdateManufacturerDto } from './dto/update-manufacturer.dto';
 import { Response } from 'express';
 import { AdminRequired } from '../admin.decorator';
+import { SessionAuthGuard } from 'src/auth/session-auth.guard';
 
 @Controller()
 @AdminRequired()
+@UseGuards(SessionAuthGuard)
 export class ManufacturerController {
   constructor(private readonly manufacturerService: ManufacturerService) {}
 

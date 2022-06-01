@@ -7,8 +7,10 @@ import {
   Res,
   Render,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { SessionAuthGuard } from 'src/auth/session-auth.guard';
 import { AdminRequired } from '../admin.decorator';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -17,6 +19,7 @@ import { Category } from './entities/category.entity';
 
 @Controller()
 @AdminRequired()
+@UseGuards(SessionAuthGuard)
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
