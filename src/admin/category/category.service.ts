@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Repository } from 'typeorm';
+import { FindConditions, ILike, IsNull, Repository } from 'typeorm';
+import { LoadTableParams } from '../interfaces/loadTableParams';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
@@ -26,6 +27,45 @@ export class CategoryService {
 
   async getAll(): Promise<Category[]> {
     return this.categoryRepository.find({ relations: ['parentCategory'] });
+  }
+
+  async findAndCount({
+    start,
+    length,
+    search,
+    order,
+  }: LoadTableParams = {}): Promise<[Category[], number]> {
+    const where: FindConditions<Category>[] = [];
+
+    if (search) {
+      where.push(
+        ...[
+          { name: ILike(`%${search}%`) },
+          {
+            parentCategory: {
+              name: ILike(`%${search}%`),
+            },
+          },
+        ],
+      );
+    }
+    if (!isNaN(parseInt(search))) {
+      where.push({
+        id: parseInt(search),
+      });
+    }
+
+    return this.categoryRepository.findAndCount({
+      relations: ['parentCategory'],
+      take: length,
+      skip: start,
+      where,
+      order,
+    });
+  }
+
+  async count(): Promise<number> {
+    return this.categoryRepository.count();
   }
 
   async getRoots(): Promise<Category[]> {

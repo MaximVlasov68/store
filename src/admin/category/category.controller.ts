@@ -8,10 +8,12 @@ import {
   Render,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { SessionAuthGuard } from 'src/auth/session-auth.guard';
 import { AdminRequired } from '../admin.decorator';
+import { LoadTableItems } from '../interfaces/loadTableItems.dto';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -58,5 +60,31 @@ export class CategoryController {
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.categoryService.remove(id);
     return res.redirect('/admin/category');
+  }
+
+  @Post('loadItems')
+  async loadItems(
+    @Body() loadTableItemsDto: LoadTableItems,
+    @Body('draw', ParseIntPipe)
+    draw: number /* приведение draw к типу number */,
+  ) {
+    const { start, length, search, columns, order } = loadTableItemsDto;
+
+    const ordering = Object.fromEntries(
+      order.map((orderElement) => [
+        columns[orderElement.column].data,
+        orderElement.dir.toUpperCase() as 'asc' | 'desc',
+      ]),
+    );
+    console.log(ordering);
+
+    const [data, recordsFiltered] = await this.categoryService.findAndCount({
+      start,
+      length,
+      search: search.value,
+      order: ordering,
+    });
+    const recordsTotal = await this.categoryService.count();
+    return { data, draw, recordsTotal, recordsFiltered };
   }
 }
