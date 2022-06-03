@@ -1,4 +1,5 @@
 let modal = document.querySelector('.modal');
+let modalError = document.querySelector('.modalError');
 let login = document.querySelector('.login');
 let loginBtn = document.querySelector('.login-btn');
 let registerBtn = document.querySelector('.reg-btn');
@@ -19,10 +20,24 @@ function catalogDisplay() {
 /* функции открывающие модалку профиля */
 function openModal() {
   modal.style.display = 'flex';
+  modal.style.animation = 'upToDownModal .8s forwards';
   overlay.style.display = 'block';
 }
 function closeModal() {
-  modal.style.display = 'none';
+  /* modal.style.display = 'none'; */
+  modal.style.animation = 'downToUpModal .8s forwards';
+  overlay.style.display = 'none';
+}
+
+/* функции открывающие модалку ошибки связаную с недоступностью услуг */
+function openModalError() {
+  modalError.style.display = 'flex';
+  modalError.style.animation = 'upToDownModal .8s forwards';
+  overlay.style.display = 'block';
+}
+function closeModalError() {
+  /* modalError.style.display = 'none'; */
+  modalError.style.animation = 'downToUpModal .8s forwards';
   overlay.style.display = 'none';
 }
 

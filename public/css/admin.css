@@ -22,6 +22,28 @@ header{
     width: 150px;
     height: 150px;
 }
+.back img{
+    transform: rotate(90deg);
+    width: 50px;
+    height: 50px;
+    padding: 20px;
+}
+.back-absolute img, .back-absolute-for-order img{
+    position: absolute;
+    transform: rotate(90deg);
+    width: 70px;
+    height: 70px;
+    left: 100px;
+    top: 100px;
+    padding: 10px;
+}
+.back-absolute-for-order img{
+    left: 200px;
+    top: -4px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+}
 .navigation{
     display: flex;
     align-items: center;
@@ -78,5 +100,6 @@ td a{
     color:red;
     cursor: pointer;
 }
+
 /* admin-list*/
 

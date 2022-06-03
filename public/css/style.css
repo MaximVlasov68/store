@@ -493,7 +493,7 @@ footer{
     filter: blur(16px);
 } */
 
-.modal{
+.modal, .modalError{
     display: none;
     position: fixed;
     flex-direction: column;
@@ -505,6 +505,12 @@ footer{
     background-color: rgba(0,0,0,0.4); /*Черный с непрозрачностью */
     background: #F9F9F9;
     border-radius: 8px;
+}
+.modalError{
+    padding: 20px;
+}
+.modalError img{
+    margin-top: 20px;
 }
 .head-modal{
     padding-top: 60px;
@@ -757,6 +763,26 @@ footer{
 		transform: translateY(-50%);
 		opacity: 0;
         /* visibility: hidden; */
+	}
+}
+
+@keyframes upToDownModal{
+	0% {
+		transform: translate(-50%, -100%);
+	}
+	100% {
+		transform: translate(-50%, -50%);
+		
+	}
+}
+@keyframes downToUpModal{
+	0%{
+		transform: translate(-50%, -50%);
+	}
+	100%{
+		transform: translate(-50%, -100%);
+		opacity: 0;
+        visibility: hidden;
 	}
 }
 
@@ -1244,6 +1270,9 @@ footer{
     .item .price{
         margin-bottom: 8px;
     }
+    .modalError{
+        max-width: 360px;
+    }
     .head-modal {
         padding-top: 45px;
         padding-left: 85px;
@@ -1483,6 +1512,9 @@ footer{
     .item .name{
         margin-top: 10px;
         font-size: 1.2em ;
+    }
+    .modalError{
+        max-width: 305px;
     }
     .head-modal {
         padding-top: 45px;
