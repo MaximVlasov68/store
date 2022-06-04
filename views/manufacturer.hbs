@@ -19,9 +19,9 @@
 </head>
 <body>
     <div class="back-absolute">
-        <a href="/admin"><img src="/img/arrow2.svg" alt="стрелка"></a>
+        <a href="/admin"><img src="/img/Arrow2.svg" alt="стрелка"></a>
     </div>
-    
+
     <h2>{{#if manufacturer}}Редактирование{{else}}Создание{{/if}} производителя</h2>
     <form class="admin-form ui form" method="POST">
         
@@ -70,20 +70,36 @@
             <th></th>
             <th></th>
         </thead>
-            {{#each manufacturerList}}
-        <tr>
-            <td>{{this.name}}</td>
-            <td>{{this.country}}</td>
-            <td>{{this.city}}</td>
-            <td><a href="/admin/manufacturer?id={{this.id}}"><img src="/img/edit.svg"></a></td>
-            <td><a href="/admin/manufacturer/{{this.id}}/delete"><img src="/img/delete.svg"></a></td>
-            
-        </tr>
-            {{/each}}
     </table>
     <script>
         $(document).ready( function () {
-        $('#manufacturer').DataTable(); 
+        $('#manufacturer').DataTable({
+            ajax: {
+                url:'/admin/manufacturer/loadItems',
+                dataSrc: 'data',
+                type: 'POST',
+            },
+            serverSide: true,
+            columns: [
+                {data: 'name'},
+                {
+                    data: 'country',
+                    render: (data) => data ? data : '-'
+                },
+                {
+                    data: 'city',
+                    render: (data) => data ? data : '-'
+                },
+                { 
+                    data: null,
+                    render: (data, type, row) => `<a href="/admin/manufacturer?id=${row.id}"><img src="/img/edit.svg"></a>`
+                },
+                { 
+                    data: null,
+                    render: (data, type, row) => `<a href="/admin/manufacturer/${row.id}/delete"><img src="/img/delete.svg"></a>`
+                },
+            ]
+        }); 
         } );
     </script>
 </body>

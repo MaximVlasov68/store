@@ -21,7 +21,7 @@
 
 <body>
     <div class="back-absolute-for-order">
-        <a href="/admin"><img src="/img/arrow2.svg" alt="стрелка"></a>
+        <a href="/admin"><img src="/img/Arrow2.svg" alt="стрелка"></a>
     </div>
 
     <table id="order" class="ui celled table dataTable">
@@ -35,43 +35,67 @@
             <th>Телефон клиента</th>
         </thead>
         <tbody>
-            {{#each orderList}}
-            <tr>
-                <td id="orderId">{{this.id}}</td>
-                <td>
-                    <ol>
-                        {{#each this.orderProducts}}
-                        <li>{{this.product.productName}} - {{this.quantity}} шт.</li>
-                        {{/each}}
-                    </ol>
-                </td>
-                <td>
-                    {{#if this.completed}}Завершен{{else}}
-                    Выполняется
-                    <button id="complete">Завершить</button>
-                    {{/if}}
-                </td>
-                <td>{{this.totalCost}} ₽</td>
-                <td>{{this.address}}</td>
-                <td>{{this.user.telephoneNumber}}</td>
-            </tr>
-            {{/each}}
+            
         </tbody>
     </table>
 
     <script>
         $(document).ready(function () {
-            $('#order').DataTable();
+            $('#order').DataTable({
+                 ajax: {
+                    url: '/admin/order/loadItems',
+                    dataSrc: 'data',
+                    type: 'POST'
+                },
+                serverSide: true,
+                columns: [
+                    { 
+                        data: 'id',
+                    },
+                    { 
+                        data: 'orderProducts',
+                        render: (data) => {
+                            let res = '<ol>'
+                            res += data.reduce(
+                                    (list, item) => list +`<li>${item.product.productName} - ${item.quantity} шт.</li>`
+                            , "")
+                            res += '</ol>'
+                            return res;
+                        },
+                        orderable: false
+                    },
+                    {
+                        data: 'completed',
+                        render: (data, type, row) => data ? 'Завершен' : `<button id="complete" data-id="${row.id}">Завершить</button>`,
+                    },
+                    { 
+                        data: 'totalCost',
+                        orderable: false
+                    },
+                    {
+                        data: 'address',
+                        render: (data) => data ? data : 'Самовывоз',
+                    },
+                    {
+                        data: 'user.telephoneNumber',
+                    },
+                ]
+            })
+            .on('draw',
+                 function() { 
+                    $('button#complete').click(async function () {
+                        const orderId = this.dataset.id
+                        await fetch(`complete/${orderId}`, {
+                            method: 'POST',
+                        })
+                    document.location.reload()
+                })
+            }
+            );
         });
     </script>
     <script>
-        $('button#complete').click(async function () {
-            const orderId = $(this).parent().siblings('#orderId').html()
-            await fetch(`complete/${orderId}`, {
-                method: 'POST',
-            })
-            document.location.reload()
-        })
+           
     </script>
 </body>
 

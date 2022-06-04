@@ -29,7 +29,7 @@ export class Order {
     if (cost >= 10000) {
       discount = 0.1;
     }
-    this.totalCost = cost - cost * discount;
+    this.totalCost = Math.round(cost - cost * discount);
   }
 
   @Column({ default: null })

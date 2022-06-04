@@ -73,7 +73,7 @@ export class CategoryController {
     const ordering = Object.fromEntries(
       order.map((orderElement) => [
         columns[orderElement.column].data,
-        orderElement.dir.toUpperCase() as 'asc' | 'desc',
+        orderElement.dir.toUpperCase() as 'ASC' | 'DESC',
       ]),
     );
     console.log(ordering);

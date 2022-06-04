@@ -10,6 +10,7 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFiles,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -23,6 +24,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { writeFile, unlink } from 'fs/promises';
 import { randomUUID } from 'crypto';
 import { join } from 'path';
+import { LoadTableItems } from '../interfaces/loadTableItems.dto';
 
 @Controller()
 @AdminRequired()
@@ -128,5 +130,31 @@ export class ProductController {
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.productService.remove(id);
     return res.redirect('/admin/product');
+  }
+
+  @Post('loadItems')
+  async loadItems(
+    @Body() loadTableItemsDto: LoadTableItems,
+    @Body('draw', ParseIntPipe)
+    draw: number /* приведение draw к типу number */,
+  ) {
+    const { start, length, search, columns, order } = loadTableItemsDto;
+
+    const ordering = Object.fromEntries(
+      order.map((orderElement) => [
+        columns[orderElement.column].data,
+        orderElement.dir.toUpperCase() as 'ASC' | 'DESC',
+      ]),
+    );
+    console.log(ordering);
+
+    const [data, recordsFiltered] = await this.productService.findAndCount({
+      start,
+      length,
+      search: search.value,
+      order: ordering,
+    });
+    const recordsTotal = await this.productService.count();
+    return { data, draw, recordsTotal, recordsFiltered };
   }
 }

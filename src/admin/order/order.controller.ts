@@ -9,6 +9,7 @@ import {
   Render,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -16,6 +17,7 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { ProductService } from '../product/product.service';
 import { AdminRequired } from '../admin.decorator';
 import { SessionAuthGuard } from 'src/auth/session-auth.guard';
+import { LoadTableItems } from '../interfaces/loadTableItems.dto';
 
 @Controller()
 @AdminRequired()
@@ -37,6 +39,32 @@ export class OrderController {
   async findAll() {
     const orderList = await this.orderService.findAll();
     return { orderList };
+  }
+
+  @Post('loadItems')
+  async loadItems(
+    @Body() loadTableItemsDto: LoadTableItems,
+    @Body('draw', ParseIntPipe)
+    draw: number /* приведение draw к типу number */,
+  ) {
+    const { start, length, search, columns, order } = loadTableItemsDto;
+
+    const ordering = Object.fromEntries(
+      order.map((orderElement) => [
+        columns[orderElement.column].data,
+        orderElement.dir.toUpperCase() as 'ASC' | 'DESC',
+      ]),
+    );
+    console.log(ordering);
+
+    const [data, recordsFiltered] = await this.orderService.findAndCount({
+      start,
+      length,
+      search: search.value,
+      order: ordering,
+    });
+    const recordsTotal = await this.orderService.count();
+    return { data, draw, recordsTotal, recordsFiltered };
   }
 
   @Post('/complete/:id')

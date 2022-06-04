@@ -3,13 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   Res,
   Render,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ManufacturerService } from './manufacturer.service';
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
@@ -17,6 +16,7 @@ import { UpdateManufacturerDto } from './dto/update-manufacturer.dto';
 import { Response } from 'express';
 import { AdminRequired } from '../admin.decorator';
 import { SessionAuthGuard } from 'src/auth/session-auth.guard';
+import { LoadTableItems } from '../interfaces/loadTableItems.dto';
 
 @Controller()
 @AdminRequired()
@@ -59,5 +59,32 @@ export class ManufacturerController {
   async remove(@Res() res: Response, @Param('id') id: number) {
     await this.manufacturerService.remove(id);
     return res.redirect('/admin/manufacturer');
+  }
+  @Post('loadItems')
+  async loadItems(
+    @Body() loadTableItemsDto: LoadTableItems,
+    @Body('draw', ParseIntPipe)
+    draw: number /* приведение draw к типу number */,
+  ) {
+    const { start, length, search, columns, order } = loadTableItemsDto;
+
+    const ordering = Object.fromEntries(
+      order.map((orderElement) => [
+        columns[orderElement.column].data,
+        orderElement.dir.toUpperCase() as 'ASC' | 'DESC',
+      ]),
+    );
+    console.log(ordering);
+
+    const [data, recordsFiltered] = await this.manufacturerService.findAndCount(
+      {
+        start,
+        length,
+        search: search.value,
+        order: ordering,
+      },
+    );
+    const recordsTotal = await this.manufacturerService.count();
+    return { data, draw, recordsTotal, recordsFiltered };
   }
 }

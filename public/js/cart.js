@@ -194,7 +194,7 @@ class Cart {
         products: this.products,
         cart: {
           totalCost: this.totalCost,
-          totalCostWithDiscount: this.totalCostWithDiscount,
+          totalCostWithDiscount: Math.round(this.totalCostWithDiscount),
           totalWeight: this.totalWeight,
           isAllChecked: this.isAllChecked,
           canBeDelivered: this.canBeDelivered,
@@ -364,7 +364,7 @@ class CartModal {
         discount: Math.round(
           this.cart.totalCost - this.cart.totalCostWithDiscount,
         ),
-        costWithDiscount: this.cart.totalCostWithDiscount,
+        costWithDiscount: Math.round(this.cart.totalCostWithDiscount),
         address: this.address,
         orderId: this.orderId,
       };

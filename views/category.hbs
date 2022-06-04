@@ -20,9 +20,9 @@
 </head>
 <body>
     <div class="back-absolute">
-        <a href="/admin"><img src="/img/arrow2.svg" alt="стрелка"></a>
+        <a href="/admin"><img src="/img/Arrow2.svg" alt="стрелка"></a>
     </div>
-    
+
     <h2>{{#if category}}Редактирование{{else}}Создание{{/if}} категории</h2>
     <form class="admin-form ui form" method="POST">
         
@@ -92,7 +92,7 @@
             ajax: {
                 url: '/admin/category/loadItems',
                 dataSrc: 'data',
-                type:"POST",
+                type:'POST',
             },
             serverSide: true,
             columns: [

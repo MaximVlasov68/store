@@ -304,6 +304,7 @@ article{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 5vh;
+    margin-bottom: 5vh;
 }
 .content-box .item{
     display: flex;

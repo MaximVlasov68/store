@@ -37,31 +37,35 @@ export class CategoryService {
   }: LoadTableParams = {}): Promise<[Category[], number]> {
     const where: FindConditions<Category>[] = [];
 
+    const queryBuilder = this.categoryRepository
+      .createQueryBuilder('category')
+      .leftJoinAndSelect('category.parentCategory', 'parentCategory');
+
     if (search) {
-      where.push(
-        ...[
-          { name: ILike(`%${search}%`) },
-          {
-            parentCategory: {
-              name: ILike(`%${search}%`),
-            },
-          },
-        ],
-      );
+      queryBuilder
+        .where(`category.name ILIKE '%${search}%'`)
+        .orWhere(`parentCategory.name ILIKE '%${search}%'`);
     }
     if (!isNaN(parseInt(search))) {
-      where.push({
-        id: parseInt(search),
+      queryBuilder.orWhere(`category.id = ${parseInt(search)}`);
+    }
+
+    if (order) {
+      Object.entries(order).forEach(([column, order]) => {
+        const parsedColumnName =
+          column.split(
+            '.',
+          ); /* разбить объект по нахождению '.' на  массив строк*/
+
+        if (parsedColumnName.length === 1) {
+          parsedColumnName.unshift('category');
+        }
+
+        queryBuilder.orderBy(parsedColumnName.join('.'), order);
       });
     }
 
-    return this.categoryRepository.findAndCount({
-      relations: ['parentCategory'],
-      take: length,
-      skip: start,
-      where,
-      order,
-    });
+    return queryBuilder.take(length).skip(start).getManyAndCount();
   }
 
   async count(): Promise<number> {

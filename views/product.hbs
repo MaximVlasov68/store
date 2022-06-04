@@ -21,7 +21,7 @@
 
 <body>
     <div class="back-absolute">
-        <a href="/admin"><img src="/img/arrow2.svg" alt="стрелка"></a>
+        <a href="/admin"><img src="/img/Arrow2.svg" alt="стрелка"></a>
     </div>
 
     <h2>{{#if product}}Редактирование{{else}}Создание{{/if}} продукта</h2>
@@ -166,33 +166,60 @@
             <th></th>
             <th></th>
         </thead>
-        <tbody>
-            {{#each productList}}
-            <tr>
-                <td>{{this.productName}}</td>
-                <td>{{this.price}}</td>
-                <td>
-                    {{#each this.images}}
-                    <img src="/img/product-images/{{this}}" width="50px">
-                    {{/each}}
-                </td>
-                <td>{{this.color}}</td>
-                <td>{{this.weight}}</td>
-                <td>{{this.size}}</td>
-                <td>{{#if this.isAvailable}}Есть{{else}}Нет{{/if}}</td>
-                <td>{{#if this.showInSlider}}Добавлен{{else}}Нет{{/if}}</td>
-                <td>{{#if this.showInRecommended}}Добавлен{{else}}Нет{{/if}}</td>
-                <td>{{this.category.name}}</td>
-                <td>{{this.manufacturer.name}}</td>
-                <td><a href="/admin/product?id={{this.id}}"><img src="/img/edit.svg"></a></td>
-                <td><a href="/admin/product/{{this.id}}/delete"><img src="/img/delete.svg"></a></td>
-            </tr>
-            {{/each}}
-        </tbody>
+        <tbody></tbody>
     </table>
     <script>
         $(document).ready(function () {
-            $('#product').DataTable();
+            $('#product').DataTable({
+                ajax: {
+                    url: '/admin/product/loadItems',
+                    dataSrc: 'data',
+                    type: 'POST'
+                },
+                serverSide: true,
+                columns: [
+                    { data: 'productName' },
+                    { data: 'price' },
+                    { 
+                        data: 'images',
+                        render: (data) => data.reduce((res, image) => res + `<img src="/img/product-images/${image}" width="50px">`, ""),
+                    },
+                    { 
+                        data: 'color',
+                        render: (data) => data ? data : '-',
+                    },
+                    {
+                        data: 'weight',
+                        render: (data) => data ? data : '-',
+                    },
+                    {
+                        data: 'size',
+                        render: (data) => data ? data : '-',
+                    },
+                    {
+                        data: 'isAvailable',
+                        render: (data) => data ? 'Есть' : 'Нет',
+                    },
+                    {
+                        data: 'showInSlider',
+                        render: (data) => data ? 'Добавлен' : 'Нет',
+                    },
+                    {
+                        data: 'showInRecommended',
+                        render: (data) => data ? 'Добавлен' : 'Нет',
+                    },
+                    { data: 'category.name' },
+                    { data: 'manufacturer.name' },
+                    { 
+                        data: null,
+                        render: (data, type, row) => `<a href="/admin/product?id=${row.id}"><img src="/img/edit.svg"></a>`
+                    },
+                    { 
+                        data: null,
+                        render: (data, type, row) => `<a href="/admin/product/${row.id}/delete"><img src="/img/delete.svg"></a>`
+                    },
+                ]
+            });
             $('div.dropdown-category').dropdown('set selected', {{ product.category.id }});
             $('div.dropdown-manufacturer').dropdown('set selected', {{ product.manufacturer.id }});
         });

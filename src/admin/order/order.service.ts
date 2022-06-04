@@ -7,6 +7,7 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { OrderProductsService } from '../orderProducts/orderProducts.service';
 import { User } from 'src/users/entities/user.entity';
+import { LoadTableParams } from '../interfaces/loadTableParams';
 
 @Injectable()
 export class OrderService {
@@ -47,6 +48,50 @@ export class OrderService {
       orders = orders.andWhere('order.completed = :completed', { completed });
     }
     return orders.getMany();
+  }
+
+  async findAndCount({
+    start,
+    length,
+    search,
+    order,
+  }: LoadTableParams = {}): Promise<[Order[], number]> {
+    const queryBuilder = this.orderRepository
+      .createQueryBuilder('order')
+      .leftJoinAndSelect('order.user', 'user')
+      .leftJoinAndSelect('order.orderProducts', 'orderProducts')
+      .leftJoinAndSelect('orderProducts.product', 'product');
+
+    if (search) {
+      console.log(search);
+
+      queryBuilder
+        .where(`order.address ILIKE '%${search}%'`)
+        .orWhere(`user.telephoneNumber ILIKE '%${search}%'`);
+    }
+    if (!isNaN(parseInt(search))) {
+      queryBuilder.orWhere(`order.id = ${parseInt(search)}`);
+    }
+
+    if (order) {
+      Object.entries(order).forEach(([column, order]) => {
+        const parsedColumnName =
+          column.split('.'); /* разбить строку по нахождению . на  элементы*/
+
+        if (parsedColumnName.length === 1) {
+          parsedColumnName.unshift('order');
+        }
+
+        console.log(parsedColumnName);
+        queryBuilder.orderBy(parsedColumnName.join('.'), order);
+      });
+    }
+
+    return queryBuilder.take(length).skip(start).getManyAndCount();
+  }
+
+  async count(): Promise<number> {
+    return this.orderRepository.count();
   }
 
   async setCompleted(id: number) {
