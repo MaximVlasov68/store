@@ -18,7 +18,7 @@ async function bootstrap() {
   });
 
   const httpsOptions =
-    process.env.NODE_ENV == 'prod'
+    process.env.NODE_ENV === 'prod'
       ? {
           key: fs.readFileSync('./private-key.pem'),
           cert: fs.readFileSync('./public-certificate.pem'),
@@ -45,7 +45,7 @@ async function bootstrap() {
           user: process.env.POSTGRES_USER,
           password: process.env.POSTGRES_PASSWORD,
         },
-        createTableIfMissing: true /* создать таблицу самому */,
+        createTableIfMissing: true /* создать таблицу автоматом */,
       }),
       secret: 'my-secret',
       resave: false,
