@@ -25,9 +25,9 @@ services:
     networks:
       - store-network
     volumes:
-      - type: bind
-        source: ./nginx.conf
-        target: /etc/nginx/nginx.conf
+      - type: bind # тип подключения файлов docker
+        source: ./nginx.conf    # исходный
+        target: /etc/nginx/nginx.conf # целевой
         read_only: true
 networks:
   store-network:
