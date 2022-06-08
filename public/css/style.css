@@ -580,10 +580,18 @@ footer{
     box-sizing: border-box;
     border-radius: 8px;
 }
-.save{
+.agree{
     display: flex;
     align-items: center;
     align-self: start;
+    font-size: 0.9em;
+    gap: 1vw;
+}
+.personalData{
+    color: rgb(40, 40, 192);
+}
+.personalData:hover{
+    color: rgb(22, 22, 219)
 }
 .checkbox[type=checkbox]{
     cursor: pointer;
