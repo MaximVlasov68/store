@@ -31,53 +31,6 @@ export class ProductService {
     });
   }
 
-  async findAndCount({
-    start,
-    length,
-    search,
-    order,
-  }: LoadTableParams = {}): Promise<[Product[], number]> {
-    const where: FindConditions<Product>[] = [];
-
-    const queryBuilder = this.productRepository
-      .createQueryBuilder('product')
-      .leftJoinAndSelect('product.category', 'category')
-      .leftJoinAndSelect('product.manufacturer', 'manufacturer');
-
-    if (search) {
-      queryBuilder
-        .where(`product.productName ILIKE '%${search}%'`)
-        .orWhere(`product.color ILIKE '%${search}%'`)
-        .orWhere(`category.name ILIKE '%${search}%'`)
-        .orWhere(`manufacturer.name ILIKE '%${search}%'`);
-    }
-    if (!isNaN(parseInt(search))) {
-      queryBuilder.orWhere(`product.price = ${parseInt(search)}`);
-    }
-    if (!isNaN(parseFloat(search))) {
-      queryBuilder.orWhere(`product.weight = ${parseFloat(search)}`);
-    }
-
-    if (order) {
-      Object.entries(order).forEach(([column, order]) => {
-        const parsedColumnName =
-          column.split('.'); /* разбить строку по нахождению . на  элементы*/
-
-        if (parsedColumnName.length === 1) {
-          parsedColumnName.unshift('product');
-        }
-
-        queryBuilder.orderBy(parsedColumnName.join('.'), order);
-      });
-    }
-
-    return queryBuilder.take(length).skip(start).getManyAndCount();
-  }
-
-  async count(): Promise<number> {
-    return this.productRepository.count();
-  }
-
   async findByCategory(categoryId: number): Promise<Product[]> {
     return this.productRepository.find({
       where: {
@@ -126,5 +79,51 @@ export class ProductService {
       /* для бека, чтобы первый элемент для меня был 1, а для него 0 */
     });
     return { sliderItems, recommendedItems };
+  }
+
+  async findAndCount({
+    start,
+    length,
+    search,
+    order,
+  }: LoadTableParams = {}): Promise<[Product[], number]> {
+    const queryBuilder = this.productRepository
+      .createQueryBuilder('product')
+      .leftJoinAndSelect('product.category', 'category')
+      .leftJoinAndSelect('product.manufacturer', 'manufacturer');
+
+    if (search) {
+      queryBuilder
+        .where(`product.productName ILIKE '%${search}%'`)
+        .orWhere(`product.color ILIKE '%${search}%'`)
+        .orWhere(`category.name ILIKE '%${search}%'`)
+        .orWhere(`manufacturer.name ILIKE '%${search}%'`);
+    }
+    if (!isNaN(parseInt(search))) {
+      queryBuilder.orWhere(`product.price = ${parseInt(search)}`);
+    }
+    if (!isNaN(parseFloat(search))) {
+      queryBuilder.orWhere(`product.weight = ${parseFloat(search)}`);
+    }
+
+    if (order) {
+      Object.entries(order).forEach(([column, order]) => {
+        console.log(order);
+        const parsedColumnName =
+          column.split('.'); /* разбить строку по нахождению . на  элементы*/
+        console.log(parsedColumnName);
+        if (parsedColumnName.length === 1) {
+          parsedColumnName.unshift('product');
+        }
+
+        queryBuilder.orderBy(parsedColumnName.join('.'), order);
+      });
+    }
+
+    return queryBuilder.take(length).skip(start).getManyAndCount();
+  }
+
+  async count(): Promise<number> {
+    return this.productRepository.count();
   }
 }

@@ -17,7 +17,6 @@ services:
         - store-network
     volumes:
         - .:/usr/src/app
-        - /usr/src/app/node_modules
   nginx:
     image: nginx
     ports:

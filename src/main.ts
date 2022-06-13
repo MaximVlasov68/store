@@ -58,7 +58,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
-  hbs.handlebars.registerHelper({ ...handlebarsHelpers() });
+  hbs.handlebars.registerHelper(handlebarsHelpers());
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
 
   const appService =
