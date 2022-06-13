@@ -77,6 +77,7 @@ export class AppController {
   @Render('main')
   @Get()
   async main(@Session() session) {
+    console.log(session);
     const commonData = await this.getCommonData();
     const { recommendedItems, sliderItems } =
       await this.productService.getMainPageItems(8);
