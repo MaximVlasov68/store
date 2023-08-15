@@ -12,23 +12,23 @@ services:
       - NODE_ENV=prod
     build: .
     ports:
-        - 443:3000
+        - 80:3000
     networks:
         - store-network
     volumes:
         - .:/usr/src/app
         - /usr/src/app/node_modules
-  nginx:
-    image: nginx
-    ports:
-      - 80:80
-    networks:
-      - store-network
-    volumes:
-      - type: bind
-        source: ./nginx.conf
-        target: /etc/nginx/nginx.conf
-        read_only: true
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - 80:80
+  #   networks:
+  #     - store-network
+  #   volumes:
+  #     - type: bind
+  #       source: ./nginx.conf
+  #       target: /etc/nginx/nginx.conf
+  #       read_only: true
 networks:
   store-network:
 version: '3.7'
