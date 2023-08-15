@@ -17,17 +17,17 @@ async function bootstrap() {
     path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
   });
 
-  const httpsOptions =
-    process.env.NODE_ENV === 'prod'
-      ? {
-          key: fs.readFileSync('./private-key.pem'),
-          cert: fs.readFileSync('./public-certificate.pem'),
-        }
-      : undefined;
+  // const httpsOptions =
+  //   process.env.NODE_ENV === 'prod'
+  //     ? {
+  //         key: fs.readFileSync('./private-key.pem'),
+  //         cert: fs.readFileSync('./public-certificate.pem'),
+  //       }
+  //     : undefined;
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    httpsOptions,
-  });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule 
+    // { httpsOptions,}
+    );
 
   app.useGlobalPipes(
     new ValidationPipe({
