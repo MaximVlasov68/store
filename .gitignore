@@ -39,3 +39,4 @@ lerna-debug.log*
 /public/img/product-images
 
 *.pem
+.env
